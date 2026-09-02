@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "title": "Settings",
+    "profile": "Profile",
+    "appearance": "Appearance",
+    "language": "Language",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "security": "Security",
+    "save": "Save Changes",
+    "language_label": "Select Language",
+    "notifications_label": "Enable Notifications",
+    "privacy_label": "Privacy Settings",
+    "security_label": "Security Settings"
+  }
+}

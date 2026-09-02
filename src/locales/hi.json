@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "title": "सेटिंग्स",
+    "profile": "प्रोफ़ाइल",
+    "appearance": "दिखावट",
+    "language": "भाषा",
+    "notifications": "सूचनाएं",
+    "privacy": "गोपनीयता",
+    "security": "सुरक्षा",
+    "save": "परिवर्तन सहेजें",
+    "language_label": "भाषा चुनें",
+    "notifications_label": "सूचनाएं सक्षम करें",
+    "privacy_label": "गोपनीयता सेटिंग्स",
+    "security_label": "सुरक्षा सेटिंग्स"
+  }
+}

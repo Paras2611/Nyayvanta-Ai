@@ -1,19 +1,39 @@
 import React from 'react';
-import { Scale, ShieldCheck, BookOpen, Sparkles, AlertCircle, FileText } from 'lucide-react';
+import { Scale, ShieldCheck, BookOpen, Sparkles, AlertCircle, FileText, ChevronRight } from 'lucide-react';
 
 interface HeaderProps {
   onOpenSamples: () => void;
   onOpenStatutes: () => void;
   onReset: () => void;
+  onStepNavigate: (step: 'DOMAIN_SELECT' | 'CASE_INTAKE' | 'CASE_REPORT' | 'UNSUPPORTED_GUARDRAIL') => void;
   activeDomainTitle?: string;
+  currentStep: 'DOMAIN_SELECT' | 'CASE_INTAKE' | 'CASE_REPORT' | 'UNSUPPORTED_GUARDRAIL';
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenSamples,
   onOpenStatutes,
   onReset,
-  activeDomainTitle
+  onStepNavigate,
+  activeDomainTitle,
+  currentStep
 }) => {
+  const getBreadcrumbs = () => {
+    switch (currentStep) {
+      case 'DOMAIN_SELECT':
+        return [{ name: 'Home', step: 'DOMAIN_SELECT' }];
+      case 'CASE_INTAKE':
+        return [{ name: 'Home', step: 'DOMAIN_SELECT' }, { name: 'Domain Selection', step: 'DOMAIN_SELECT' }, { name: 'Intake', step: 'CASE_INTAKE' }];
+      case 'CASE_REPORT':
+        return [{ name: 'Home', step: 'DOMAIN_SELECT' }, { name: 'Domain Selection', step: 'DOMAIN_SELECT' }, { name: 'Intake', step: 'CASE_INTAKE' }, { name: 'Report', step: 'CASE_REPORT' }];
+      case 'UNSUPPORTED_GUARDRAIL':
+        return [{ name: 'Home', step: 'DOMAIN_SELECT' }, { name: 'Scope Notice', step: 'UNSUPPORTED_GUARDRAIL' }];
+      default:
+        return [{ name: 'Home', step: 'DOMAIN_SELECT' }];
+    }
+  };
+
+  const breadcrumbs = getBreadcrumbs();
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -25,8 +45,8 @@ export const Header: React.FC<HeaderProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xl font-bold tracking-tight text-gray-900 font-serif-legal">LAWLINK</span>
-              <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-accent/10 text-accent border border-accent/30">
-                INDIA MVP
+              <span className="hidden sm:inline text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-accent/10 text-accent border border-accent/30">
+                INDIA
               </span>
             </div>
             <p className="text-xs text-gray-500 hidden sm:block">
@@ -74,6 +94,21 @@ export const Header: React.FC<HeaderProps> = ({
             <span>Evidence-Visible AI</span>
           </div>
         </div>
+      </div>
+      {/* Breadcrumb Navigation */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 border-t border-gray-100 text-xs text-gray-500 flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
+        {breadcrumbs.map((crumb, index) => (
+          <React.Fragment key={crumb.name}>
+            {index > 0 && <ChevronRight className="w-3 h-3 text-gray-400 shrink-0" />}
+            <button
+              onClick={() => onStepNavigate(crumb.step as any)}
+              className={`shrink-0 ${index === breadcrumbs.length - 1 ? 'font-semibold text-gray-900 cursor-default' : 'hover:text-accent cursor-pointer'}`}
+              disabled={index === breadcrumbs.length - 1}
+            >
+              {crumb.name}
+            </button>
+          </React.Fragment>
+        ))}
       </div>
     </header>
   );

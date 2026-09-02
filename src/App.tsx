@@ -50,6 +50,7 @@ export default function App() {
     setIntakeFormData({ domainId });
     setCurrentStep('CASE_INTAKE');
     setErrorMessage(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // 2. Handle Natural language query search
@@ -64,6 +65,7 @@ export default function App() {
       if (!result.isSupported && result.unsupportedDomain) {
         setUnsupportedDetails(result.unsupportedDomain);
         setCurrentStep('UNSUPPORTED_GUARDRAIL');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (result.domainId) {
         setSelectedDomainId(result.domainId);
         setIntakeFormData({
@@ -72,6 +74,7 @@ export default function App() {
           disputeDescription: queryText
         });
         setCurrentStep('CASE_INTAKE');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } catch (err: any) {
       console.error('Classification error:', err);
@@ -82,6 +85,7 @@ export default function App() {
         disputeDescription: queryText
       });
       setCurrentStep('CASE_INTAKE');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setIsClassifying(false);
     }
@@ -105,7 +109,19 @@ export default function App() {
     }
   };
 
-  // 4. Handle Quick Loading of Prebuilt Sample Cases
+  // 4. Navigate to a specific step
+  const handleStepNavigate = (step: AppStep) => {
+    setCurrentStep(step);
+    if (step === 'DOMAIN_SELECT') {
+      setSelectedDomainId(null);
+      setIntakeFormData(undefined);
+      setAnalysisResult(null);
+      setUnsupportedDetails(null);
+      setErrorMessage(null);
+    }
+  };
+
+  // 5. Handle Quick Loading of Prebuilt Sample Cases
   const handleSelectSampleCase = (sample: PrebuiltSampleCase) => {
     setIsSamplesModalOpen(false);
 
@@ -114,7 +130,7 @@ export default function App() {
       setUnsupportedDetails({
         category: sample.unsupportedCategory || 'criminal',
         label: sample.badgeLabel,
-        rejectionReason: `Matters involving ${sample.badgeLabel} fall outside LawLink's 4 supported MVP domains.`,
+        rejectionReason: `Matters involving ${sample.badgeLabel} fall outside LawLink's 4 supported domains.`,
         safeRedirectionGuide: {
           appropriateForum: 'Nearest Police Station / Judicial Magistrate / Family Court',
           freeLegalAidAgency: 'National Legal Services Authority (NALSA) - Helpline 15100',
@@ -130,6 +146,7 @@ export default function App() {
     setSelectedDomainId(sample.domainId as SupportedDomainId);
     setIntakeFormData(sample.intakeData);
     setCurrentStep('CASE_INTAKE');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Reset to Home
@@ -143,17 +160,19 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-page-bg text-text-primary flex flex-col font-sans selection:bg-accent/20 selection:text-accent">
+    <div className="h-screen flex flex-col bg-page-bg text-text-primary font-sans selection:bg-accent/20 selection:text-accent overflow-hidden">
       {/* Universal Header */}
       <Header
         onOpenSamples={() => setIsSamplesModalOpen(true)}
         onOpenStatutes={() => setIsStatutesModalOpen(true)}
         onReset={handleReset}
+        onStepNavigate={handleStepNavigate}
         activeDomainTitle={selectedDomainId ? SUPPORTED_DOMAINS[selectedDomainId]?.shortTitle : undefined}
+        currentStep={currentStep}
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6">
+      <main className="flex-1 overflow-y-auto w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6">
         <div className="max-w-[1700px] mx-auto w-full">
         {errorMessage && (
           <div className="max-w-4xl mx-auto mb-6">

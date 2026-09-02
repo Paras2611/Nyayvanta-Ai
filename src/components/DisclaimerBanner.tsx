@@ -19,7 +19,7 @@ export const DisclaimerBanner: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 pt-2 border-t border-slate-900">
           <div>
-            <span>LawLink MVP © 2025 • Strict 4-Domain Evidence-First Intelligence</span>
+            <span>LawLink © 2025 • Strict 4-Domain Evidence-First Intelligence</span>
           </div>
           <div className="flex items-center gap-4">
             <span>Supported: Consumer • Tenancy • Employment • Contract</span>

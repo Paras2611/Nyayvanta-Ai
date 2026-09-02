@@ -22,7 +22,7 @@ export const DashboardPage: React.FC = () => {
       <section>
         <h2 className="text-lg font-bold mb-4">Start New Case</h2>
         <div className="mb-4">
-          <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">LawLink MVP — Supported Domains</span>
+          <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">LawLink — Supported Domains</span>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {Object.values(DOMAIN_REGISTRY).map(d => <DomainCard key={d.id} domain={d} />)}

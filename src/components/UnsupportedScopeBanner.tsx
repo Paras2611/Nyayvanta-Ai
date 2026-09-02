@@ -47,7 +47,7 @@ export const UnsupportedScopeBanner: React.FC<UnsupportedScopeBannerProps> = ({
 
             {/* Mandatory verbatim statement */}
             <h2 className="text-2xl font-bold text-white tracking-tight font-serif-legal mb-2">
-              This case type is currently outside LawLink&apos;s supported MVP scope.
+              This case type is currently outside LawLink&apos;s supported scope.
             </h2>
 
             <p className="text-slate-300 text-sm leading-relaxed mb-4">
@@ -135,7 +135,7 @@ export const UnsupportedScopeBanner: React.FC<UnsupportedScopeBannerProps> = ({
           </div>
         </div>
 
-        {/* Supported MVP Domains Reminder */}
+        {/* Supported Domains Reminder */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800">
           <div className="text-xs text-slate-400 text-center sm:text-left">
             <span>LawLink currently supports: </span>

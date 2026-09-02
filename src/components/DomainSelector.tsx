@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import {
   ShieldAlert,
   Home,
@@ -71,10 +72,11 @@ export const DomainSelector: React.FC<DomainSelectorProps> = ({
               placeholder="Describe your legal issue (e.g., 'Landlord refusing ₹1.5L deposit', 'Employer withheld salary', 'Defective laptop warranty denial')..."
               className="w-full pl-12 pr-32 py-4 bg-white border border-gray-300 hover:border-gray-400 focus:border-accent focus:ring-2 focus:ring-accent/20 rounded-2xl text-gray-900 placeholder:text-gray-400 text-sm shadow-sm transition"
             />
-            <button
+            <motion.button
               type="submit"
               disabled={!naturalQuery.trim() || isClassifying}
-              className="absolute right-2 px-4 py-2.5 rounded-xl bg-button-primary hover:bg-gray-800 disabled:opacity-50 text-white font-bold text-xs flex items-center gap-1.5 transition shadow-md"
+              whileTap={{ scale: 0.98 }}
+              className="absolute right-2 px-4 py-2.5 rounded-xl bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white font-bold text-xs flex items-center gap-1.5 transition shadow-sm cursor-pointer"
             >
               {isClassifying ? (
                 <>
@@ -87,13 +89,13 @@ export const DomainSelector: React.FC<DomainSelectorProps> = ({
                   <ArrowRight className="w-3.5 h-3.5" />
                 </>
               )}
-            </button>
+            </motion.button>
           </div>
         </form>
 
         <div className="flex items-center justify-center gap-2 mt-3 text-xs text-gray-500">
           <Info className="w-3.5 h-3.5 text-gray-400" />
-          <span>Queries are instantly classified to enforce LawLink&apos;s strict 4-domain MVP boundaries.</span>
+          <span>Queries are instantly classified to enforce LawLink&apos;s strict 4-domain boundaries.</span>
         </div>
       </div>
 
@@ -102,7 +104,7 @@ export const DomainSelector: React.FC<DomainSelectorProps> = ({
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-xl font-bold text-gray-900 font-serif-legal">
-              Supported Legal Domains (MVP)
+              Supported Legal Domains
             </h2>
             <p className="text-xs text-gray-500">
               Select one of the four verified legal practice areas to initiate intake.
@@ -115,9 +117,11 @@ export const DomainSelector: React.FC<DomainSelectorProps> = ({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {Object.values(SUPPORTED_DOMAINS).map((domain) => (
-            <div
+            <motion.div
               key={domain.id}
               onClick={() => onSelectDomain(domain.id)}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
               className="group cursor-pointer bg-white hover:bg-gray-50 border border-gray-200 hover:border-accent/50 rounded-2xl p-6 transition-all duration-200 hover:shadow-lg hover:shadow-gray-200/50 flex flex-col justify-between"
             >
               <div>
@@ -170,7 +174,7 @@ export const DomainSelector: React.FC<DomainSelectorProps> = ({
                 <span>Start Case Intake</span>
                 <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition" />
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -185,20 +189,21 @@ export const DomainSelector: React.FC<DomainSelectorProps> = ({
         </div>
 
         <p className="text-xs text-gray-600 leading-relaxed mb-4">
-          To prevent misleading legal advice and maintain high-fidelity evidence standards, LawLink strictly excludes the following matters in the current MVP:
+          To prevent misleading legal advice and maintain high-fidelity evidence standards, LawLink strictly excludes the following matters in the current system:
         </p>
 
         <div className="flex flex-wrap gap-2">
           {Object.values(UNSUPPORTED_DOMAINS_MAP).map((unsupported) => (
-            <button
+            <motion.button
               key={unsupported.category}
               onClick={() => onQuerySubmit(unsupported.keywords[0])}
-              className="text-[11px] px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 hover:text-rose-800 border border-rose-100 transition flex items-center gap-1.5"
+              whileTap={{ scale: 0.95 }}
+              className="text-[11px] px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white border border-rose-700 transition flex items-center gap-1.5 cursor-pointer"
               title="Click to test guardrail redirect"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
               <span>{unsupported.label.split('&')[0].trim()}</span>
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>

@@ -36,7 +36,7 @@ export async function classifyLegalQuery(
         unsupportedDomain: {
           category: 'criminal',
           label: 'Matter Outside Supported Scope',
-          rejectionReason: 'This case type is currently outside LawLink’s supported MVP scope.',
+          rejectionReason: 'This case type is currently outside LawLink’s supported scope.',
           safeRedirectionGuide: {
             appropriateForum: 'Nearest Judicial Magistrate / Family Court / Relevant Authority',
             freeLegalAidAgency: 'National Legal Services Authority (NALSA) - Helpline 15100',

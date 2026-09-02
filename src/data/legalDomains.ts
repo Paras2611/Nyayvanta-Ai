@@ -182,7 +182,7 @@ export const UNSUPPORTED_DOMAINS_MAP: Record<UnsupportedDomainId, UnsupportedDom
   criminal: {
     category: 'criminal',
     label: 'Criminal Offences & IPC/BNS Proceedings',
-    reason: 'Criminal law involves state prosecution, custodial liberty, and criminal procedure under Bharatiya Nagarik Suraksha Sanhita (BNSS) / CrPC, which is outside LawLink MVP scope.',
+    reason: 'Criminal law involves state prosecution, custodial liberty, and criminal procedure under Bharatiya Nagarik Suraksha Sanhita (BNSS) / CrPC, which is outside LawLink scope.',
     keywords: ['fir', 'police', 'arrest', 'bail', 'ipc', 'bns', 'theft', 'fraud', 'cheating', '420', 'custody', 'assault'],
     safeRedirection: {
       appropriateForum: 'Nearest Police Station (for Zero FIR / e-FIR) or Judicial Magistrate First Class',

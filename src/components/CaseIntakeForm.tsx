@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -159,7 +160,7 @@ export const CaseIntakeForm: React.FC<CaseIntakeFormProps> = ({
         <button
           type="button"
           onClick={onBack}
-          className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition"
+          className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 hover:text-gray-900 transition cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Domain Selection</span>
@@ -419,22 +420,24 @@ export const CaseIntakeForm: React.FC<CaseIntakeFormProps> = ({
 
         {/* Submit Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
-          <button
+          <motion.button
             type="button"
             onClick={onBack}
-            className="w-full sm:w-auto px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 text-xs font-semibold border border-slate-700 transition"
+            whileTap={{ scale: 0.98 }}
+            className="w-full sm:w-auto px-5 py-3 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold border border-gray-300 transition cursor-pointer"
           >
             Cancel & Back
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
             type="submit"
             disabled={isAnalyzing}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 disabled:opacity-50 text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-amber-500/20 transition"
+            whileTap={{ scale: 0.98 }}
+            className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-accent hover:bg-accent/90 disabled:opacity-50 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition cursor-pointer"
           >
             {isAnalyzing ? (
               <>
-                <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 <span>Running Legal Intelligence Model...</span>
               </>
             ) : (
@@ -443,7 +446,7 @@ export const CaseIntakeForm: React.FC<CaseIntakeFormProps> = ({
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
-          </button>
+          </motion.button>
         </div>
       </form>
     </div>

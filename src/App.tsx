@@ -181,8 +181,8 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main ref={mainRef as any} className="flex-1 overflow-y-auto w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6">
-        <div className="max-w-[1700px] mx-auto w-full">
+      <main ref={mainRef as any} className="flex-1 overflow-y-auto w-full bg-slate-950">
+        <div className="max-w-[1700px] mx-auto w-full bg-white rounded-none min-h-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6">
         {errorMessage && (
           <div className="max-w-4xl mx-auto mb-6">
             <div className="p-4 bg-rose-950/40 border border-rose-500/50 rounded-2xl text-xs text-rose-200 flex items-center justify-between">
@@ -240,12 +240,10 @@ export default function App() {
             detectedQuery={lastQuery}
           />
         )}
-        
-        {/* Universal Legal Disclaimer Banner */}
-        <DisclaimerBanner />
         </div>
+        <DisclaimerBanner />
       </main>
-
+      
       {/* Modals */}
       {isSamplesModalOpen && (
         <SampleCasesModal

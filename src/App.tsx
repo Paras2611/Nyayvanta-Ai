@@ -225,6 +225,9 @@ export default function App() {
             detectedQuery={lastQuery}
           />
         )}
+        
+        {/* Universal Legal Disclaimer Banner */}
+        <DisclaimerBanner />
         </div>
       </main>
 
@@ -248,9 +251,6 @@ export default function App() {
           onClose={() => setIsNoticeStudioOpen(false)}
         />
       )}
-
-      {/* Universal Legal Disclaimer Banner */}
-      <DisclaimerBanner />
     </div>
   );
 }

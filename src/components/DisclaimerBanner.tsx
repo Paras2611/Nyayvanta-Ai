@@ -4,7 +4,7 @@ import { AlertCircle, Scale, ShieldAlert } from 'lucide-react';
 export const DisclaimerBanner: React.FC = () => {
   return (
     <footer className="bg-slate-950 border-t border-slate-800/80 py-8 px-4 text-xs text-slate-400">
-      <div className="max-w-7xl mx-auto space-y-4">
+      <div className="w-full space-y-4">
         <div className="p-4 bg-slate-900/90 border border-slate-800 rounded-xl flex items-start gap-3">
           <Scale className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
           <div className="space-y-1">
@@ -17,7 +17,7 @@ export const DisclaimerBanner: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 pt-2 border-t border-slate-900">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 pt-2 border-t border-slate-900 w-full">
           <div>
             <span>LawLink © 2025 • Strict 4-Domain Evidence-First Intelligence</span>
           </div>

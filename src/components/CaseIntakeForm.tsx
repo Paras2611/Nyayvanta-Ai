@@ -35,7 +35,7 @@ export const CaseIntakeForm: React.FC<CaseIntakeFormProps> = ({
 }) => {
   const domainMeta = SUPPORTED_DOMAINS[domainId];
 
-  const [stateOfIncident, setStateOfIncident] = useState(initialData?.stateOfIncident || 'Karnataka');
+  const [stateOfIncident, setStateOfIncident] = useState(initialData?.stateOfIncident || 'Maharashtra');
   const [disputeTitle, setDisputeTitle] = useState(initialData?.disputeTitle || '');
   const [disputeDescription, setDisputeDescription] = useState(initialData?.disputeDescription || '');
   const [complainantRole, setComplainantRole] = useState(

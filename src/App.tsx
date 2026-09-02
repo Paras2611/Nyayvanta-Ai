@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Header } from './components/Header';
 import { DomainSelector } from './components/DomainSelector';
 import { CaseIntakeForm } from './components/CaseIntakeForm';
@@ -38,6 +39,14 @@ export default function App() {
   const [isSamplesModalOpen, setIsSamplesModalOpen] = useState(false);
   const [isStatutesModalOpen, setIsStatutesModalOpen] = useState(false);
   const [isNoticeStudioOpen, setIsNoticeStudioOpen] = useState(false);
+
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+    }
+  }, [currentStep]);
 
   // Loading states
   const [isClassifying, setIsClassifying] = useState(false);
@@ -172,7 +181,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6">
+      <main ref={mainRef as any} className="flex-1 overflow-y-auto w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6">
         <div className="max-w-[1700px] mx-auto w-full">
         {errorMessage && (
           <div className="max-w-4xl mx-auto mb-6">
@@ -199,13 +208,19 @@ export default function App() {
 
         {/* STEP 2: CASE INTAKE */}
         {currentStep === 'CASE_INTAKE' && selectedDomainId && (
-          <CaseIntakeForm
-            domainId={selectedDomainId}
-            initialData={intakeFormData}
-            onBack={() => setCurrentStep('DOMAIN_SELECT')}
-            onSubmit={handleIntakeSubmit}
-            isAnalyzing={isAnalyzing}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <CaseIntakeForm
+              domainId={selectedDomainId}
+              initialData={intakeFormData}
+              onBack={() => setCurrentStep('DOMAIN_SELECT')}
+              onSubmit={handleIntakeSubmit}
+              isAnalyzing={isAnalyzing}
+            />
+          </motion.div>
         )}
 
         {/* STEP 3: CASE REPORT */}

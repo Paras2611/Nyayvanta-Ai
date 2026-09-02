@@ -70,7 +70,7 @@ export const DomainSelector: React.FC<DomainSelectorProps> = ({
               value={naturalQuery}
               onChange={(e) => setNaturalQuery(e.target.value)}
               placeholder="Describe your legal issue (e.g., 'Landlord refusing ₹1.5L deposit', 'Employer withheld salary', 'Defective laptop warranty denial')..."
-              className="w-full pl-12 pr-32 py-4 bg-white border border-gray-300 hover:border-gray-400 focus:border-accent focus:ring-2 focus:ring-accent/20 rounded-2xl text-gray-900 placeholder:text-gray-400 text-sm shadow-sm transition"
+              className="w-full pl-12 pr-40 py-4 bg-white border border-gray-300 hover:border-gray-400 focus:border-accent focus:ring-2 focus:ring-accent/20 rounded-2xl text-gray-900 placeholder:text-gray-400 text-sm shadow-sm transition"
             />
             <motion.button
               type="submit"

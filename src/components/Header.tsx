@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Scale, ShieldCheck, BookOpen, Sparkles, AlertCircle, FileText, ChevronRight } from 'lucide-react';
 
 interface HeaderProps {
@@ -100,13 +101,16 @@ export const Header: React.FC<HeaderProps> = ({
         {breadcrumbs.map((crumb, index) => (
           <React.Fragment key={crumb.name}>
             {index > 0 && <ChevronRight className="w-3 h-3 text-gray-400 shrink-0" />}
-            <button
+            <motion.button
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05 }}
               onClick={() => onStepNavigate(crumb.step as any)}
               className={`shrink-0 ${index === breadcrumbs.length - 1 ? 'font-semibold text-gray-900 cursor-default' : 'hover:text-accent cursor-pointer'}`}
               disabled={index === breadcrumbs.length - 1}
             >
               {crumb.name}
-            </button>
+            </motion.button>
           </React.Fragment>
         ))}
       </div>

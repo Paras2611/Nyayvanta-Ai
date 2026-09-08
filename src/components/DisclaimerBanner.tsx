@@ -12,14 +12,14 @@ export const DisclaimerBanner: React.FC = () => {
               Statutory Information Disclaimer & Bar Council of India Compliance
             </h4>
             <p className="text-slate-400 leading-relaxed text-[11px]">
-              LawLink is an AI-assisted legal information and research system, <strong>NOT a replacement for a qualified legal professional</strong> or advocate enrolled with the Bar Council of India. Information generated herein does not constitute formal attorney-client advice or legal solicitation under the Advocates Act, 1961. Always consult an enrolled advocate or qualified legal practitioner before instituting formal legal proceedings before any Court, Commission, or Tribunal in India.
+              Nyayvanta-ai is an AI-assisted legal information and research system, <strong>NOT a replacement for a qualified legal professional</strong> or advocate enrolled with the Bar Council of India. Information generated herein does not constitute formal attorney-client advice or legal solicitation under the Advocates Act, 1961. Always consult an enrolled advocate or qualified legal practitioner before instituting formal legal proceedings before any Court, Commission, or Tribunal in India.
             </p>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 pt-2 border-t border-slate-900 w-full px-4">
           <div>
-            <span>LawLink © 2025 • Strict 4-Domain Evidence-First Intelligence</span>
+            <span>Nyayvanta-ai © 2025 • Strict 4-Domain Evidence-First Intelligence</span>
           </div>
           <div className="flex items-center gap-4">
             <span>Supported: Consumer • Tenancy • Employment • Contract</span>

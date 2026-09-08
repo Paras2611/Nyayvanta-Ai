@@ -1,5 +1,5 @@
 {
-  "name": "LawLink - AI Legal Case & Document Intelligence",
+  "name": "Nyayvanta-ai",
   "description": "India-specific legal case intelligence and document analysis platform for Consumer, Tenancy, Employment, and Contract disputes with evidence-first verification.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

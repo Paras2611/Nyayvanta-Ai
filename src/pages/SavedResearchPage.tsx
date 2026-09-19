@@ -54,12 +54,12 @@ export const SavedResearchPage: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 pb-2 border-b border-[#E8E3F5] dark:border-slate-800 overflow-x-auto scrollbar-none">
+      <div className="flex gap-1.5 pb-2 border-b border-[#E8E3F5] dark:border-slate-800 overflow-x-auto scrollbar-none">
         {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 press-feedback ${
               activeTab === tab
                 ? 'bg-[#684EC9] text-white shadow-xs'
                 : 'bg-white dark:bg-[#111827] text-[#544E6D] dark:text-slate-400 border border-[#E8E3F5] dark:border-slate-700 hover:bg-[#EDE9FE]'
@@ -87,7 +87,7 @@ export const SavedResearchPage: React.FC = () => {
         {items.map((item) => (
           <div
             key={item.id}
-            className="p-5 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-3 shadow-xs hover:border-[#684EC9] dark:hover:border-purple-600 transition-colors flex flex-col justify-between"
+            className="p-4 sm:p-5 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-3 shadow-xs hover:border-[#684EC9] dark:hover:border-purple-600 transition-colors flex flex-col justify-between"
           >
             <div className="space-y-2">
               <div className="flex items-center justify-between">
@@ -104,10 +104,10 @@ export const SavedResearchPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="pt-3 border-t border-[#E8E3F5] dark:border-slate-800 flex items-center justify-between text-xs">
+            <div className="pt-3 border-t border-[#E8E3F5] dark:border-slate-800 flex items-center justify-between text-xs gap-2">
               <button
                 onClick={() => navigate(`/chat?q=${encodeURIComponent(item.title)}`)}
-                className="flex items-center gap-1.5 font-bold text-[#684EC9] dark:text-purple-400 hover:underline cursor-pointer"
+                className="flex items-center gap-1.5 font-bold text-[#684EC9] dark:text-purple-400 hover:underline cursor-pointer press-feedback"
               >
                 <MessageSquare size={14} />
                 <span>Open in Research</span>
@@ -119,14 +119,14 @@ export const SavedResearchPage: React.FC = () => {
                     navigator.clipboard.writeText(window.location.origin + `/legal-search?q=${encodeURIComponent(item.title)}`);
                     alert('Link copied to clipboard');
                   }}
-                  className="p-2 text-[#7E779C] hover:text-[#684EC9] rounded-lg hover:bg-[#EDE9FE] dark:hover:bg-purple-950/30 transition-colors cursor-pointer"
+                  className="p-2 text-[#7E779C] hover:text-[#684EC9] rounded-lg hover:bg-[#EDE9FE] dark:hover:bg-purple-950/30 transition-colors cursor-pointer press-feedback"
                   title="Share"
                 >
                   <Share2 size={15} />
                 </button>
                 <button
                   onClick={() => handleDelete(item.id)}
-                  className="p-2 text-[#7E779C] hover:text-rose-600 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
+                  className="p-2 text-[#7E779C] hover:text-rose-600 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer press-feedback"
                   title="Delete"
                 >
                   <Trash2 size={15} />

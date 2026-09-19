@@ -134,14 +134,14 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
                 key={step.stepNumber}
                 className="p-4 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 shadow-xs hover:border-[#DDD6FE] transition-colors"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-1.5">
                   <span className="text-xs font-bold text-[#1E1B2E] dark:text-white flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-[#EDE9FE] dark:bg-purple-900/50 text-[#684EC9] dark:text-purple-300 flex items-center justify-center text-xs font-bold">
+                    <span className="w-6 h-6 rounded-full bg-[#EDE9FE] dark:bg-purple-900/50 text-[#684EC9] dark:text-purple-300 flex items-center justify-center text-xs font-bold shrink-0">
                       {step.stepNumber}
                     </span>
-                    {step.title}
+                    <span>{step.title}</span>
                   </span>
-                  <span className="text-[11px] bg-[#F8F7FC] dark:bg-slate-800 px-2 py-0.5 rounded-md text-[#544E6D] dark:text-slate-300 font-semibold border border-[#E8E3F5] dark:border-slate-700">
+                  <span className="text-[10px] sm:text-[11px] bg-[#F8F7FC] dark:bg-slate-800 px-2 py-0.5 rounded-md text-[#544E6D] dark:text-slate-300 font-semibold border border-[#E8E3F5] dark:border-slate-700 shrink-0">
                     {step.recommendedTimeline}
                   </span>
                 </div>

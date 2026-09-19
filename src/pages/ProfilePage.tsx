@@ -111,7 +111,7 @@ export const ProfilePage: React.FC = () => {
           <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <button
               type="submit"
-              className="flex items-center justify-center gap-1.5 px-6 py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors"
+              className="flex items-center justify-center gap-1.5 px-6 py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors press-feedback w-full sm:w-auto min-h-[44px]"
             >
               {savedSuccess ? (
                 <>
@@ -129,7 +129,7 @@ export const ProfilePage: React.FC = () => {
                 localStorage.removeItem('nyayavanta_token');
                 navigate('/login');
               }}
-              className="flex items-center justify-center gap-1.5 text-xs text-rose-600 hover:text-rose-700 hover:underline font-bold py-2"
+              className="flex items-center justify-center gap-1.5 text-xs text-rose-600 hover:text-rose-700 hover:underline font-bold py-2 press-feedback"
             >
               <LogOut size={14} />
               <span>Log Out</span>

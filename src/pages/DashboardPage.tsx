@@ -91,47 +91,47 @@ export const DashboardPage: React.FC = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Ask Nyayavanta a legal question (e.g. Can landlord forfeit security deposit?)..."
-              className="w-full pl-10 sm:pl-12 pr-24 sm:pr-28 py-3 sm:py-3.5 rounded-2xl border border-[#D8D1EE] dark:border-[#382F5E] bg-white dark:bg-[#1E1836] text-[#1E1B2E] dark:text-white text-xs sm:text-sm placeholder:text-[#958EB3] focus:outline-none focus:ring-2 focus:ring-[#7C66DC] transition-all"
+              placeholder="Ask a legal question (e.g. Can landlord forfeit deposit?)..."
+              className="w-full pl-10 sm:pl-12 pr-22 sm:pr-28 py-3 sm:py-3.5 rounded-2xl border border-[#D8D1EE] dark:border-[#382F5E] bg-white dark:bg-[#1E1836] text-[#1E1B2E] dark:text-white text-xs sm:text-sm placeholder:text-[#958EB3] focus:outline-none focus:ring-2 focus:ring-[#7C66DC] transition-all shadow-2xs"
             />
             <button
               type="submit"
-              className="absolute right-1.5 sm:right-2 px-3.5 sm:px-5 py-2 bg-[#684EC9] hover:bg-[#573EAE] text-white rounded-xl text-xs font-bold shadow-xs transition-colors"
+              className="absolute right-1.5 sm:right-2 px-3 sm:px-5 py-2 bg-[#684EC9] hover:bg-[#573EAE] text-white rounded-xl text-xs font-bold shadow-xs transition-colors press-feedback"
             >
               Research
             </button>
           </div>
         </form>
 
-        {/* Quick Actions */}
-        <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+        {/* Quick Actions Responsive Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 max-w-2xl mx-auto pt-2">
           <button
             onClick={() => navigate('/chat')}
-            className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] transition-all"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs"
           >
-            <MessageSquare size={14} className="text-[#684EC9]" />
-            <span>Ask Nyayavanta</span>
+            <MessageSquare size={14} className="text-[#684EC9] shrink-0" />
+            <span className="truncate">Ask Nyayavanta</span>
           </button>
           <button
             onClick={() => navigate('/legal-search')}
-            className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] transition-all"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs"
           >
-            <BookOpen size={14} className="text-[#684EC9]" />
-            <span>Search Laws</span>
+            <BookOpen size={14} className="text-[#684EC9] shrink-0" />
+            <span className="truncate">Search Laws</span>
           </button>
           <button
             onClick={() => navigate('/case-search')}
-            className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] transition-all"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs"
           >
-            <Briefcase size={14} className="text-[#684EC9]" />
-            <span>Search Cases</span>
+            <Briefcase size={14} className="text-[#684EC9] shrink-0" />
+            <span className="truncate">Search Cases</span>
           </button>
           <button
             onClick={() => navigate('/documents')}
-            className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] transition-all"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs"
           >
-            <FileText size={14} className="text-[#684EC9]" />
-            <span>Analyze Document</span>
+            <FileText size={14} className="text-[#684EC9] shrink-0" />
+            <span className="truncate">Analyze Docs</span>
           </button>
         </div>
       </section>
@@ -152,17 +152,17 @@ export const DashboardPage: React.FC = () => {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
           {domainCards.map((d) => {
             const Icon = d.icon;
             return (
               <div
                 key={d.id}
                 onClick={() => navigate(`/chat?domain=${d.id}`)}
-                className="p-5 rounded-2xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] cursor-pointer lavender-card-hover flex flex-col justify-between space-y-3"
+                className="p-4 sm:p-5 rounded-2xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] cursor-pointer lavender-card-hover press-feedback flex flex-col justify-between space-y-3 shadow-2xs"
               >
                 <div className="space-y-2.5">
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${d.iconColor}`}>
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${d.iconColor} shadow-2xs`}>
                     <Icon size={18} />
                   </div>
                   <h3 className="font-bold text-sm text-[#1E1B2E] dark:text-white">{d.title}</h3>

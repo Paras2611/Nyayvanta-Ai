@@ -112,17 +112,17 @@ export const HistoryPage: React.FC = () => {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
+                    <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto pt-2.5 sm:pt-0 border-t sm:border-0 border-[#E8E3F5] dark:border-slate-800 shrink-0">
                       <button
                         onClick={() => navigate(`/chat?q=${encodeURIComponent(item.title)}&domain=${item.domain}`)}
-                        className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#684EC9] hover:bg-[#573EB0] text-white text-xs font-bold shadow-xs transition-colors cursor-pointer"
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#684EC9] hover:bg-[#573EB0] text-white text-xs font-bold shadow-xs transition-colors cursor-pointer press-feedback"
                       >
                         <span>Continue</span>
                         <ArrowRight size={13} />
                       </button>
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="p-2 text-[#7E779C] hover:text-rose-600 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
+                        className="p-2.5 text-[#7E779C] hover:text-rose-600 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer press-feedback"
                         title="Delete record"
                       >
                         <Trash2 size={16} />

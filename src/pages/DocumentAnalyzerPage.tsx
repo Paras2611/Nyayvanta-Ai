@@ -56,15 +56,16 @@ export const DocumentAnalyzerPage: React.FC = () => {
   const [filename, setFilename] = useState('Sample_Lease_Agreement.pdf');
   const [pipelineState, setPipelineState] = useState<string>('Idle');
   const [analysisResult, setAnalysisResult] = useState<DocumentAnalysisResponse | null>(null);
+  const [activeMobileTab, setActiveMobileTab] = useState<'input' | 'findings'>('input');
 
   const sampleAgreements = [
     {
-      title: 'Residential Lease with Deposit Forfeiture',
+      title: 'Residential Lease (Deposit Forfeiture)',
       file: 'Bengaluru_Tenancy_Agreement.pdf',
       text: `RESIDENTIAL LEASE AGREEMENT\nThis Agreement is made on 01-10-2025 between Shri R. K. Sharma (Lessor) and Anand Verma (Lessee).\nClause 4: The Lessee has deposited a Security Deposit of INR 1,50,000.\nClause 8: In the event of default or early vacation, the entire security deposit shall be forfeited as liquidated damages.\nClause 14: Any dispute arising out of this agreement shall be referred to Sole Arbitrator appointed by Lessor.\nClause 18: Courts in Bengaluru shall have exclusive jurisdiction.`
     },
     {
-      title: 'Employment Offer Letter with 1-Year Non-Compete',
+      title: 'Employment Offer (1-Yr Non-Compete)',
       file: 'Tech_Employment_Contract.pdf',
       text: `EMPLOYMENT AGREEMENT\nEntered on 15-06-2024 between CloudTech Private Limited and Priya Nair.\nClause 5: Designation: Lead Software Architect.\nClause 9: The employee agrees that for a period of 12 months following resignation or termination, employee shall not engage or work for any competitor in India.\nClause 12: Training bond damages of INR 3,00,000 are stipulated in case of departure within 2 years.`
     }
@@ -74,6 +75,8 @@ export const DocumentAnalyzerPage: React.FC = () => {
     const text = textToUse !== undefined ? textToUse : inputText;
     const name = nameToUse || filename;
     if (!text.trim()) return;
+
+    setActiveMobileTab('findings');
 
     // Pipeline steps
     const steps = [
@@ -108,10 +111,10 @@ export const DocumentAnalyzerPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
+    <div className="space-y-5 sm:space-y-6">
+      <div className="space-y-1.5 sm:space-y-2">
         <h1 className="text-xl md:text-2xl font-black text-[#1E1B2E] dark:text-white flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
+          <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0 shadow-2xs">
             <FileText size={20} />
           </div>
           <span>Analyze a Legal Document</span>
@@ -121,9 +124,9 @@ export const DocumentAnalyzerPage: React.FC = () => {
         </p>
       </div>
 
-      {/* Preset Samples */}
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-semibold text-[#7E779C] self-center">Quick Load Sample:</span>
+      {/* Preset Samples - Swipeable Track on Mobile */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+        <span className="text-xs font-semibold text-[#7E779C] shrink-0">Sample:</span>
         {sampleAgreements.map((s, idx) => (
           <button
             key={idx}
@@ -132,34 +135,65 @@ export const DocumentAnalyzerPage: React.FC = () => {
               setFilename(s.file);
               handleRunAnalysis(s.text, s.file);
             }}
-            className="text-xs px-3.5 py-1.5 rounded-xl border border-[#E8E3F5] dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-[#684EC9] text-[#544E6D] dark:text-slate-300 hover:bg-[#EDE9FE] dark:hover:bg-purple-950/30 font-bold transition-all shadow-2xs cursor-pointer"
+            className="text-xs px-3 py-1.5 rounded-xl border border-[#E8E3F5] dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-[#684EC9] text-[#544E6D] dark:text-slate-300 hover:bg-[#EDE9FE] dark:hover:bg-purple-950/30 font-bold transition-all shadow-2xs cursor-pointer shrink-0 press-feedback"
           >
             {s.title}
           </button>
         ))}
       </div>
 
+      {/* Mobile Tab Segmented Switcher (lg:hidden) */}
+      <div className="flex lg:hidden bg-[#EDE9FE] dark:bg-[#1E1836] p-1 rounded-2xl border border-[#D8D1EE] dark:border-[#382F5E]">
+        <button
+          onClick={() => setActiveMobileTab('input')}
+          className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+            activeMobileTab === 'input'
+              ? 'bg-white dark:bg-[#2C244C] text-[#573EAE] dark:text-white shadow-xs'
+              : 'text-[#544E6D] dark:text-[#A59FC2]'
+          }`}
+        >
+          <UploadCloud size={14} />
+          <span>Document Input</span>
+        </button>
+        <button
+          onClick={() => setActiveMobileTab('findings')}
+          className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+            activeMobileTab === 'findings'
+              ? 'bg-white dark:bg-[#2C244C] text-[#573EAE] dark:text-white shadow-xs'
+              : 'text-[#544E6D] dark:text-[#A59FC2]'
+          }`}
+        >
+          <Scale size={14} />
+          <span>Analysis Findings</span>
+          {analysisResult && (
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          )}
+        </button>
+      </div>
+
       {/* Split Screen Workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left: Input / Viewer */}
-        <div className="p-5 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs flex flex-col justify-between">
+        <div className={`p-4 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs flex flex-col justify-between ${
+          activeMobileTab === 'findings' ? 'hidden lg:flex' : 'flex'
+        }`}>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="font-bold text-sm text-[#1E1B2E] dark:text-white flex items-center gap-2">
                 <UploadCloud size={18} className="text-[#684EC9]" />
                 <span>Document Text / Paste Area</span>
               </h2>
-              <span className="text-xs font-mono text-[#7E779C] bg-[#F8F7FC] dark:bg-slate-800 px-2 py-0.5 rounded-md border border-[#E8E3F5] dark:border-slate-700">
+              <span className="text-xs font-mono text-[#7E779C] bg-[#F8F7FC] dark:bg-slate-800 px-2 py-0.5 rounded-md border border-[#E8E3F5] dark:border-slate-700 max-w-[140px] sm:max-w-none truncate">
                 {filename}
               </span>
             </div>
 
             <textarea
-              rows={13}
+              rows={8}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Paste complete agreement text, lease deed clauses, or employment notice..."
-              className="w-full p-4 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs font-mono text-[#1E1B2E] dark:text-slate-200 leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-inner"
+              className="w-full p-3.5 sm:p-4 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs font-mono text-[#1E1B2E] dark:text-slate-200 leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-inner lg:min-h-[320px]"
             />
           </div>
 
@@ -170,7 +204,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
             <button
               onClick={() => handleRunAnalysis()}
               disabled={pipelineState !== 'Idle' && pipelineState !== 'Complete'}
-              className="px-6 py-2.5 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[42px]"
+              className="px-6 py-2.5 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[42px] press-feedback"
             >
               Analyze Document
             </button>
@@ -178,7 +212,9 @@ export const DocumentAnalyzerPage: React.FC = () => {
         </div>
 
         {/* Right: Analysis & Findings */}
-        <div className="p-5 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs overflow-y-auto max-h-[650px]">
+        <div className={`p-4 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs overflow-y-auto max-h-[650px] ${
+          activeMobileTab === 'input' ? 'hidden lg:block' : 'block'
+        }`}>
           {!analysisResult ? (
             <div className="h-full flex flex-col items-center justify-center text-center p-8 space-y-3 text-[#7E779C] min-h-[350px]">
               <div className="w-14 h-14 rounded-2xl bg-[#EDE9FE] dark:bg-purple-950/40 text-[#684EC9] flex items-center justify-center">

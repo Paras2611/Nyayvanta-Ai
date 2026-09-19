@@ -28,8 +28,8 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-4">
-      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-3 sm:p-4">
+      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-5 sm:p-8 space-y-5 sm:space-y-6 shadow-xs">
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7C66DC] to-[#573EAE] text-white flex items-center justify-center mx-auto shadow-sm">
             <Scale size={24} />
@@ -81,7 +81,7 @@ export const LoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px]"
+            className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px] press-feedback"
           >
             {loading ? 'Authenticating...' : 'Sign In to Workspace'}
           </button>
@@ -127,8 +127,8 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-4">
-      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-3 sm:p-4">
+      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-5 sm:p-8 space-y-5 sm:space-y-6 shadow-xs">
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7C66DC] to-[#573EAE] text-white flex items-center justify-center mx-auto shadow-sm">
             <Scale size={24} />
@@ -196,7 +196,7 @@ export const RegisterPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px]"
+            className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px] press-feedback"
           >
             {loading ? 'Creating Account...' : 'Register Account'}
           </button>
@@ -216,8 +216,8 @@ export const RegisterPage: React.FC = () => {
 export const ForgotPasswordPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-4">
-      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs text-center">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-3 sm:p-4">
+      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-5 sm:p-8 space-y-5 sm:space-y-6 shadow-xs text-center">
         <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7C66DC] to-[#573EAE] text-white flex items-center justify-center mx-auto shadow-sm">
           <Scale size={24} />
         </div>
@@ -247,7 +247,7 @@ export const ForgotPasswordPage: React.FC = () => {
             />
             <button
               type="submit"
-              className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px]"
+              className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px] press-feedback"
             >
               Send Reset Link
             </button>
@@ -263,3 +263,4 @@ export const ForgotPasswordPage: React.FC = () => {
     </div>
   );
 };
+

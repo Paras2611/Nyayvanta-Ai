@@ -55,19 +55,19 @@ export const CaseDetailPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Back Button and Actions */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         <button
           onClick={() => navigate('/case-search')}
-          className="flex items-center gap-1.5 text-xs font-bold text-[#544E6D] dark:text-slate-400 hover:text-[#684EC9] transition-colors cursor-pointer"
+          className="flex items-center gap-1.5 text-xs font-bold text-[#544E6D] dark:text-slate-400 hover:text-[#684EC9] transition-colors cursor-pointer py-1"
         >
           <ArrowLeft size={16} />
           <span>Back to Landmark Cases</span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
           <button
             onClick={handleSave}
-            className="flex items-center gap-1 text-xs px-3.5 py-2 rounded-xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-[#1E1B2E] dark:text-slate-200 hover:border-[#684EC9] font-bold shadow-xs transition-colors cursor-pointer"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-1 text-xs px-3.5 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-[#1E1B2E] dark:text-slate-200 hover:border-[#684EC9] font-bold shadow-xs transition-colors cursor-pointer press-feedback"
           >
             {savedSuccess ? (
               <>
@@ -85,16 +85,16 @@ export const CaseDetailPage: React.FC = () => {
             onClick={() =>
               navigate(`/chat?q=${encodeURIComponent(`Explain the legal holding of ${caseData.caseName} (${caseData.citationStr})`)}`)
             }
-            className="flex items-center gap-1 text-xs px-4 py-2 rounded-xl bg-[#684EC9] hover:bg-[#573EB0] text-white font-bold shadow-xs transition-colors cursor-pointer"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-1 text-xs px-4 py-2.5 rounded-xl bg-[#684EC9] hover:bg-[#573EB0] text-white font-bold shadow-xs transition-colors cursor-pointer press-feedback"
           >
             <MessageSquare size={14} />
-            <span>Ask Nyayavanta</span>
+            <span>Ask AI</span>
           </button>
         </div>
       </div>
 
       {/* Case Header Card */}
-      <div className="p-6 sm:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs">
+      <div className="p-5 sm:p-7 md:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <span className="text-xs font-mono font-bold text-[#684EC9] dark:text-purple-400 bg-[#EDE9FE] dark:bg-purple-950 px-3 py-1 rounded-lg border border-[#DDD6FE] dark:border-purple-800">
             {caseData.citationStr}
@@ -124,8 +124,8 @@ export const CaseDetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Procedural Timeline */}
-      <div className="p-6 sm:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs">
+      {/* Adaptive Procedural Timeline */}
+      <div className="p-5 sm:p-7 md:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs">
         <div className="flex items-center gap-2">
           <Clock size={18} className="text-[#684EC9]" />
           <h2 className="font-black text-sm text-[#1E1B2E] dark:text-white uppercase tracking-wider">
@@ -136,11 +136,30 @@ export const CaseDetailPage: React.FC = () => {
           Filing → Hearing → Interim Order → Judgment → Appeal → Final Disposition
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2.5 pt-2">
+        {/* Mobile Vertical Connected Timeline (sm:hidden) */}
+        <div className="sm:hidden relative border-l-2 border-[#DDD6FE] dark:border-purple-900/60 ml-3.5 my-2 space-y-4 pl-4">
+          {(caseData.timelineMilestones || []).map((m: any, idx: number) => (
+            <div key={idx} className="relative">
+              <div className="absolute -left-[23px] top-1 w-3.5 h-3.5 rounded-full bg-[#684EC9] border-2 border-white dark:border-[#111827] shadow-2xs" />
+              <div className="p-3 rounded-xl border border-[#E8E3F5] dark:border-slate-800 bg-[#F8F7FC] dark:bg-slate-900/40 text-xs space-y-1">
+                <span className="text-[10px] font-bold text-[#684EC9] dark:text-purple-400 uppercase tracking-wider block">
+                  {m.step}
+                </span>
+                <p className="font-bold text-[11px] text-[#1E1B2E] dark:text-slate-200">
+                  {m.date}
+                </p>
+                <p className="text-[11px] text-[#544E6D] dark:text-slate-400">{m.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop / Tablet Horizontal Grid (hidden sm:grid) */}
+        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-5 gap-2.5 pt-2">
           {(caseData.timelineMilestones || []).map((m: any, idx: number) => (
             <div
               key={idx}
-              className="p-3 rounded-xl border border-[#E8E3F5] dark:border-slate-800 bg-[#F8F7FC] dark:bg-slate-900/40 text-xs space-y-1 shadow-2xs"
+              className="p-3 rounded-xl border border-[#E8E3F5] dark:border-slate-800 bg-[#F8F7FC] dark:bg-slate-900/40 text-xs space-y-1 shadow-2xs relative"
             >
               <span className="text-[10px] font-bold text-[#684EC9] dark:text-purple-400 uppercase tracking-wider block">
                 {m.step}

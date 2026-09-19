@@ -115,12 +115,12 @@ export const LegalSearchPage: React.FC = () => {
 
       {/* Tabs and Filters */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pb-3 border-b border-[#E8E3F5] dark:border-slate-800">
-        <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+        <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none w-full sm:w-auto">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => handleTabClick(tab)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
+              className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 press-feedback ${
                 activeTab === tab
                   ? 'bg-[#684EC9] text-white shadow-xs'
                   : 'bg-white dark:bg-[#111827] text-[#544E6D] dark:text-slate-400 border border-[#E8E3F5] dark:border-slate-700 hover:bg-[#EDE9FE]'
@@ -131,13 +131,15 @@ export const LegalSearchPage: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex items-center gap-2 text-xs shrink-0 self-end sm:self-auto">
-          <Filter size={14} className="text-[#7E779C]" />
-          <span className="text-[#544E6D] dark:text-slate-400 font-medium">Domain:</span>
+        <div className="flex items-center gap-2 text-xs w-full sm:w-auto justify-between sm:justify-start">
+          <div className="flex items-center gap-1.5 text-[#544E6D] dark:text-slate-400 font-medium">
+            <Filter size={14} className="text-[#7E779C]" />
+            <span>Domain:</span>
+          </div>
           <select
             value={domainFilter}
             onChange={(e) => setDomainFilter(e.target.value)}
-            className="p-1.5 rounded-xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-[#1E1B2E] dark:text-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20"
+            className="p-2 rounded-xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-[#1E1B2E] dark:text-slate-200 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20"
           >
             <option value="">All Domains</option>
             <option value="consumer">Consumer Protection</option>
@@ -206,13 +208,13 @@ export const LegalSearchPage: React.FC = () => {
                 Jurisdiction: {item.jurisdiction || 'India (Central)'}
               </span>
 
-              <div className="flex items-center gap-2 self-end sm:self-auto">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 self-start sm:self-auto">
                 {item.sourceUrl && (
                   <a
                     href={item.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-[#7E779C] hover:text-[#684EC9] transition-colors"
+                    className="flex items-center gap-1 text-[#7E779C] hover:text-[#684EC9] px-2 py-1 rounded-lg transition-colors"
                   >
                     <span>Official Source</span>
                     <ExternalLink size={12} />
@@ -220,7 +222,7 @@ export const LegalSearchPage: React.FC = () => {
                 )}
                 <button
                   onClick={() => handleSave(item)}
-                  className="flex items-center gap-1 text-[#544E6D] dark:text-slate-300 hover:text-[#684EC9] px-2.5 py-1.5 rounded-lg hover:bg-[#EDE9FE] dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                  className="flex items-center gap-1 text-[#544E6D] dark:text-slate-300 hover:text-[#684EC9] px-2.5 py-1.5 rounded-lg hover:bg-[#EDE9FE] dark:hover:bg-slate-800 press-feedback transition-colors cursor-pointer"
                 >
                   {savedSuccessId === item.id ? (
                     <>
@@ -236,7 +238,7 @@ export const LegalSearchPage: React.FC = () => {
                 </button>
                 <button
                   onClick={() => navigate(`/chat?q=${encodeURIComponent(`Analyze ${item.title}`)}`)}
-                  className="flex items-center gap-1 text-[#684EC9] dark:text-purple-400 font-bold hover:underline px-2.5 py-1.5 rounded-lg hover:bg-[#EDE9FE] dark:hover:bg-purple-950/40 transition-colors"
+                  className="flex items-center gap-1 text-[#684EC9] dark:text-purple-400 font-bold hover:underline px-2.5 py-1.5 rounded-lg hover:bg-[#EDE9FE] dark:hover:bg-purple-950/40 press-feedback transition-colors"
                 >
                   <MessageSquare size={14} />
                   <span>Ask AI</span>

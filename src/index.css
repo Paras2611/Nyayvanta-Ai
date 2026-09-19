@@ -90,3 +90,38 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #A89BDE;
 }
+
+/* Scrollbar None Utility for swipeable pills and horizontal tracks */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Mobile Touch & Dynamics */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.press-feedback {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.press-feedback:active {
+  transform: scale(0.97);
+}
+
+.safe-bottom {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

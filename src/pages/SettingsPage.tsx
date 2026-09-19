@@ -151,7 +151,7 @@ export const SettingsPage: React.FC = () => {
         <div className="pt-2 flex justify-end">
           <button
             type="submit"
-            className="flex items-center gap-1.5 px-6 py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px]"
+            className="flex items-center justify-center gap-1.5 px-6 py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px] press-feedback w-full sm:w-auto"
           >
             {savedSuccess ? (
               <>

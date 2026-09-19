@@ -126,7 +126,7 @@ export const ClarificationCard: React.FC<ClarificationCardProps> = ({
           <button
             type="submit"
             disabled={!isComplete}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold shadow-xs transition-all ${
+            className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs font-bold shadow-xs transition-all press-feedback ${
               isComplete
                 ? 'bg-[#684EC9] hover:bg-[#573EB0] text-white cursor-pointer'
                 : 'bg-[#E8E3F5] dark:bg-slate-800 text-[#7E779C] dark:text-slate-500 cursor-not-allowed'

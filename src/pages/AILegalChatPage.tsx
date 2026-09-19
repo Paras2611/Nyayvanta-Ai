@@ -43,6 +43,7 @@ export const AILegalChatPage: React.FC = () => {
   const [processingState, setProcessingState] = useState<string>('');
   const [activeResponse, setActiveResponse] = useState<EvidenceBackedResponse | null>(null);
   const [showMobileEvidence, setShowMobileEvidence] = useState(false);
+  const [showMobileSessions, setShowMobileSessions] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -136,7 +137,7 @@ export const AILegalChatPage: React.FC = () => {
   };
 
   return (
-    <div className="flex h-[calc(100vh-6rem)] md:h-[calc(100vh-5rem)] -m-3 sm:-m-5 md:-m-6 lg:-m-8 bg-[#F8F7FC] dark:bg-[#0E0C17] relative overflow-hidden">
+    <div className="flex h-[calc(100dvh-7.5rem)] md:h-[calc(100dvh-5.5rem)] -m-3.5 sm:-m-5 md:-m-6 lg:-m-8 bg-[#F8F7FC] dark:bg-[#0E0C17] relative overflow-hidden rounded-none md:rounded-2xl border-0 md:border md:border-[#E8E3F5] dark:md:border-[#26213D]">
       {/* 1. Left Session History Panel (Desktop only) */}
       <div className="w-56 xl:w-64 border-r border-[#E8E3F5] dark:border-[#26213D] bg-[#F4F2FA] dark:bg-[#13101F] hidden lg:flex flex-col justify-between shrink-0">
         <div className="p-3.5 space-y-3 overflow-y-auto">
@@ -196,43 +197,128 @@ export const AILegalChatPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Mobile/Tablet Sessions Drawer */}
+      {showMobileSessions && (
+        <div className="fixed inset-0 z-50 flex lg:hidden bg-black/50 backdrop-blur-xs animate-fade-in">
+          <div className="w-72 max-w-[80vw] bg-[#F4F2FA] dark:bg-[#13101F] text-[#1E1B2E] p-4 flex flex-col justify-between shadow-2xl h-full">
+            <div className="overflow-y-auto space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E8E3F5] dark:border-[#26213D]">
+                <div className="flex items-center gap-2">
+                  <Clock size={16} className="text-[#684EC9]" />
+                  <span className="font-bold text-xs text-[#1E1B2E] dark:text-white uppercase tracking-wider">Research Sessions</span>
+                </div>
+                <button
+                  onClick={() => setShowMobileSessions(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <button
+                onClick={() => {
+                  setMessages([]);
+                  setActiveResponse(null);
+                  setShowMobileSessions(false);
+                }}
+                className="w-full py-2 px-3 rounded-xl bg-[#684EC9] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs"
+              >
+                <Plus size={14} />
+                <span>New Research Inquiry</span>
+              </button>
+
+              <div className="space-y-1 text-xs">
+                <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-1">Today</p>
+                <div
+                  onClick={() => setShowMobileSessions(false)}
+                  className="p-2.5 rounded-xl bg-white dark:bg-[#221D38] text-[#573EAE] dark:text-[#C4B5FD] font-semibold cursor-pointer border border-[#E0D9F7] dark:border-[#382F5E] shadow-xs truncate"
+                >
+                  Security Deposit Retention
+                </div>
+                <div
+                  onClick={() => setShowMobileSessions(false)}
+                  className="p-2.5 rounded-xl hover:bg-[#EBE6F8] dark:hover:bg-[#1D1830] text-[#544E6D] dark:text-[#A59FC2] cursor-pointer truncate transition-colors"
+                >
+                  Section 27 Non-Compete Restraint
+                </div>
+
+                <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-2">Previous 7 Days</p>
+                <div
+                  onClick={() => setShowMobileSessions(false)}
+                  className="p-2.5 rounded-xl hover:bg-[#EBE6F8] dark:hover:bg-[#1D1830] text-[#544E6D] dark:text-[#A59FC2] cursor-pointer truncate transition-colors"
+                >
+                  E-Daakhil Defective Laptop Refund
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-[#E8E3F5] dark:border-[#26213D] text-xs space-y-1">
+              <span className="text-[11px] font-bold text-[#7E779C] uppercase tracking-wider block">Domain Scope</span>
+              <select
+                value={selectedDomain}
+                onChange={(e) => {
+                  setSelectedDomain(e.target.value);
+                  setShowMobileSessions(false);
+                }}
+                className="w-full text-xs bg-white dark:bg-[#1A162B] border border-[#D8D1EE] dark:border-[#382F5E] rounded-xl px-2.5 py-2 font-bold text-[#573EAE] dark:text-[#C4B5FD]"
+              >
+                <option value="consumer">Consumer Protection</option>
+                <option value="tenancy">Tenancy / Rent</option>
+                <option value="employment">Employment</option>
+                <option value="contract">Contract Law</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex-1" onClick={() => setShowMobileSessions(false)} />
+        </div>
+      )}
+
       {/* 2. Center Chat & Workspace */}
       <div className="flex-1 flex flex-col min-w-0 bg-[#F8F7FC] dark:bg-[#0E0C17]">
         {/* Workspace Top Header */}
-        <div className="px-3 sm:px-5 py-2.5 sm:py-3 border-b border-[#E8E3F5] dark:border-[#26213D] bg-white dark:bg-[#171424] flex items-center justify-between shrink-0 shadow-xs">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-xl bg-[#F4F2FA] dark:bg-[#221D38] flex items-center justify-center text-[#684EC9] dark:text-[#C4B5FD] shrink-0">
-              <Scale size={18} />
+        <div className="px-3 sm:px-5 py-2 sm:py-2.5 border-b border-[#E8E3F5] dark:border-[#26213D] bg-white dark:bg-[#171424] flex items-center justify-between shrink-0 shadow-xs">
+          <div className="flex items-center gap-2 min-w-0">
+            {/* Mobile Sessions Button */}
+            <button
+              onClick={() => setShowMobileSessions(true)}
+              className="lg:hidden p-1.5 rounded-xl bg-[#F4F2FA] dark:bg-[#221D38] border border-[#E0D9F7] dark:border-[#382F5E] text-[#684EC9] dark:text-[#C4B5FD] press-feedback"
+              title="View chat sessions"
+            >
+              <Clock size={16} />
+            </button>
+
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#F4F2FA] dark:bg-[#221D38] flex items-center justify-center text-[#684EC9] dark:text-[#C4B5FD] shrink-0">
+              <Scale size={16} />
             </div>
             <div className="truncate">
               <h2 className="font-bold text-xs sm:text-sm text-[#1E1B2E] dark:text-white leading-tight truncate">
                 Legal Research Workspace
               </h2>
-              <p className="text-[11px] text-[#7E779C] truncate">
-                Evidence Grounding • <span className="font-bold text-[#684EC9] uppercase">{selectedDomain}</span>
+              <p className="text-[10px] sm:text-[11px] text-[#7E779C] truncate">
+                Grounding • <span className="font-bold text-[#684EC9] uppercase">{selectedDomain}</span>
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Mobile/Tablet Toggle for Evidence Panel */}
             <button
               onClick={() => setShowMobileEvidence(!showMobileEvidence)}
-              className="xl:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#EDE9FE] dark:bg-[#251F3D] text-[#573EAE] dark:text-[#C4B5FD] border border-[#D8D1EE] dark:border-[#382F5E] text-xs font-semibold"
+              className="xl:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#EDE9FE] dark:bg-[#251F3D] text-[#573EAE] dark:text-[#C4B5FD] border border-[#D8D1EE] dark:border-[#382F5E] text-xs font-semibold press-feedback"
             >
               <Layers size={13} />
               <span className="hidden sm:inline">Evidence & Sources</span>
               <span className="sm:hidden">Evidence</span>
             </button>
 
-            <span className="hidden sm:inline-flex text-[11px] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full font-semibold border border-emerald-200 dark:border-emerald-800">
+            <span className="hidden md:inline-flex text-[11px] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full font-semibold border border-emerald-200 dark:border-emerald-800">
               ● RAG Grounded
             </span>
           </div>
         </div>
 
         {/* Message Thread Scroll Area */}
-        <div className="flex-1 overflow-y-auto p-3 sm:p-5 md:p-6 space-y-5">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-5 md:p-6 space-y-4 sm:space-y-5">
           {messages.length === 0 && (
             <div className="h-full flex flex-col items-center justify-center text-center max-w-md mx-auto space-y-4 text-[#7E779C] py-8 sm:py-12">
               <div className="w-14 h-14 rounded-2xl bg-[#EDE9FE] dark:bg-[#221D38] flex items-center justify-center text-[#684EC9] dark:text-[#C4B5FD] shadow-xs">

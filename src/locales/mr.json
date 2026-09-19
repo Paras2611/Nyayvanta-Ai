@@ -1,16 +1,45 @@
 {
+  "app": {
+    "title": "न्यायवंत (Nyayavanta)",
+    "tagline": "एआय-चालित भारतीय कायदेशीर माहिती व संशोधन सहाय्यक",
+    "disclaimer": "न्यायवंत उपलब्ध कायदेशीर स्रोतांवर आधारित माहिती पुरवतो. हा पात्र वकिलांच्या सल्ल्याचा पर्याय नाही.",
+    "core_principle": "एआयला जादुई दाखवू नका. त्याचा पुरावा दृश्यमान करा."
+  },
+  "nav": {
+    "dashboard": "डॅशबोर्ड",
+    "ask": "न्यायवंतला विचारा",
+    "legal_search": "कायदा शोध",
+    "case_search": "खटला शोध",
+    "documents": "दस्तऐवज",
+    "saved": "जतन केलेले संशोधन",
+    "history": "इतिहास",
+    "profile": "प्रोफाइल",
+    "settings": "सेटिंग्ज",
+    "help": "मदत",
+    "logout": "लॉगआउट"
+  },
+  "dashboard": {
+    "hero_title": "कायदा समजा. अधिकृत स्रोत शोधा.",
+    "hero_subtitle": "भारतीय कायदेशीर माहिती व संशोधन सहाय्यक.",
+    "search_placeholder": "कायदेशीर प्रश्न विचारा...",
+    "quick_actions": "जलद कृती",
+    "ask_nyayavanta": "न्यायवंतला विचारा",
+    "search_laws": "कायदे शोधा",
+    "search_cases": "खटले शोधा",
+    "analyze_document": "दस्तऐवज विश्लेषण"
+  },
   "settings": {
     "title": "सेटिंग्ज",
-    "profile": "प्रोफाईल",
-    "appearance": "दिसणे",
+    "profile": "प्रोफाइल",
+    "appearance": "स्वरूप",
     "language": "भाषा",
     "notifications": "सूचना",
     "privacy": "गोपनीयता",
     "security": "सुरक्षा",
     "save": "बदल जतन करा",
     "language_label": "भाषा निवडा",
-    "notifications_label": "सूचना सक्षम करा",
-    "privacy_label": "गोपनीयता सेटिंग्ज",
-    "security_label": "सुरक्षा सेटिंग्ज"
+    "theme_light": "लाइट थीम",
+    "theme_dark": "डार्क थीम",
+    "theme_system": "सिस्टम डीफॉल्ट"
   }
 }

@@ -1,8 +1,43 @@
+# Node & Frontend
 node_modules/
-build/
 dist/
+build/
 coverage/
 .DS_Store
 *.log
-.env*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
 !.env.example
+
+# Python & Backend
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.venv/
+venv/
+ENV/
+
+# Databases & Runtime Data
+*.db
+*.sqlite
+*.sqlite3
+nyayavanta.db
+uploads/
+
+# Model Weights & Large Checkpoints
+nyayavanta-lm-qlora-adapter/
+*.pt
+*.bin
+*.safetensors
+*.onnx

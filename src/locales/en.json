@@ -1,16 +1,117 @@
 {
+  "app": {
+    "title": "Nyayavanta",
+    "tagline": "AI-Powered Indian Legal Information & Research Assistant",
+    "disclaimer": "Nyayavanta provides AI-generated legal information and research assistance based on available sources. It is not a substitute for advice from a qualified advocate or other legal professional. Users should verify important legal matters with authoritative sources and qualified professionals.",
+    "core_principle": "Don't make AI look magical. Make its evidence visible."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "ask": "Ask Nyayavanta",
+    "legal_search": "Legal Search",
+    "case_search": "Case Search",
+    "documents": "Documents",
+    "saved": "Saved Research",
+    "history": "History",
+    "profile": "Profile",
+    "settings": "Settings",
+    "help": "Help & Support",
+    "logout": "Logout",
+    "categories": {
+      "criminal": "Criminal Law",
+      "civil": "Civil Law",
+      "property": "Property Law",
+      "family": "Family Law",
+      "contract": "Contract Law",
+      "consumer": "Consumer Law",
+      "cyber": "Cyber Law",
+      "constitutional": "Constitutional Law",
+      "labour": "Labour Law",
+      "corporate": "Corporate Law"
+    }
+  },
+  "dashboard": {
+    "hero_title": "Understand the Law. Find the Authority.",
+    "hero_subtitle": "AI-powered Indian legal information and research assistance.",
+    "search_placeholder": "Ask Nyayavanta a legal question...",
+    "quick_actions": "Quick Research Actions",
+    "ask_nyayavanta": "Ask Nyayavanta",
+    "search_laws": "Search Laws",
+    "search_cases": "Search Cases",
+    "analyze_document": "Analyze Document",
+    "supported_domains": "V1 Supported Legal Domains",
+    "recent_research": "Recent Research",
+    "recent_documents": "Recent Documents",
+    "saved_research": "Saved Research"
+  },
+  "chat": {
+    "header_title": "Nyayavanta AI",
+    "header_subtitle": "Indian Legal Information Assistant",
+    "input_placeholder": "Describe your legal question or situation in detail...",
+    "send": "Research Law",
+    "clarification_required": "Clarification Required",
+    "clarification_prompt": "Please provide these factual details to ground the statutory analysis:",
+    "submit_answers": "Submit Clarifications",
+    "evidence_panel_title": "Evidence & Sources",
+    "acts_title": "Relevant Acts",
+    "sections_title": "Relevant Sections",
+    "judgments_title": "Relevant Judgments",
+    "verification_title": "Claim Grounding & Verification",
+    "processing": {
+      "searching": "Searching Indian legal sources...",
+      "provisions": "Finding relevant statutory provisions...",
+      "judgments": "Retrieving binding judgments...",
+      "authorities": "Comparing authorities and jurisdictions...",
+      "generating": "Formulating grounded response...",
+      "verifying": "Verifying claims against evidence..."
+    }
+  },
+  "search": {
+    "title": "Legal Search Engine",
+    "subtitle": "Search Bare Acts, Statutory Sections, Regulations, and Landmark Judgments",
+    "search_placeholder": "Search by Section, Act name, or legal phrase (e.g. Section 108 deposit refund)...",
+    "tabs": {
+      "all": "All",
+      "acts": "Acts",
+      "sections": "Sections",
+      "regulations": "Regulations",
+      "judgments": "Judgments"
+    },
+    "filter_domain": "Legal Domain",
+    "filter_jurisdiction": "Jurisdiction / Court",
+    "results_found": "results found",
+    "relevance": "Relevance",
+    "view_source": "View Official Source",
+    "save_to_research": "Save to Research"
+  },
+  "documents": {
+    "title": "Analyze a Legal Document",
+    "subtitle": "Inspect lease agreements, contracts, and employment letters with clause-level evidence.",
+    "dropzone_title": "Upload Document for Statutory Analysis",
+    "dropzone_desc": "Supports PDF, TXT, PNG, JPG documents up to 25MB",
+    "upload_btn": "Upload Document",
+    "analyze_btn": "Run AI Analysis",
+    "risk_badge": "Legal Risk Level",
+    "parties": "Identified Parties",
+    "dates": "Key Dates",
+    "detected_clauses": "Detected Clauses & Enforceability",
+    "recommendations": "Actionable Informational Steps"
+  },
   "settings": {
     "title": "Settings",
-    "profile": "Profile",
-    "appearance": "Appearance",
-    "language": "Language",
-    "notifications": "Notifications",
-    "privacy": "Privacy",
-    "security": "Security",
+    "profile": "Profile Information",
+    "appearance": "Appearance & Theme",
+    "language": "Language Preference",
+    "notifications": "Notifications & Alerts",
+    "privacy": "Privacy & Retention",
+    "security": "Security & Sessions",
     "save": "Save Changes",
-    "language_label": "Select Language",
-    "notifications_label": "Enable Notifications",
-    "privacy_label": "Privacy Settings",
-    "security_label": "Security Settings"
+    "language_label": "Select Interface Language",
+    "theme_light": "Light Theme",
+    "theme_dark": "Dark Theme",
+    "theme_system": "System Default",
+    "notifications_label": "Enable research notifications and statutory updates",
+    "privacy_label": "Manage conversation history retention and uploaded file purging",
+    "security_label": "Two-factor authentication and session management"
   }
 }

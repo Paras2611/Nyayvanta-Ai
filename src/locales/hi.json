@@ -1,4 +1,75 @@
 {
+  "app": {
+    "title": "न्यायवन्त (Nyayavanta)",
+    "tagline": "एआई-संचालित भारतीय विधिक सूचना एवं शोध सहायक",
+    "disclaimer": "न्यायवन्त उपलब्ध स्रोतों के आधार पर एआई-जनित विधिक सूचना और शोध सहायता प्रदान करता है। यह किसी योग्य अधिवक्ता की सलाह का विकल्प नहीं है।",
+    "core_principle": "एआई को जादुई मत बनाइए। इसके साक्ष्य को दृश्यमान बनाइए।"
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "ask": "न्यायवन्त से पूछें",
+    "legal_search": "कानून खोज",
+    "case_search": "मुकदमा खोज",
+    "documents": "दस्तावेज़",
+    "saved": "सहेजा गया शोध",
+    "history": "इतिहास",
+    "profile": "प्रोफ़ाइल",
+    "settings": "सेटिंग्स",
+    "help": "सहायता",
+    "logout": "लॉगआउट",
+    "categories": {
+      "criminal": "आपराधिक कानून",
+      "civil": "दीवानी कानून",
+      "property": "संपत्ति कानून",
+      "family": "पारिवारिक कानून",
+      "contract": "अनुबंध कानून",
+      "consumer": "उपभोक्ता कानून",
+      "cyber": "साइबर कानून",
+      "constitutional": "संवैधानिक कानून",
+      "labour": "श्रम कानून",
+      "corporate": "कॉर्पोरेट कानून"
+    }
+  },
+  "dashboard": {
+    "hero_title": "कानून को समझें। प्रामाणिक स्रोत खोजें।",
+    "hero_subtitle": "साक्ष्य-आधारित भारतीय विधिक सूचना एवं शोध सहायता।",
+    "search_placeholder": "न्यायवन्त से विधिक प्रश्न पूछें...",
+    "quick_actions": "त्वरित शोध कार्य",
+    "ask_nyayavanta": "न्यायवन्त से पूछें",
+    "search_laws": "कानून खोजें",
+    "search_cases": "मुकदमे खोजें",
+    "analyze_document": "दस्तावेज़ विश्लेषण",
+    "supported_domains": "समर्थित विधिक क्षेत्र",
+    "recent_research": "हाल का शोध",
+    "recent_documents": "हाल के दस्तावेज़",
+    "saved_research": "सहेजा गया शोध"
+  },
+  "chat": {
+    "header_title": "न्यायवन्त एआई",
+    "header_subtitle": "भारतीय विधिक सूचना सहायक",
+    "input_placeholder": "अपनी विधिक समस्या या परिस्थिति का विवरण दें...",
+    "send": "कानून शोध करें",
+    "clarification_required": "अतिरिक्त जानकारी आवश्यक",
+    "clarification_prompt": "सटीक विधिक विश्लेषण के लिए कृपया ये विवरण दें:",
+    "submit_answers": "उत्तर सबमिट करें",
+    "evidence_panel_title": "साक्ष्य एवं स्रोत",
+    "acts_title": "प्रासंगिक अधिनियम",
+    "sections_title": "प्रासंगिक धाराएँ",
+    "judgments_title": "प्रासंगिक निर्णय",
+    "verification_title": "दावा सत्यापन"
+  },
+  "search": {
+    "title": "विधिक खोज इंजन",
+    "subtitle": "अधिनियम, धाराएँ, नियम और ऐतिहासिक निर्णय खोजें",
+    "search_placeholder": "धारा, अधिनियम या कानूनी विषय द्वारा खोजें...",
+    "tabs": {
+      "all": "सभी",
+      "acts": "अधिनियम",
+      "sections": "धाराएँ",
+      "regulations": "विनियम",
+      "judgments": "निर्णय"
+    }
+  },
   "settings": {
     "title": "सेटिंग्स",
     "profile": "प्रोफ़ाइल",
@@ -9,8 +80,8 @@
     "security": "सुरक्षा",
     "save": "परिवर्तन सहेजें",
     "language_label": "भाषा चुनें",
-    "notifications_label": "सूचनाएं सक्षम करें",
-    "privacy_label": "गोपनीयता सेटिंग्स",
-    "security_label": "सुरक्षा सेटिंग्स"
+    "theme_light": "लाइट थीम",
+    "theme_dark": "डार्क थीम",
+    "theme_system": "सिस्टम डिफ़ॉल्ट"
   }
 }

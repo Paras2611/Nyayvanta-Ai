@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Briefcase, Search, ExternalLink, ArrowRight, Scale, Filter } from 'lucide-react';
 import { fetchCases } from '../services/api';
 
 export const CaseSearchPage: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [cases, setCases] = useState<any[]>([]);
   const [courtFilter, setCourtFilter] = useState('');
@@ -30,10 +32,10 @@ export const CaseSearchPage: React.FC = () => {
           <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
             <Briefcase size={20} />
           </div>
-          <span>Landmark Judicial Decisions</span>
+          <span>{t('cases.title')}</span>
         </h1>
         <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
-          Authoritative Supreme Court and High Court precedents establishing binding legal doctrine across India.
+          {t('cases.subtitle')}
         </p>
       </div>
 
@@ -45,7 +47,7 @@ export const CaseSearchPage: React.FC = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Filter by case name, citation, or legal holding..."
+            placeholder={t('cases.search_placeholder')}
             className="w-full pl-10 pr-4 py-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-sm text-[#1E1B2E] dark:text-white placeholder-[#7E779C] focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-xs"
           />
         </div>
@@ -56,7 +58,7 @@ export const CaseSearchPage: React.FC = () => {
             onChange={(e) => setCourtFilter(e.target.value)}
             className="w-full sm:w-auto p-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-xs font-bold text-[#1E1B2E] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 shadow-xs cursor-pointer"
           >
-            <option value="">All Courts</option>
+            <option value="">{t('cases.all_courts')}</option>
             <option value="Supreme Court">Supreme Court of India</option>
             <option value="High Court">High Courts</option>
           </select>
@@ -94,7 +96,7 @@ export const CaseSearchPage: React.FC = () => {
                 onClick={() => navigate(`/cases/${c.id}`)}
                 className="flex items-center gap-1.5 text-xs font-bold text-[#684EC9] dark:text-purple-400 hover:text-[#573EB0] hover:underline press-feedback"
               >
-                <span>Full Case & Timeline</span>
+                <span>{t('cases.view_full_case')}</span>
                 <ArrowRight size={14} />
               </button>
             </div>

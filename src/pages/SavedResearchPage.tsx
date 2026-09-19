@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Bookmark, Trash2, ExternalLink, MessageSquare, Share2, FileText, Scale } from 'lucide-react';
 import { fetchSavedItems, deleteSavedItem } from '../services/api';
 
 export const SavedResearchPage: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'All' | 'Answers' | 'Sections' | 'Cases' | 'Documents' | 'Sources'>('All');
   const [items, setItems] = useState<any[]>([]);
 
-  const tabs: Array<'All' | 'Answers' | 'Sections' | 'Cases' | 'Documents' | 'Sources'> = [
-    'All',
-    'Answers',
-    'Sections',
-    'Cases',
-    'Documents',
-    'Sources'
+  const tabs: Array<{ id: 'All' | 'Answers' | 'Sections' | 'Cases' | 'Documents' | 'Sources'; labelKey: string }> = [
+    { id: 'All', labelKey: 'saved.tabs.all' },
+    { id: 'Answers', labelKey: 'saved.open_chat' },
+    { id: 'Sections', labelKey: 'saved.tabs.statutes' },
+    { id: 'Cases', labelKey: 'saved.tabs.cases' },
+    { id: 'Documents', labelKey: 'saved.tabs.clauses' },
+    { id: 'Sources', labelKey: 'search.tabs.all' }
   ];
 
   const loadItems = async (tab?: string) => {
@@ -46,10 +48,10 @@ export const SavedResearchPage: React.FC = () => {
           <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
             <Bookmark size={20} />
           </div>
-          <span>Saved Legal Research</span>
+          <span>{t('saved.title')}</span>
         </h1>
         <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
-          Bookmarked statutory provisions, landmark judgments, extracted clauses, and grounded answers.
+          {t('saved.subtitle')}
         </p>
       </div>
 
@@ -57,15 +59,15 @@ export const SavedResearchPage: React.FC = () => {
       <div className="flex gap-1.5 pb-2 border-b border-[#E8E3F5] dark:border-slate-800 overflow-x-auto scrollbar-none">
         {tabs.map((tab) => (
           <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
             className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 press-feedback ${
-              activeTab === tab
+              activeTab === tab.id
                 ? 'bg-[#684EC9] text-white shadow-xs'
                 : 'bg-white dark:bg-[#111827] text-[#544E6D] dark:text-slate-400 border border-[#E8E3F5] dark:border-slate-700 hover:bg-[#EDE9FE]'
             }`}
           >
-            {tab}
+            {t(tab.labelKey)}
           </button>
         ))}
       </div>
@@ -76,10 +78,10 @@ export const SavedResearchPage: React.FC = () => {
           <div className="col-span-full text-center py-12 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 p-6 shadow-xs">
             <Bookmark size={32} className="mx-auto text-[#7E779C]" />
             <p className="text-sm font-bold text-[#1E1B2E] dark:text-slate-300">
-              No saved items in this category.
+              {t('saved.empty_title')}
             </p>
             <p className="text-xs text-[#7E779C]">
-              Bookmark legal sections or cases during search or chat to reference them here.
+              {t('saved.empty_desc')}
             </p>
           </div>
         )}
@@ -110,7 +112,7 @@ export const SavedResearchPage: React.FC = () => {
                 className="flex items-center gap-1.5 font-bold text-[#684EC9] dark:text-purple-400 hover:underline cursor-pointer press-feedback"
               >
                 <MessageSquare size={14} />
-                <span>Open in Research</span>
+                <span>{t('saved.open_chat')}</span>
               </button>
 
               <div className="flex items-center gap-1">
@@ -127,7 +129,7 @@ export const SavedResearchPage: React.FC = () => {
                 <button
                   onClick={() => handleDelete(item.id)}
                   className="p-2 text-[#7E779C] hover:text-rose-600 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer press-feedback"
-                  title="Delete"
+                  title={t('saved.remove')}
                 >
                   <Trash2 size={15} />
                 </button>

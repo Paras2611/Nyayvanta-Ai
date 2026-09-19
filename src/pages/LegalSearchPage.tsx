@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Search,
   BookOpen,
@@ -14,6 +15,7 @@ import {
 import { searchLegalCorpus, saveResearchItem, SearchResultItem } from '../services/api';
 
 export const LegalSearchPage: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const initialCategory = searchParams.get('cat') || '';
@@ -26,12 +28,12 @@ export const LegalSearchPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [savedSuccessId, setSavedSuccessId] = useState<string | null>(null);
 
-  const tabs: Array<'All' | 'Acts' | 'Sections' | 'Regulations' | 'Judgments'> = [
-    'All',
-    'Acts',
-    'Sections',
-    'Regulations',
-    'Judgments'
+  const tabs: Array<{ id: 'All' | 'Acts' | 'Sections' | 'Regulations' | 'Judgments'; labelKey: string }> = [
+    { id: 'All', labelKey: 'search.tabs.all' },
+    { id: 'Acts', labelKey: 'search.tabs.acts' },
+    { id: 'Sections', labelKey: 'search.tabs.sections' },
+    { id: 'Regulations', labelKey: 'search.tabs.regulations' },
+    { id: 'Judgments', labelKey: 'search.tabs.judgments' }
   ];
 
   const handleSearch = async (searchQuery?: string, tabOverride?: string) => {
@@ -80,10 +82,10 @@ export const LegalSearchPage: React.FC = () => {
           <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
             <BookOpen size={20} />
           </div>
-          <span>Indian Legal Corpus Search</span>
+          <span>{t('search.title')}</span>
         </h1>
         <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
-          Directly query authentic Bare Acts, Sections, Gazette Regulations, and Supreme Court rulings across India.
+          {t('search.subtitle')}
         </p>
       </div>
 
@@ -101,7 +103,7 @@ export const LegalSearchPage: React.FC = () => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by Section (e.g. Section 27), Act name, or topic (e.g. liquidated damages)..."
+            placeholder={t('search.search_placeholder')}
             className="w-full pl-10 pr-4 py-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-sm text-[#1E1B2E] dark:text-white placeholder-[#7E779C] focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-xs"
           />
         </div>
@@ -109,7 +111,7 @@ export const LegalSearchPage: React.FC = () => {
           type="submit"
           className="px-6 py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs transition-colors shrink-0 min-h-[44px] cursor-pointer"
         >
-          Search Law
+          {t('search.search_btn')}
         </button>
       </form>
 
@@ -118,15 +120,15 @@ export const LegalSearchPage: React.FC = () => {
         <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none w-full sm:w-auto">
           {tabs.map((tab) => (
             <button
-              key={tab}
-              onClick={() => handleTabClick(tab)}
+              key={tab.id}
+              onClick={() => handleTabClick(tab.id)}
               className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 press-feedback ${
-                activeTab === tab
+                activeTab === tab.id
                   ? 'bg-[#684EC9] text-white shadow-xs'
                   : 'bg-white dark:bg-[#111827] text-[#544E6D] dark:text-slate-400 border border-[#E8E3F5] dark:border-slate-700 hover:bg-[#EDE9FE]'
               }`}
             >
-              {tab}
+              {t(tab.labelKey)}
             </button>
           ))}
         </div>
@@ -134,18 +136,18 @@ export const LegalSearchPage: React.FC = () => {
         <div className="flex items-center gap-2 text-xs w-full sm:w-auto justify-between sm:justify-start">
           <div className="flex items-center gap-1.5 text-[#544E6D] dark:text-slate-400 font-medium">
             <Filter size={14} className="text-[#7E779C]" />
-            <span>Domain:</span>
+            <span>{t('search.filter_domain')}:</span>
           </div>
           <select
             value={domainFilter}
             onChange={(e) => setDomainFilter(e.target.value)}
             className="p-2 rounded-xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-[#1E1B2E] dark:text-slate-200 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20"
           >
-            <option value="">All Domains</option>
-            <option value="consumer">Consumer Protection</option>
-            <option value="tenancy">Tenancy / Rent</option>
-            <option value="employment">Employment / Labour</option>
-            <option value="contract">Contract Law</option>
+            <option value="">{t('search.all_domains')}</option>
+            <option value="consumer">{t('nav.categories.consumer')}</option>
+            <option value="tenancy">{t('nav.categories.property')}</option>
+            <option value="employment">{t('nav.categories.labour')}</option>
+            <option value="contract">{t('nav.categories.contract')}</option>
           </select>
         </div>
       </div>
@@ -153,7 +155,7 @@ export const LegalSearchPage: React.FC = () => {
       {/* Search Results */}
       <div className="space-y-3">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 text-xs text-[#7E779C]">
-          <span>{totalResults} authoritative legal records found</span>
+          <span>{totalResults} {t('search.results_found')}</span>
           <span className="text-[11px]">Ranked by BM25 + Semantic Hybrid Relevance</span>
         </div>
 
@@ -161,10 +163,10 @@ export const LegalSearchPage: React.FC = () => {
           <div className="text-center py-12 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 p-6 shadow-xs">
             <Scale size={32} className="mx-auto text-[#7E779C]" />
             <p className="text-sm font-bold text-[#1E1B2E] dark:text-slate-300">
-              No legal provisions found matching your search.
+              {t('saved.empty_title')}
             </p>
             <p className="text-xs text-[#7E779C]">
-              Try searching by exact Section number like "Section 108" or "Section 74".
+              {t('search.subtitle')}
             </p>
           </div>
         )}
@@ -216,7 +218,7 @@ export const LegalSearchPage: React.FC = () => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-1 text-[#7E779C] hover:text-[#684EC9] px-2 py-1 rounded-lg transition-colors"
                   >
-                    <span>Official Source</span>
+                    <span>{t('search.view_source')}</span>
                     <ExternalLink size={12} />
                   </a>
                 )}
@@ -227,12 +229,12 @@ export const LegalSearchPage: React.FC = () => {
                   {savedSuccessId === item.id ? (
                     <>
                       <CheckCircle2 size={14} className="text-emerald-600" />
-                      <span className="text-emerald-600 font-bold">Saved!</span>
+                      <span className="text-emerald-600 font-bold">{t('search.saved')}</span>
                     </>
                   ) : (
                     <>
                       <BookmarkPlus size={14} />
-                      <span>Save</span>
+                      <span>{t('search.save')}</span>
                     </>
                   )}
                 </button>
@@ -241,7 +243,7 @@ export const LegalSearchPage: React.FC = () => {
                   className="flex items-center gap-1 text-[#684EC9] dark:text-purple-400 font-bold hover:underline px-2.5 py-1.5 rounded-lg hover:bg-[#EDE9FE] dark:hover:bg-purple-950/40 press-feedback transition-colors"
                 >
                   <MessageSquare size={14} />
-                  <span>Ask AI</span>
+                  <span>{t('search.ask_ai')}</span>
                 </button>
               </div>
             </div>

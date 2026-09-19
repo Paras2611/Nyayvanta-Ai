@@ -31,39 +31,39 @@ export const DashboardPage: React.FC = () => {
   const domainCards = [
     {
       id: 'consumer',
-      title: 'Consumer Complaints',
-      act: 'Consumer Protection Act, 2019',
-      desc: 'Defective goods, deficiency in service, unfair trade practices, E-Daakhil filing procedure.',
+      title: t('dashboard.domains.consumer.title', 'Consumer Complaints'),
+      act: t('dashboard.domains.consumer.act', 'Consumer Protection Act, 2019'),
+      desc: t('dashboard.domains.consumer.desc', 'Defective goods, deficiency in service, unfair trade practices, E-Daakhil filing procedure.'),
       icon: Building,
-      badgeColor: 'bg-[#EDE9FE] text-[#573EAE] border-[#DDD6FE]',
-      iconColor: 'bg-[#F4F2FA] text-[#684EC9]'
+      badgeColor: 'bg-[#EDE9FE] dark:bg-[#251F3D] text-[#573EAE] dark:text-[#C4B5FD] border-[#DDD6FE] dark:border-[#3D3360]',
+      iconColor: 'bg-[#F4F2FA] dark:bg-[#201B34] text-[#684EC9] dark:text-[#A78BFA]'
     },
     {
       id: 'tenancy',
-      title: 'Rental / Tenancy Disputes',
-      act: 'Transfer of Property Act, 1882',
-      desc: 'Security deposit withholding, eviction notices, lease deeds, Rent Court summary jurisdiction.',
+      title: t('dashboard.domains.tenancy.title', 'Rental / Tenancy Disputes'),
+      act: t('dashboard.domains.tenancy.act', 'Transfer of Property Act, 1882'),
+      desc: t('dashboard.domains.tenancy.desc', 'Security deposit withholding, eviction notices, lease deeds, Rent Court summary jurisdiction.'),
       icon: Home,
-      badgeColor: 'bg-[#ECFDF5] text-[#065F46] border-[#A7F3D0]',
-      iconColor: 'bg-[#F0FDF4] text-[#059669]'
+      badgeColor: 'bg-[#ECFDF5] dark:bg-emerald-950/40 text-[#065F46] dark:text-emerald-300 border-[#A7F3D0] dark:border-emerald-800',
+      iconColor: 'bg-[#F0FDF4] dark:bg-emerald-950/60 text-[#059669] dark:text-emerald-400'
     },
     {
       id: 'employment',
-      title: 'Employment Disputes',
-      act: 'Payment of Gratuity Act & ICA Sec 27',
-      desc: 'Unpaid salary, statutory gratuity delays, non-compete restraint unenforceability, SAMADHAAN portal.',
+      title: t('dashboard.domains.employment.title', 'Employment Disputes'),
+      act: t('dashboard.domains.employment.act', 'Payment of Gratuity Act & ICA Sec 27'),
+      desc: t('dashboard.domains.employment.desc', 'Unpaid salary, statutory gratuity delays, non-compete restraint unenforceability, SAMADHAAN portal.'),
       icon: Users,
-      badgeColor: 'bg-[#EDE9FE] text-[#573EAE] border-[#DDD6FE]',
-      iconColor: 'bg-[#F4F2FA] text-[#684EC9]'
+      badgeColor: 'bg-[#EDE9FE] dark:bg-[#251F3D] text-[#573EAE] dark:text-[#C4B5FD] border-[#DDD6FE] dark:border-[#3D3360]',
+      iconColor: 'bg-[#F4F2FA] dark:bg-[#201B34] text-[#684EC9] dark:text-[#A78BFA]'
     },
     {
       id: 'contract',
-      title: 'Contract Disputes',
-      act: 'Indian Contract Act & MSMED Act',
-      desc: 'Commercial breach, Section 73/74 damages, MSME Samadhaan 45-day statutory payment recovery.',
+      title: t('dashboard.domains.contract.title', 'Contract Disputes'),
+      act: t('dashboard.domains.contract.act', 'Indian Contract Act & MSMED Act'),
+      desc: t('dashboard.domains.contract.desc', 'Commercial breach, Section 73/74 damages, MSME Samadhaan 45-day statutory payment recovery.'),
       icon: FileSpreadsheet,
-      badgeColor: 'bg-[#FEF3C7] text-[#92400E] border-[#FDE68A]',
-      iconColor: 'bg-[#FFFBEB] text-[#D97706]'
+      badgeColor: 'bg-[#FEF3C7] dark:bg-amber-950/40 text-[#92400E] dark:text-amber-300 border-[#FDE68A] dark:border-amber-800',
+      iconColor: 'bg-[#FFFBEB] dark:bg-amber-950/60 text-[#D97706] dark:text-amber-400'
     }
   ];
 
@@ -73,14 +73,14 @@ export const DashboardPage: React.FC = () => {
       <section className="bg-gradient-to-b from-white to-[#F8F6FD] dark:from-[#171424] dark:to-[#120F1F] border border-[#E8E3F5] dark:border-[#2D2745] rounded-3xl p-5 sm:p-8 md:p-10 text-center space-y-4 lavender-shadow-sm">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE9FE] dark:bg-[#251F3D] border border-[#D8D1EE] dark:border-[#3D3360] text-[#573EAE] dark:text-[#C4B5FD] text-xs font-semibold">
           <Sparkles size={13} className="text-[#684EC9] dark:text-[#A78BFA]" />
-          <span>Evidence-First Legal Intelligence Platform</span>
+          <span>{t('dashboard.hero_badge', 'Evidence-First Legal Intelligence Platform')}</span>
         </div>
 
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1E1B2E] dark:text-white tracking-tight leading-tight">
-          Understand the Law. Find the Authority.
+          {t('dashboard.hero_title', 'Understand the Law. Find the Authority.')}
         </h1>
         <p className="text-xs sm:text-sm md:text-base text-[#544E6D] dark:text-[#A59FC2] max-w-2xl mx-auto leading-relaxed">
-          AI-powered Indian legal information and research assistance grounded in authentic Bare Acts, statutory sections, and landmark Supreme Court precedents.
+          {t('dashboard.hero_subtitle', 'AI-powered Indian legal information and research assistance grounded in authentic Bare Acts, statutory sections, and landmark Supreme Court precedents.')}
         </p>
 
         {/* Big Search Input */}
@@ -91,14 +91,14 @@ export const DashboardPage: React.FC = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Ask a legal question (e.g. Can landlord forfeit deposit?)..."
+              placeholder={t('dashboard.search_placeholder', 'Ask a legal question (e.g. Can landlord forfeit deposit?)...')}
               className="w-full pl-10 sm:pl-12 pr-22 sm:pr-28 py-3 sm:py-3.5 rounded-2xl border border-[#D8D1EE] dark:border-[#382F5E] bg-white dark:bg-[#1E1836] text-[#1E1B2E] dark:text-white text-xs sm:text-sm placeholder:text-[#958EB3] focus:outline-none focus:ring-2 focus:ring-[#7C66DC] transition-all shadow-2xs"
             />
             <button
               type="submit"
-              className="absolute right-1.5 sm:right-2 px-3 sm:px-5 py-2 bg-[#684EC9] hover:bg-[#573EAE] text-white rounded-xl text-xs font-bold shadow-xs transition-colors press-feedback"
+              className="absolute right-1.5 sm:right-2 px-3 sm:px-5 py-2 bg-[#684EC9] hover:bg-[#573EAE] text-white rounded-xl text-xs font-bold shadow-xs transition-colors press-feedback cursor-pointer"
             >
-              Research
+              {t('dashboard.research_btn', 'Research')}
             </button>
           </div>
         </form>
@@ -107,31 +107,31 @@ export const DashboardPage: React.FC = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 max-w-2xl mx-auto pt-2">
           <button
             onClick={() => navigate('/chat')}
-            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs cursor-pointer"
           >
             <MessageSquare size={14} className="text-[#684EC9] shrink-0" />
-            <span className="truncate">Ask Nyayavanta</span>
+            <span className="truncate">{t('dashboard.ask_nyayavanta', 'Ask Nyayavanta')}</span>
           </button>
           <button
             onClick={() => navigate('/legal-search')}
-            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs cursor-pointer"
           >
             <BookOpen size={14} className="text-[#684EC9] shrink-0" />
-            <span className="truncate">Search Laws</span>
+            <span className="truncate">{t('dashboard.search_laws', 'Search Laws')}</span>
           </button>
           <button
             onClick={() => navigate('/case-search')}
-            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs cursor-pointer"
           >
             <Briefcase size={14} className="text-[#684EC9] shrink-0" />
-            <span className="truncate">Search Cases</span>
+            <span className="truncate">{t('dashboard.search_cases', 'Search Cases')}</span>
           </button>
           <button
             onClick={() => navigate('/documents')}
-            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2.5 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] text-xs font-semibold text-[#544E6D] dark:text-[#DDD6FE] hover:border-[#7C66DC] hover:text-[#684EC9] press-feedback transition-all shadow-2xs cursor-pointer"
           >
             <FileText size={14} className="text-[#684EC9] shrink-0" />
-            <span className="truncate">Analyze Docs</span>
+            <span className="truncate">{t('dashboard.analyze_docs', 'Analyze Docs')}</span>
           </button>
         </div>
       </section>
@@ -141,14 +141,14 @@ export const DashboardPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-base sm:text-lg font-bold text-[#1E1B2E] dark:text-white">
-              V1 Supported Legal Domains
+              {t('dashboard.supported_domains', 'V1 Supported Legal Domains')}
             </h2>
             <p className="text-xs text-[#7E779C]">
-              Specialized statutory retrieval and claim grounding for 4 core domains.
+              {t('dashboard.supported_domains_desc', 'Specialized statutory retrieval and claim grounding for 4 core domains.')}
             </p>
           </div>
           <span className="text-xs font-semibold text-[#573EAE] dark:text-[#C4B5FD] bg-[#EDE9FE] dark:bg-[#251F3D] px-2.5 py-1 rounded-lg">
-            Scope Verified
+            {t('dashboard.scope_verified', 'Scope Verified')}
           </span>
         </div>
 
@@ -174,7 +174,7 @@ export const DashboardPage: React.FC = () => {
                   </p>
                 </div>
                 <div className="pt-2 border-t border-[#F1EEFA] dark:border-[#26213D] flex items-center justify-between text-xs font-bold text-[#684EC9] dark:text-[#A78BFA]">
-                  <span>Start Research</span>
+                  <span>{t('dashboard.start_research', 'Start Research')}</span>
                   <ArrowRight size={14} />
                 </div>
               </div>
@@ -189,11 +189,11 @@ export const DashboardPage: React.FC = () => {
         <div className="p-5 bg-white dark:bg-[#171424] border border-[#E8E3F5] dark:border-[#2D2745] rounded-2xl space-y-3.5 lavender-shadow-sm">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-sm text-[#1E1B2E] dark:text-white flex items-center gap-2">
-              <Bookmark size={16} className="text-[#684EC9]" />
-              <span>Recent Research</span>
+              <Bookmark size={16} className="text-[#684EC9] dark:text-[#A78BFA]" />
+              <span>{t('dashboard.recent_research', 'Recent Research')}</span>
             </h3>
-            <button onClick={() => navigate('/saved')} className="text-xs text-[#684EC9] dark:text-[#A78BFA] font-semibold hover:underline">
-              View All
+            <button onClick={() => navigate('/saved')} className="text-xs text-[#684EC9] dark:text-[#A78BFA] font-semibold hover:underline cursor-pointer">
+              {t('dashboard.view_all', 'View All')}
             </button>
           </div>
           <div className="space-y-2.5 text-xs">
@@ -203,7 +203,7 @@ export const DashboardPage: React.FC = () => {
             >
               <div className="flex justify-between font-semibold text-[#1E1B2E] dark:text-slate-200">
                 <span>Tenancy Deposit Withholding in Bengaluru</span>
-                <span className="text-[10px] text-[#7E779C]">Today</span>
+                <span className="text-[10px] text-[#7E779C]">{t('chat.today', 'Today')}</span>
               </div>
               <p className="text-[#544E6D] dark:text-[#958EB3] line-clamp-1">
                 Section 108(B)(q) Transfer of Property Act & Kailash Nath precedent.
@@ -215,7 +215,7 @@ export const DashboardPage: React.FC = () => {
             >
               <div className="flex justify-between font-semibold text-[#1E1B2E] dark:text-slate-200">
                 <span>Non-compete validity under Sec 27 ICA</span>
-                <span className="text-[10px] text-[#7E779C]">Yesterday</span>
+                <span className="text-[10px] text-[#7E779C]">{t('chat.previous_7_days', 'Yesterday')}</span>
               </div>
               <p className="text-[#544E6D] dark:text-[#958EB3] line-clamp-1">
                 Post-service non-compete restraint is void under Supreme Court Golikari precedent.
@@ -228,11 +228,11 @@ export const DashboardPage: React.FC = () => {
         <div className="p-5 bg-white dark:bg-[#171424] border border-[#E8E3F5] dark:border-[#2D2745] rounded-2xl space-y-3.5 lavender-shadow-sm">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-sm text-[#1E1B2E] dark:text-white flex items-center gap-2">
-              <FileText size={16} className="text-[#684EC9]" />
-              <span>Recent Documents</span>
+              <FileText size={16} className="text-[#684EC9] dark:text-[#A78BFA]" />
+              <span>{t('dashboard.recent_documents', 'Recent Documents')}</span>
             </h3>
-            <button onClick={() => navigate('/documents')} className="text-xs text-[#684EC9] dark:text-[#A78BFA] font-semibold hover:underline">
-              Analyze New
+            <button onClick={() => navigate('/documents')} className="text-xs text-[#684EC9] dark:text-[#A78BFA] font-semibold hover:underline cursor-pointer">
+              {t('dashboard.view_all', 'View All')}
             </button>
           </div>
           <div className="space-y-2.5 text-xs">
@@ -241,27 +241,13 @@ export const DashboardPage: React.FC = () => {
               className="p-3 rounded-xl border border-[#E8E3F5] dark:border-[#26213D] bg-[#FBFBFE] dark:bg-[#1C182B] hover:bg-[#F4F2FA] dark:hover:bg-[#231E36] cursor-pointer space-y-1 transition-colors"
             >
               <div className="flex justify-between font-semibold text-[#1E1B2E] dark:text-slate-200">
-                <span>Residential_Lease_Agreement_2025.pdf</span>
-                <span className="text-[10px] text-amber-700 dark:text-amber-300 font-semibold bg-amber-50 dark:bg-amber-950/60 px-1.5 py-0.5 rounded">
-                  Risk: High
+                <span>Residential_Lease_Indiranagar.pdf</span>
+                <span className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded">
+                  Clause 14 Flagged
                 </span>
               </div>
               <p className="text-[#544E6D] dark:text-[#958EB3] line-clamp-1">
-                Arbitration Clause 14 & Liquidated Damages Clause 8 flagged.
-              </p>
-            </div>
-            <div
-              onClick={() => navigate('/documents')}
-              className="p-3 rounded-xl border border-[#E8E3F5] dark:border-[#26213D] bg-[#FBFBFE] dark:bg-[#1C182B] hover:bg-[#F4F2FA] dark:hover:bg-[#231E36] cursor-pointer space-y-1 transition-colors"
-            >
-              <div className="flex justify-between font-semibold text-[#1E1B2E] dark:text-slate-200">
-                <span>Vendor_Service_Contract.pdf</span>
-                <span className="text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold bg-emerald-50 dark:bg-emerald-950/60 px-1.5 py-0.5 rounded">
-                  Risk: Low
-                </span>
-              </div>
-              <p className="text-[#544E6D] dark:text-[#958EB3] line-clamp-1">
-                MSMED Act 45-day payment statutory provisions compliant.
+                Security deposit forfeiture without damage assessment is invalid under Karnataka Rent Act.
               </p>
             </div>
           </div>

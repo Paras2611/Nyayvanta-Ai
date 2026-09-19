@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { User, ShieldCheck, Mail, Key, LogOut, CheckCircle2 } from 'lucide-react';
 import { fetchProfile, updateProfile } from '../services/api';
 
 export const ProfilePage: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<any>({
     full_name: 'Nyayavanta Legal Researcher',
@@ -41,10 +43,10 @@ export const ProfilePage: React.FC = () => {
           <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
             <User size={20} />
           </div>
-          <span>User Profile & Credentials</span>
+          <span>{t('profile.title')}</span>
         </h1>
         <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
-          Manage your advocate/researcher credentials and authentication preferences.
+          {t('profile.subtitle')}
         </p>
       </div>
 
@@ -64,7 +66,7 @@ export const ProfilePage: React.FC = () => {
                 <span>{profile.email}</span>
               </span>
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-800">
-                Verified Account
+                {t('profile.status')}
               </span>
             </div>
           </div>
@@ -74,7 +76,7 @@ export const ProfilePage: React.FC = () => {
         <form onSubmit={handleUpdate} className="space-y-4">
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">
-              Full Legal Name / Advocate Name
+              {t('profile.full_name')}
             </label>
             <input
               type="text"
@@ -86,7 +88,7 @@ export const ProfilePage: React.FC = () => {
 
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">
-              Email Address (Read-only)
+              {t('profile.email')}
             </label>
             <input
               type="email"
@@ -98,7 +100,7 @@ export const ProfilePage: React.FC = () => {
 
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">
-              Platform Role
+              {t('profile.role')}
             </label>
             <input
               type="text"
@@ -116,10 +118,10 @@ export const ProfilePage: React.FC = () => {
               {savedSuccess ? (
                 <>
                   <CheckCircle2 size={14} className="text-emerald-300" />
-                  <span>Profile Saved!</span>
+                  <span>{t('profile.saved')}</span>
                 </>
               ) : (
-                <span>Save Profile Changes</span>
+                <span>{t('profile.save')}</span>
               )}
             </button>
 
@@ -132,7 +134,7 @@ export const ProfilePage: React.FC = () => {
               className="flex items-center justify-center gap-1.5 text-xs text-rose-600 hover:text-rose-700 hover:underline font-bold py-2 press-feedback"
             >
               <LogOut size={14} />
-              <span>Log Out</span>
+              <span>{t('nav.logout')}</span>
             </button>
           </div>
         </form>

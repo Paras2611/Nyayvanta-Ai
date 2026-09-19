@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   UploadCloud,
   FileText,
@@ -51,6 +52,7 @@ export const RiskBadge: React.FC<{ risk: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' 
 };
 
 export const DocumentAnalyzerPage: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [inputText, setInputText] = useState('');
   const [filename, setFilename] = useState('Sample_Lease_Agreement.pdf');
@@ -117,16 +119,18 @@ export const DocumentAnalyzerPage: React.FC = () => {
           <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0 shadow-2xs">
             <FileText size={20} />
           </div>
-          <span>Analyze a Legal Document</span>
+          <span>{t('documents.title')}</span>
         </h1>
         <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
-          Upload or paste legal agreements, notices, or contracts for statutory clause extraction, enforceability check, and risk scoring.
+          {t('documents.subtitle')}
         </p>
       </div>
 
       {/* Preset Samples - Swipeable Track on Mobile */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-        <span className="text-xs font-semibold text-[#7E779C] shrink-0">Sample:</span>
+        <span className="text-xs font-semibold text-[#7E779C] shrink-0">
+          {t('documents.sample_agreements')}
+        </span>
         {sampleAgreements.map((s, idx) => (
           <button
             key={idx}
@@ -137,7 +141,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
             }}
             className="text-xs px-3 py-1.5 rounded-xl border border-[#E8E3F5] dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-[#684EC9] text-[#544E6D] dark:text-slate-300 hover:bg-[#EDE9FE] dark:hover:bg-purple-950/30 font-bold transition-all shadow-2xs cursor-pointer shrink-0 press-feedback"
           >
-            {s.title}
+            {idx === 0 ? t('documents.sample_rental') : t('documents.sample_employment')}
           </button>
         ))}
       </div>
@@ -153,7 +157,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
           }`}
         >
           <UploadCloud size={14} />
-          <span>Document Input</span>
+          <span>{t('documents.tab_input')}</span>
         </button>
         <button
           onClick={() => setActiveMobileTab('findings')}
@@ -164,7 +168,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
           }`}
         >
           <Scale size={14} />
-          <span>Analysis Findings</span>
+          <span>{t('documents.tab_findings')}</span>
           {analysisResult && (
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           )}
@@ -181,7 +185,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <h2 className="font-bold text-sm text-[#1E1B2E] dark:text-white flex items-center gap-2">
                 <UploadCloud size={18} className="text-[#684EC9]" />
-                <span>Document Text / Paste Area</span>
+                <span>{t('documents.upload_title')}</span>
               </h2>
               <span className="text-xs font-mono text-[#7E779C] bg-[#F8F7FC] dark:bg-slate-800 px-2 py-0.5 rounded-md border border-[#E8E3F5] dark:border-slate-700 max-w-[140px] sm:max-w-none truncate">
                 {filename}
@@ -192,7 +196,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
               rows={8}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="Paste complete agreement text, lease deed clauses, or employment notice..."
+              placeholder={t('documents.placeholder_textarea')}
               className="w-full p-3.5 sm:p-4 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs font-mono text-[#1E1B2E] dark:text-slate-200 leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-inner lg:min-h-[320px]"
             />
           </div>
@@ -206,7 +210,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
               disabled={pipelineState !== 'Idle' && pipelineState !== 'Complete'}
               className="px-6 py-2.5 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[42px] press-feedback"
             >
-              Analyze Document
+              {pipelineState !== 'Idle' && pipelineState !== 'Complete' ? t('documents.btn_analyzing') : t('documents.btn_analyze')}
             </button>
           </div>
         </div>
@@ -220,9 +224,11 @@ export const DocumentAnalyzerPage: React.FC = () => {
               <div className="w-14 h-14 rounded-2xl bg-[#EDE9FE] dark:bg-purple-950/40 text-[#684EC9] flex items-center justify-center">
                 <Scale size={28} />
               </div>
-              <p className="font-bold text-sm text-[#1E1B2E] dark:text-slate-200">No analysis generated yet</p>
+              <p className="font-bold text-sm text-[#1E1B2E] dark:text-slate-200">
+                {t('saved.empty_title')}
+              </p>
               <p className="text-xs text-[#544E6D] dark:text-slate-400 max-w-xs">
-                Click "Analyze Document" or select a preset sample above to run clause extraction.
+                {t('documents.awaiting_analysis')}
               </p>
             </div>
           ) : (
@@ -241,13 +247,13 @@ export const DocumentAnalyzerPage: React.FC = () => {
               {/* Parties & Dates */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs bg-[#F8F7FC] dark:bg-slate-900/40 p-3.5 rounded-2xl border border-[#E8E3F5] dark:border-slate-800">
                 <div>
-                  <span className="text-[#7E779C] uppercase font-bold text-[10px]">Parties:</span>
+                  <span className="text-[#7E779C] uppercase font-bold text-[10px]">{t('documents.parties')}:</span>
                   <p className="font-bold text-[#1E1B2E] dark:text-slate-300">
                     {analysisResult.parties.join(' & ')}
                   </p>
                 </div>
                 <div>
-                  <span className="text-[#7E779C] uppercase font-bold text-[10px]">Key Dates:</span>
+                  <span className="text-[#7E779C] uppercase font-bold text-[10px]">{t('documents.dates')}:</span>
                   <p className="font-bold text-[#1E1B2E] dark:text-slate-300">
                     {analysisResult.dates.join(', ')}
                   </p>
@@ -257,7 +263,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
               {/* Detected Clauses */}
               <div className="space-y-3">
                 <h4 className="text-xs font-bold text-[#573EAE] dark:text-purple-400 uppercase tracking-wider">
-                  Analyzed Clauses ({analysisResult.importantClauses.length})
+                  {t('documents.clauses_analyzed')} ({analysisResult.importantClauses.length})
                 </h4>
                 {analysisResult.importantClauses.map((clause, i) => (
                   <div
@@ -288,7 +294,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
               {/* Actionable Recommendations */}
               <div className="p-4 bg-[#F6F4FD] dark:bg-purple-950/20 border border-[#DDD6FE] dark:border-purple-900 rounded-2xl space-y-2 text-xs">
                 <h4 className="font-bold text-[#46328D] dark:text-purple-200 uppercase tracking-wider text-[11px]">
-                  Actionable Informational Steps
+                  {t('documents.recommendations')}
                 </h4>
                 <ul className="space-y-1.5 text-[#544E6D] dark:text-slate-300 list-disc pl-4">
                   {analysisResult.recommendations.map((rec, idx) => (
@@ -308,7 +314,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
                   }
                   className="flex items-center gap-1.5 text-xs font-bold text-[#684EC9] dark:text-purple-400 hover:text-[#573EB0] hover:underline cursor-pointer"
                 >
-                  <span>Ask Nyayavanta About These Findings</span>
+                  <span>{t('search.ask_ai')}</span>
                   <ArrowRight size={14} />
                 </button>
               </div>

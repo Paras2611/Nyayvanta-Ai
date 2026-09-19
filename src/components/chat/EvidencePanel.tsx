@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ShieldCheck,
   AlertCircle,
@@ -66,11 +67,12 @@ export const VerificationBadge: React.FC<{
 };
 
 export const ConfidenceCard: React.FC<{ confidence: ConfidenceInfo }> = ({ confidence }) => {
+  const { t } = useTranslation();
   return (
     <div className="bg-[#F8F7FC] dark:bg-[#0B1220] border border-[#E8E3F5] dark:border-slate-800 rounded-xl p-3.5 shadow-xs">
       <div className="flex items-center justify-between mb-1.5">
         <span className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
-          Grounding Confidence
+          {t('chat.evidence_panel.confidence')}
         </span>
         <span className="text-sm font-bold text-[#684EC9] dark:text-purple-400">
           {confidence.score}% ({confidence.level})
@@ -133,6 +135,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
   sources = [],
   onClose,
 }) => {
+  const { t } = useTranslation();
   const hasNoEvidence =
     relevantLaw.length === 0 &&
     relevantCases.length === 0 &&
@@ -145,11 +148,13 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
       <div className="flex items-center justify-between pb-3 border-b border-[#E8E3F5] dark:border-slate-800">
         <div className="flex items-center gap-2">
           <FileCheck className="text-[#684EC9] dark:text-purple-400" size={17} />
-          <h2 className="font-bold text-xs sm:text-sm text-[#1E1B2E] dark:text-white">Evidence & Grounding</h2>
+          <h2 className="font-bold text-xs sm:text-sm text-[#1E1B2E] dark:text-white">
+            {t('chat.evidence_panel.title')}
+          </h2>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-[10px] sm:text-[11px] bg-[#EDE9FE] dark:bg-purple-950 text-[#573EAE] dark:text-purple-300 font-semibold px-2 py-0.5 rounded-md border border-[#DDD6FE] dark:border-purple-800">
-            Verifiable
+            {t('chat.evidence_panel.verifiable')}
           </span>
           {onClose && (
             <button
@@ -171,33 +176,39 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
           </div>
           <div>
             <h3 className="text-xs font-bold text-[#1E1B2E] dark:text-white">
-              Awaiting Legal Inquiry
+              {t('chat.evidence_panel.awaiting_title')}
             </h3>
             <p className="text-[11px] text-[#7E779C] dark:text-[#A59FC2] mt-1 leading-relaxed">
-              When you submit a query, Nyayavanta retrieves statutory provisions and case law citations, verifying all claims here in real time.
+              {t('chat.evidence_panel.awaiting_desc')}
             </p>
           </div>
           <div className="space-y-2 pt-1 text-left">
             <div className="p-2.5 rounded-xl bg-white dark:bg-[#1D1830] border border-[#E8E3F5] dark:border-[#382F5E] text-[11px] space-y-0.5 shadow-2xs">
               <div className="flex items-center gap-1.5 font-bold text-[#684EC9] dark:text-[#C4B5FD]">
                 <BookOpen size={12} />
-                <span>Bare Acts Citations</span>
+                <span>{t('chat.evidence_panel.bare_acts')}</span>
               </div>
-              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">Sections mapped from BNS, BSA, CPC, ICA, and CPA.</p>
+              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">
+                {t('chat.evidence_panel.bare_acts_desc')}
+              </p>
             </div>
             <div className="p-2.5 rounded-xl bg-white dark:bg-[#1D1830] border border-[#E8E3F5] dark:border-[#382F5E] text-[11px] space-y-0.5 shadow-2xs">
               <div className="flex items-center gap-1.5 font-bold text-[#684EC9] dark:text-[#C4B5FD]">
                 <Scale size={12} />
-                <span>Precedents & Judgments</span>
+                <span>{t('chat.evidence_panel.precedents')}</span>
               </div>
-              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">Supreme Court and High Court precedent ratios.</p>
+              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">
+                {t('chat.evidence_panel.precedents_desc')}
+              </p>
             </div>
             <div className="p-2.5 rounded-xl bg-white dark:bg-[#1D1830] border border-[#E8E3F5] dark:border-[#2E274D] text-[11px] space-y-0.5 shadow-2xs">
               <div className="flex items-center gap-1.5 font-bold text-emerald-600 dark:text-emerald-400">
                 <ShieldCheck size={12} />
-                <span>Zero-Hallucination Audit</span>
+                <span>{t('chat.evidence_panel.audit')}</span>
               </div>
-              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">Every statement tagged as Verified or Conflicting.</p>
+              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">
+                {t('chat.evidence_panel.audit_desc')}
+              </p>
             </div>
           </div>
         </div>
@@ -210,7 +221,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
       {claimsVerification.length > 0 && (
         <section className="space-y-2">
           <h3 className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
-            Claim Grounding ({claimsVerification.length})
+            {t('chat.evidence_panel.claim_grounding')} ({claimsVerification.length})
           </h3>
           <div className="space-y-2.5">
             {claimsVerification.map((claim) => (
@@ -225,7 +236,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
         <section className="space-y-2">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
-              Relevant Provisions ({relevantLaw.length})
+              {t('chat.evidence_panel.relevant_provisions')} ({relevantLaw.length})
             </h3>
             <BookOpen size={14} className="text-[#7E779C]" />
           </div>
@@ -265,7 +276,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
         <section className="space-y-2">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
-              Binding Precedents ({relevantCases.length})
+              {t('chat.evidence_panel.binding_precedents')} ({relevantCases.length})
             </h3>
             <Scale size={14} className="text-[#7E779C]" />
           </div>

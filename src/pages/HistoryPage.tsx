@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { History, MessageSquare, Trash2, ArrowRight, Archive, Edit3 } from 'lucide-react';
 
 interface HistoryEntry {
@@ -12,6 +13,7 @@ interface HistoryEntry {
 }
 
 export const HistoryPage: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [historyItems, setHistoryItems] = useState<HistoryEntry[]>([
     {
@@ -60,11 +62,11 @@ export const HistoryPage: React.FC = () => {
     setHistoryItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const groups: Array<'Today' | 'Yesterday' | 'Previous 7 Days' | 'Older'> = [
-    'Today',
-    'Yesterday',
-    'Previous 7 Days',
-    'Older'
+  const groups: Array<{ id: 'Today' | 'Yesterday' | 'Previous 7 Days' | 'Older'; labelKey: string }> = [
+    { id: 'Today', labelKey: 'chat.today' },
+    { id: 'Yesterday', labelKey: 'chat.today' },
+    { id: 'Previous 7 Days', labelKey: 'chat.previous_7_days' },
+    { id: 'Older', labelKey: 'history.title' }
   ];
 
   return (
@@ -74,22 +76,22 @@ export const HistoryPage: React.FC = () => {
           <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
             <History size={20} />
           </div>
-          <span>Research History</span>
+          <span>{t('history.title')}</span>
         </h1>
         <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
-          Chronological audit trail of your past legal inquiries, questions, and retrieved evidence.
+          {t('history.subtitle')}
         </p>
       </div>
 
       <div className="space-y-6">
         {groups.map((grp) => {
-          const groupItems = historyItems.filter((i) => i.dateGroup === grp);
+          const groupItems = historyItems.filter((i) => i.dateGroup === grp.id);
           if (groupItems.length === 0) return null;
 
           return (
-            <div key={grp} className="space-y-3">
+            <div key={grp.id} className="space-y-3">
               <h2 className="text-xs font-bold text-[#573EAE] dark:text-purple-400 uppercase tracking-wider">
-                {grp}
+                {grp.id === 'Today' ? t('chat.today') : grp.id === 'Previous 7 Days' ? t('chat.previous_7_days') : grp.id}
               </h2>
               <div className="space-y-2.5">
                 {groupItems.map((item) => (

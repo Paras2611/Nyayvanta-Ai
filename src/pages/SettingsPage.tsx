@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Settings, Shield, Bell, Moon, Sun, Globe, CheckCircle2 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 export const SettingsPage: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('light');
+  const { theme, setTheme } = useTheme();
   const [notifications, setNotifications] = useState(true);
   const [historyRetention, setHistoryRetention] = useState('90');
   const [savedSuccess, setSavedSuccess] = useState(false);
-
-  const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
-    setTheme(newTheme);
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
 
   const handleLanguageChange = (lang: string) => {
     i18n.changeLanguage(lang);
@@ -35,10 +27,10 @@ export const SettingsPage: React.FC = () => {
           <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
             <Settings size={20} />
           </div>
-          <span>{t('settings.title', 'Settings & Preferences')}</span>
+          <span>{t('settings.title')}</span>
         </h1>
         <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
-          Configure appearance, multi-lingual legal terminology, notification alerts, and retention policies.
+          {t('settings.subtitle')}
         </p>
       </div>
 
@@ -47,33 +39,33 @@ export const SettingsPage: React.FC = () => {
         <div className="p-5 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-3 shadow-xs">
           <h2 className="text-xs font-bold text-[#573EAE] dark:text-purple-400 uppercase tracking-wider flex items-center gap-2">
             <Sun size={16} className="text-amber-500" />
-            <span>{t('settings.appearance', 'Appearance & Theme')}</span>
+            <span>{t('settings.appearance')}</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             {[
-              { id: 'light', label: t('settings.theme_light', 'Light Lavender (Default)') },
-              { id: 'dark', label: t('settings.theme_dark', 'Dark Theme') },
-              { id: 'system', label: t('settings.theme_system', 'System Default') }
-            ].map((th) => (
-              <label
-                key={th.id}
-                className={`p-3.5 rounded-2xl border text-xs font-bold cursor-pointer flex items-center justify-between transition-all ${
-                  theme === th.id
-                    ? 'bg-[#EDE9FE] dark:bg-purple-950/40 border-[#684EC9] text-[#46328D] dark:text-purple-200 shadow-xs'
-                    : 'bg-[#F8F7FC] dark:bg-slate-900/40 border-[#E8E3F5] dark:border-slate-700 text-[#544E6D] dark:text-slate-300 hover:bg-[#EDE9FE]'
-                }`}
-              >
-                <span>{th.label}</span>
-                <input
-                  type="radio"
-                  name="theme"
-                  value={th.id}
-                  checked={theme === th.id}
-                  onChange={() => handleThemeChange(th.id as any)}
-                  className="accent-[#684EC9]"
-                />
-              </label>
-            ))}
+              { id: 'light', label: t('settings.theme_light'), icon: Sun },
+              { id: 'dark', label: t('settings.theme_dark'), icon: Moon }
+            ].map((th) => {
+              const IconComp = th.icon;
+              return (
+                <button
+                  key={th.id}
+                  type="button"
+                  onClick={() => setTheme(th.id as 'light' | 'dark')}
+                  className={`p-3.5 rounded-2xl border text-xs font-bold cursor-pointer flex items-center justify-between transition-all press-feedback ${
+                    theme === th.id
+                      ? 'bg-[#EDE9FE] dark:bg-purple-950/40 border-[#684EC9] text-[#46328D] dark:text-purple-200 shadow-xs'
+                      : 'bg-[#F8F7FC] dark:bg-slate-900/40 border-[#E8E3F5] dark:border-slate-700 text-[#544E6D] dark:text-slate-300 hover:bg-[#EDE9FE]'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <IconComp size={15} />
+                    <span>{th.label}</span>
+                  </div>
+                  {theme === th.id && <CheckCircle2 size={16} className="text-[#684EC9]" />}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -81,14 +73,14 @@ export const SettingsPage: React.FC = () => {
         <div className="p-5 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-3 shadow-xs">
           <h2 className="text-xs font-bold text-[#573EAE] dark:text-purple-400 uppercase tracking-wider flex items-center gap-2">
             <Globe size={16} className="text-[#684EC9]" />
-            <span>{t('settings.language', 'Language Preference')}</span>
+            <span>{t('settings.language')}</span>
           </h2>
           <p className="text-xs text-[#544E6D] dark:text-slate-400">
-            {t('settings.language_label', 'Select interface language for legal summaries and navigation:')}
+            {t('settings.language_desc')}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
-              { code: 'en', label: 'English (Central Acts)' },
+              { code: 'en', label: 'English' },
               { code: 'hi', label: 'हिंदी (Hindi)' },
               { code: 'mr', label: 'मराठी (Marathi)' }
             ].map((lang) => (
@@ -96,8 +88,8 @@ export const SettingsPage: React.FC = () => {
                 key={lang.code}
                 type="button"
                 onClick={() => handleLanguageChange(lang.code)}
-                className={`p-3.5 rounded-2xl border text-xs font-bold transition-all cursor-pointer ${
-                  i18n.language === lang.code
+                className={`p-3.5 rounded-2xl border text-xs font-bold transition-all cursor-pointer press-feedback ${
+                  i18n.language.startsWith(lang.code)
                     ? 'bg-[#684EC9] text-white border-[#684EC9] shadow-xs'
                     : 'bg-[#F8F7FC] dark:bg-slate-900 border-[#E8E3F5] dark:border-slate-700 text-[#544E6D] dark:text-slate-300 hover:bg-[#EDE9FE]'
                 }`}
@@ -112,8 +104,11 @@ export const SettingsPage: React.FC = () => {
         <div className="p-5 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs">
           <h2 className="text-xs font-bold text-[#573EAE] dark:text-purple-400 uppercase tracking-wider flex items-center gap-2">
             <Bell size={16} className="text-emerald-500" />
-            <span>{t('settings.notifications', 'Notifications & Alerts')}</span>
+            <span>{t('settings.notifications')}</span>
           </h2>
+          <p className="text-xs text-[#544E6D] dark:text-slate-400">
+            {t('settings.notifications_desc')}
+          </p>
           <label className="flex items-center gap-3 cursor-pointer">
             <input
               type="checkbox"
@@ -122,7 +117,7 @@ export const SettingsPage: React.FC = () => {
               className="w-4 h-4 accent-[#684EC9] rounded"
             />
             <span className="text-xs font-semibold text-[#1E1B2E] dark:text-slate-300">
-              {t('settings.notifications_label', 'Enable research notifications and statutory updates')}
+              {t('settings.notifications')}
             </span>
           </label>
         </div>
@@ -131,10 +126,10 @@ export const SettingsPage: React.FC = () => {
         <div className="p-5 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-3 shadow-xs">
           <h2 className="text-xs font-bold text-[#573EAE] dark:text-purple-400 uppercase tracking-wider flex items-center gap-2">
             <Shield size={16} className="text-[#684EC9]" />
-            <span>{t('settings.privacy', 'Privacy & Retention')}</span>
+            <span>{t('settings.privacy')}</span>
           </h2>
           <p className="text-xs text-[#544E6D] dark:text-slate-400">
-            {t('settings.privacy_label', 'Manage conversation history retention and uploaded file purging')}
+            {t('settings.privacy_desc')}
           </p>
           <select
             value={historyRetention}
@@ -156,10 +151,10 @@ export const SettingsPage: React.FC = () => {
             {savedSuccess ? (
               <>
                 <CheckCircle2 size={14} className="text-emerald-300" />
-                <span>Settings Applied!</span>
+                <span>{t('settings.saved')}</span>
               </>
             ) : (
-              <span>{t('settings.save', 'Save Changes')}</span>
+              <span>{t('settings.save')}</span>
             )}
           </button>
         </div>

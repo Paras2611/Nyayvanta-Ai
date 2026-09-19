@@ -161,7 +161,7 @@ export const AILegalChatPage: React.FC = () => {
           <div className="p-3.5 space-y-3 overflow-y-auto">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold text-[#7E779C] uppercase tracking-wider">
-                Sessions
+                {t('chat.sessions', 'Sessions')}
               </span>
               <div className="flex items-center gap-1">
                 <button
@@ -170,7 +170,7 @@ export const AILegalChatPage: React.FC = () => {
                     setActiveResponse(null);
                   }}
                   className="p-1.5 rounded-lg bg-white dark:bg-[#221D38] border border-[#E0D9F7] dark:border-[#382F5E] text-[#684EC9] dark:text-[#C4B5FD] hover:bg-[#EBE6F8] shadow-xs cursor-pointer press-feedback"
-                  title="New Research Inquiry"
+                  title={t('chat.new_inquiry', 'New Research Inquiry')}
                 >
                   <Plus size={14} />
                 </button>
@@ -185,7 +185,7 @@ export const AILegalChatPage: React.FC = () => {
             </div>
 
           <div className="space-y-1 text-xs">
-            <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-1">Today</p>
+            <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-1">{t('chat.today', 'Today')}</p>
             <div
               onClick={() => {}}
               className="p-2.5 rounded-xl bg-white dark:bg-[#221D38] text-[#573EAE] dark:text-[#C4B5FD] font-semibold cursor-pointer border border-[#E0D9F7] dark:border-[#382F5E] shadow-xs truncate"
@@ -199,7 +199,7 @@ export const AILegalChatPage: React.FC = () => {
               Section 27 Non-Compete Restraint
             </div>
 
-            <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-2">Previous 7 Days</p>
+            <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-2">{t('chat.previous_7_days', 'Previous 7 Days')}</p>
             <div className="p-2.5 rounded-xl hover:bg-[#EBE6F8] dark:hover:bg-[#1D1830] text-[#544E6D] dark:text-[#A59FC2] cursor-pointer truncate transition-colors">
               E-Daakhil Defective Laptop Refund
             </div>
@@ -210,16 +210,16 @@ export const AILegalChatPage: React.FC = () => {
         </div>
 
         <div className="p-3 border-t border-[#E8E3F5] dark:border-[#26213D] text-xs text-[#544E6D] flex items-center justify-between">
-          <span className="text-[11px] font-medium">Domain:</span>
+          <span className="text-[11px] font-medium">{t('chat.domain_scope', 'Domain Scope')}:</span>
           <select
             value={selectedDomain}
             onChange={(e) => setSelectedDomain(e.target.value)}
             className="text-xs bg-white dark:bg-[#1A162B] border border-[#D8D1EE] dark:border-[#382F5E] rounded-lg px-2 py-1 font-semibold text-[#573EAE] dark:text-[#C4B5FD]"
           >
-            <option value="consumer">Consumer</option>
-            <option value="tenancy">Tenancy</option>
-            <option value="employment">Employment</option>
-            <option value="contract">Contract</option>
+            <option value="consumer">{t('chat.domains.consumer', 'Consumer')}</option>
+            <option value="tenancy">{t('chat.domains.tenancy', 'Tenancy')}</option>
+            <option value="employment">{t('chat.domains.employment', 'Employment')}</option>
+            <option value="contract">{t('chat.domains.contract', 'Contract')}</option>
           </select>
         </div>
       </div>
@@ -331,10 +331,10 @@ export const AILegalChatPage: React.FC = () => {
             </div>
             <div className="truncate">
               <h2 className="font-bold text-xs sm:text-sm text-[#1E1B2E] dark:text-white leading-tight truncate">
-                Legal Research Workspace
+                {t('chat.header_title', 'Legal Research Workspace')}
               </h2>
               <p className="text-[10px] sm:text-[11px] text-[#7E779C] truncate">
-                Grounding • <span className="font-bold text-[#684EC9] uppercase">{selectedDomain}</span>
+                {t('chat.grounding', 'Grounding')} • <span className="font-bold text-[#684EC9] uppercase">{selectedDomain}</span>
               </p>
             </div>
           </div>
@@ -354,13 +354,13 @@ export const AILegalChatPage: React.FC = () => {
                   ? 'bg-[#684EC9] text-white shadow-xs'
                   : 'bg-[#EDE9FE] dark:bg-[#251F3D] text-[#573EAE] dark:text-[#C4B5FD] border border-[#D8D1EE] dark:border-[#382F5E] hover:bg-[#E0D9F7]'
               }`}
-              title="Toggle Evidence & Sources grounding panel"
+              title={t('chat.evidence_and_sources', 'Evidence & Sources')}
             >
               <Layers size={13} />
               <span className="hidden sm:inline">
-                {showDesktopEvidence ? 'Hide Evidence' : 'Evidence & Sources'}
+                {showDesktopEvidence ? t('chat.hide_evidence', 'Hide Evidence') : t('chat.evidence_and_sources', 'Evidence & Sources')}
               </span>
-              <span className="sm:hidden">Evidence</span>
+              <span className="sm:hidden">{t('chat.evidence', 'Evidence')}</span>
               {evidenceCount > 0 && (
                 <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/25 font-mono">
                   {evidenceCount}
@@ -369,7 +369,7 @@ export const AILegalChatPage: React.FC = () => {
             </button>
 
             <span className="hidden md:inline-flex text-[11px] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full font-semibold border border-emerald-200 dark:border-emerald-800">
-              ● RAG Grounded
+              ● {t('chat.rag_grounded', 'RAG Grounded')}
             </span>
           </div>
         </div>
@@ -383,10 +383,10 @@ export const AILegalChatPage: React.FC = () => {
               </div>
               <div className="space-y-1">
                 <h3 className="font-bold text-sm sm:text-base text-[#1E1B2E] dark:text-white">
-                  Ask a Specific Indian Legal Question
+                  {t('chat.ask_question_title', 'Ask a Specific Indian Legal Question')}
                 </h3>
                 <p className="text-xs text-[#544E6D] dark:text-[#A59FC2] leading-relaxed">
-                  Describe the dispute facts, consideration quantum, or terms. Nyayavanta connects statements to Bare Acts and Supreme Court decisions.
+                  {t('chat.ask_question_desc', 'Describe the dispute facts, consideration quantum, or terms. Nyayavanta connects statements to Bare Acts and Supreme Court decisions.')}
                 </p>
               </div>
 
@@ -398,9 +398,9 @@ export const AILegalChatPage: React.FC = () => {
                       'Landlord is withholding my deposit of Rs 80,000 after I vacated the flat with proper 15-day notice in Bengaluru.'
                     )
                   }
-                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs"
+                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs cursor-pointer"
                 >
-                  "Landlord withholding deposit of Rs 80,000 after vacation in Bengaluru."
+                  {t('chat.sample_prompt_1', '"Landlord withholding deposit of Rs 80,000 after vacation in Bengaluru."')}
                 </button>
                 <button
                   onClick={() =>
@@ -408,9 +408,9 @@ export const AILegalChatPage: React.FC = () => {
                       'Can my employer enforce a 1-year non-compete clause after I resigned from my software job?'
                     )
                   }
-                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs"
+                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs cursor-pointer"
                 >
-                  "Can my employer enforce a post-employment non-compete clause in India?"
+                  {t('chat.sample_prompt_2', '"Can my employer enforce a post-employment non-compete clause in India?"')}
                 </button>
                 <button
                   onClick={() =>
@@ -418,9 +418,9 @@ export const AILegalChatPage: React.FC = () => {
                       'Buyer is refusing to pay MSME invoices overdue by 90 days. What statutory remedies exist under the MSMED Act?'
                     )
                   }
-                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs"
+                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs cursor-pointer"
                 >
-                  "Buyer refusing to pay overdue MSME invoices beyond 45 days."
+                  {t('chat.sample_prompt_3', '"Buyer refusing to pay overdue MSME invoices beyond 45 days."')}
                 </button>
               </div>
             </div>
@@ -481,21 +481,21 @@ export const AILegalChatPage: React.FC = () => {
                 type="text"
                 value={inputQuery}
                 onChange={(e) => setInputQuery(e.target.value)}
-                placeholder="Describe your Indian legal question or situation in detail..."
+                placeholder={t('chat.input_placeholder', 'Describe your Indian legal question or situation in detail...')}
                 disabled={isProcessing}
                 className="w-full pl-3.5 sm:pl-4 pr-16 sm:pr-20 py-2.5 sm:py-3.5 rounded-2xl border border-[#D8D1EE] dark:border-[#382F5E] bg-[#F8F7FC] dark:bg-[#120F1F] text-xs sm:text-sm text-[#1E1B2E] dark:text-white placeholder:text-[#958EB3] placeholder:truncate focus:outline-none focus:ring-2 focus:ring-[#7C66DC]"
               />
               <div className="absolute right-2 flex items-center gap-1 text-[#7E779C]">
                 <button
                   type="button"
-                  title="Attach Agreement"
+                  title={t('chat.attach_agreement', 'Attach Agreement')}
                   className="p-1.5 hover:text-[#573EAE] rounded-lg cursor-pointer"
                 >
                   <Paperclip size={15} />
                 </button>
                 <button
                   type="button"
-                  title="Voice input placeholder"
+                  title={t('chat.voice_input', 'Voice input')}
                   className="p-1.5 hover:text-[#573EAE] rounded-lg cursor-pointer"
                 >
                   <Mic size={15} />
@@ -511,6 +511,7 @@ export const AILegalChatPage: React.FC = () => {
                   ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
                   : 'bg-[#684EC9] hover:bg-[#573EAE] text-white cursor-pointer press-feedback'
               }`}
+              title={t('chat.send', 'Send')}
             >
               <Send size={16} />
             </button>

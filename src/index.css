@@ -20,7 +20,7 @@
 }
 
 :root {
-  /* Light Lavender & White Canonical Palette (Default) */
+  /* Light Lavender & White Canonical Palette */
   --bg-main: #F8F7FC;
   --bg-surface: #FFFFFF;
   --bg-sidebar: #F1EEFA;
@@ -37,26 +37,6 @@
   --status-verified: #059669;
   --status-warning: #D97706;
   --status-critical: #DC2626;
-}
-
-.dark {
-  /* Elegant Dark Lavender Slate */
-  --bg-main: #0E0C17;
-  --bg-surface: #171424;
-  --bg-sidebar: #13101F;
-  --bg-sidebar-hover: #1D192E;
-  --bg-sidebar-active: #26213D;
-  --text-main: #F5F3FF;
-  --text-secondary: #C4BFDC;
-  --text-muted: #958EB3;
-  --border-color: #2D2745;
-  --border-hover: #403861;
-  --accent-lavender: #8B74E8;
-  --accent-lavender-light: #221D38;
-  --accent-lavender-hover: #A391F0;
-  --status-verified: #10B981;
-  --status-warning: #F59E0B;
-  --status-critical: #EF4444;
 }
 
 html {
@@ -109,10 +89,4 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #A89BDE;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #2D2745;
-}
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #403861;
 }

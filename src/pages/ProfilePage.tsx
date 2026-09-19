@@ -37,31 +37,33 @@ export const ProfilePage: React.FC = () => {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="space-y-2">
-        <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <User className="text-indigo-600" size={24} />
+        <h1 className="text-xl md:text-2xl font-black text-[#1E1B2E] dark:text-white flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
+            <User size={20} />
+          </div>
           <span>User Profile & Credentials</span>
         </h1>
-        <p className="text-xs md:text-sm text-slate-500">
+        <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
           Manage your advocate/researcher credentials and authentication preferences.
         </p>
       </div>
 
-      <div className="p-6 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-6 shadow-sm">
+      <div className="p-6 sm:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-6 shadow-xs">
         {/* Avatar & Status Header */}
-        <div className="flex items-center gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
-          <div className="w-16 h-16 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-xl font-black shadow-md">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 pb-6 border-b border-[#E8E3F5] dark:border-slate-800 text-center sm:text-left">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#7C66DC] to-[#573EAE] text-white flex items-center justify-center text-xl font-black shadow-md shrink-0">
             {profile.full_name?.slice(0, 2).toUpperCase() || 'NY'}
           </div>
           <div className="space-y-1">
-            <h2 className="font-bold text-base text-slate-900 dark:text-white">
+            <h2 className="font-bold text-base sm:text-lg text-[#1E1B2E] dark:text-white">
               {profile.full_name}
             </h2>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-500 flex items-center gap-1">
-                <Mail size={12} />
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+              <span className="text-xs text-[#544E6D] dark:text-slate-400 flex items-center gap-1">
+                <Mail size={13} className="text-[#684EC9]" />
                 <span>{profile.email}</span>
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-800">
                 Verified Account
               </span>
             </div>
@@ -70,46 +72,46 @@ export const ProfilePage: React.FC = () => {
 
         {/* Edit Form */}
         <form onSubmit={handleUpdate} className="space-y-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">
               Full Legal Name / Advocate Name
             </label>
             <input
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-white"
+              className="w-full p-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs font-medium text-[#1E1B2E] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9]"
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">
               Email Address (Read-only)
             </label>
             <input
               type="email"
               value={profile.email}
               disabled
-              className="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 text-xs text-slate-500 cursor-not-allowed"
+              className="w-full p-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-800 bg-[#F4F2FA] dark:bg-slate-800 text-xs text-[#7E779C] cursor-not-allowed font-medium"
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">
               Platform Role
             </label>
             <input
               type="text"
               value={profile.role || 'Legal Researcher'}
               disabled
-              className="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 text-xs text-slate-500 capitalize cursor-not-allowed"
+              className="w-full p-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-800 bg-[#F4F2FA] dark:bg-slate-800 text-xs text-[#7E779C] capitalize cursor-not-allowed font-medium"
             />
           </div>
 
-          <div className="pt-2 flex items-center justify-between">
+          <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <button
               type="submit"
-              className="flex items-center gap-1.5 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer transition-colors"
+              className="flex items-center justify-center gap-1.5 px-6 py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors"
             >
               {savedSuccess ? (
                 <>
@@ -127,7 +129,7 @@ export const ProfilePage: React.FC = () => {
                 localStorage.removeItem('nyayavanta_token');
                 navigate('/login');
               }}
-              className="flex items-center gap-1.5 text-xs text-rose-600 hover:underline font-semibold"
+              className="flex items-center justify-center gap-1.5 text-xs text-rose-600 hover:text-rose-700 hover:underline font-bold py-2"
             >
               <LogOut size={14} />
               <span>Log Out</span>

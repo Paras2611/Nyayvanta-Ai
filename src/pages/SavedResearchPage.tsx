@@ -42,25 +42,27 @@ export const SavedResearchPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <Bookmark className="text-indigo-600" size={24} />
+        <h1 className="text-xl md:text-2xl font-black text-[#1E1B2E] dark:text-white flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
+            <Bookmark size={20} />
+          </div>
           <span>Saved Legal Research</span>
         </h1>
-        <p className="text-xs md:text-sm text-slate-500">
+        <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
           Bookmarked statutory provisions, landmark judgments, extracted clauses, and grounded answers.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 pb-2 border-b border-slate-200 dark:border-slate-800 overflow-x-auto">
+      <div className="flex gap-2 pb-2 border-b border-[#E8E3F5] dark:border-slate-800 overflow-x-auto scrollbar-none">
         {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
               activeTab === tab
-                ? 'bg-indigo-600 text-white shadow-xs'
-                : 'bg-white dark:bg-[#111827] text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 hover:bg-slate-50'
+                ? 'bg-[#684EC9] text-white shadow-xs'
+                : 'bg-white dark:bg-[#111827] text-[#544E6D] dark:text-slate-400 border border-[#E8E3F5] dark:border-slate-700 hover:bg-[#EDE9FE]'
             }`}
           >
             {tab}
@@ -71,12 +73,12 @@ export const SavedResearchPage: React.FC = () => {
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {items.length === 0 && (
-          <div className="col-span-2 text-center py-12 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl space-y-2">
-            <Bookmark size={28} className="mx-auto text-slate-400" />
-            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+          <div className="col-span-full text-center py-12 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 p-6 shadow-xs">
+            <Bookmark size={32} className="mx-auto text-[#7E779C]" />
+            <p className="text-sm font-bold text-[#1E1B2E] dark:text-slate-300">
               No saved items in this category.
             </p>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#7E779C]">
               Bookmark legal sections or cases during search or chat to reference them here.
             </p>
           </div>
@@ -85,46 +87,46 @@ export const SavedResearchPage: React.FC = () => {
         {items.map((item) => (
           <div
             key={item.id}
-            className="p-5 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl space-y-3 shadow-xs hover:border-indigo-400 dark:hover:border-indigo-600 transition-colors flex flex-col justify-between"
+            className="p-5 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-3 shadow-xs hover:border-[#684EC9] dark:hover:border-purple-600 transition-colors flex flex-col justify-between"
           >
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
+                <span className="text-xs font-bold px-2.5 py-0.5 rounded-md bg-[#EDE9FE] dark:bg-purple-950 text-[#573EAE] dark:text-purple-300 border border-[#DDD6FE] dark:border-purple-800">
                   {item.itemType}
                 </span>
-                <span className="text-[11px] text-slate-400">{item.dateSaved}</span>
+                <span className="text-[11px] text-[#7E779C]">{item.dateSaved}</span>
               </div>
-              <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-snug">
+              <h3 className="font-bold text-sm sm:text-base text-[#1E1B2E] dark:text-white leading-snug">
                 {item.title}
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#544E6D] dark:text-slate-300 line-clamp-3 leading-relaxed">
                 {item.description}
               </p>
             </div>
 
-            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+            <div className="pt-3 border-t border-[#E8E3F5] dark:border-slate-800 flex items-center justify-between text-xs">
               <button
                 onClick={() => navigate(`/chat?q=${encodeURIComponent(item.title)}`)}
-                className="flex items-center gap-1 font-semibold text-indigo-600 hover:underline"
+                className="flex items-center gap-1.5 font-bold text-[#684EC9] dark:text-purple-400 hover:underline cursor-pointer"
               >
-                <MessageSquare size={13} />
+                <MessageSquare size={14} />
                 <span>Open in Research</span>
               </button>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(window.location.origin + `/legal-search?q=${encodeURIComponent(item.title)}`);
                     alert('Link copied to clipboard');
                   }}
-                  className="p-1 text-slate-400 hover:text-slate-600 rounded"
+                  className="p-2 text-[#7E779C] hover:text-[#684EC9] rounded-lg hover:bg-[#EDE9FE] dark:hover:bg-purple-950/30 transition-colors cursor-pointer"
                   title="Share"
                 >
                   <Share2 size={15} />
                 </button>
                 <button
                   onClick={() => handleDelete(item.id)}
-                  className="p-1 text-slate-400 hover:text-rose-600 rounded"
+                  className="p-2 text-[#7E779C] hover:text-rose-600 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
                   title="Delete"
                 >
                   <Trash2 size={15} />

@@ -55,10 +55,10 @@ export const CaseDetailPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Back Button and Actions */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <button
           onClick={() => navigate('/case-search')}
-          className="flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition-colors"
+          className="flex items-center gap-1.5 text-xs font-bold text-[#544E6D] dark:text-slate-400 hover:text-[#684EC9] transition-colors cursor-pointer"
         >
           <ArrowLeft size={16} />
           <span>Back to Landmark Cases</span>
@@ -67,16 +67,16 @@ export const CaseDetailPage: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={handleSave}
-            className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#111827] hover:border-indigo-500 transition-colors"
+            className="flex items-center gap-1 text-xs px-3.5 py-2 rounded-xl border border-[#E8E3F5] dark:border-slate-700 bg-white dark:bg-[#111827] text-[#1E1B2E] dark:text-slate-200 hover:border-[#684EC9] font-bold shadow-xs transition-colors cursor-pointer"
           >
             {savedSuccess ? (
               <>
                 <CheckCircle2 size={14} className="text-emerald-500" />
-                <span className="text-emerald-500 font-semibold">Saved!</span>
+                <span className="text-emerald-500 font-bold">Saved!</span>
               </>
             ) : (
               <>
-                <BookmarkPlus size={14} />
+                <BookmarkPlus size={14} className="text-[#684EC9]" />
                 <span>Save Case</span>
               </>
             )}
@@ -85,7 +85,7 @@ export const CaseDetailPage: React.FC = () => {
             onClick={() =>
               navigate(`/chat?q=${encodeURIComponent(`Explain the legal holding of ${caseData.caseName} (${caseData.citationStr})`)}`)
             }
-            className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-xs"
+            className="flex items-center gap-1 text-xs px-4 py-2 rounded-xl bg-[#684EC9] hover:bg-[#573EB0] text-white font-bold shadow-xs transition-colors cursor-pointer"
           >
             <MessageSquare size={14} />
             <span>Ask Nyayavanta</span>
@@ -94,30 +94,30 @@ export const CaseDetailPage: React.FC = () => {
       </div>
 
       {/* Case Header Card */}
-      <div className="p-6 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-4 shadow-sm">
+      <div className="p-6 sm:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs font-mono font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950 px-2.5 py-1 rounded">
+          <span className="text-xs font-mono font-bold text-[#684EC9] dark:text-purple-400 bg-[#EDE9FE] dark:bg-purple-950 px-3 py-1 rounded-lg border border-[#DDD6FE] dark:border-purple-800">
             {caseData.citationStr}
           </span>
-          <span className="text-xs text-slate-500 flex items-center gap-1">
+          <span className="text-xs text-[#7E779C] flex items-center gap-1 font-medium">
             <Calendar size={13} />
             <span>Pronounced: {caseData.judgmentDate || 'Established'}</span>
           </span>
         </div>
 
-        <h1 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white leading-tight">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-[#1E1B2E] dark:text-white leading-tight">
           {caseData.caseName}
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-2 border-t border-slate-100 dark:border-slate-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-4 border-t border-[#E8E3F5] dark:border-slate-800">
           <div>
-            <span className="text-slate-400">Court / Bench:</span>
-            <p className="font-semibold text-slate-800 dark:text-slate-200">{caseData.court}</p>
-            {caseData.bench && <p className="text-slate-500 text-[11px]">{caseData.bench}</p>}
+            <span className="text-[#7E779C] uppercase font-bold text-[10px] tracking-wider block mb-1">Court / Bench</span>
+            <p className="font-bold text-[#1E1B2E] dark:text-slate-200 text-sm">{caseData.court}</p>
+            {caseData.bench && <p className="text-[#544E6D] dark:text-slate-400 text-xs mt-0.5">{caseData.bench}</p>}
           </div>
           <div>
-            <span className="text-slate-400">Parties:</span>
-            <p className="font-semibold text-slate-800 dark:text-slate-200">
+            <span className="text-[#7E779C] uppercase font-bold text-[10px] tracking-wider block mb-1">Parties in Dispute</span>
+            <p className="font-bold text-[#1E1B2E] dark:text-slate-200 text-sm">
               {caseData.petitioner || 'Petitioner'} vs {caseData.respondent || 'Respondent'}
             </p>
           </div>
@@ -125,30 +125,30 @@ export const CaseDetailPage: React.FC = () => {
       </div>
 
       {/* Procedural Timeline */}
-      <div className="p-6 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-4 shadow-sm">
+      <div className="p-6 sm:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs">
         <div className="flex items-center gap-2">
-          <Clock size={18} className="text-indigo-600" />
-          <h2 className="font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wider">
+          <Clock size={18} className="text-[#684EC9]" />
+          <h2 className="font-black text-sm text-[#1E1B2E] dark:text-white uppercase tracking-wider">
             Procedural Timeline
           </h2>
         </div>
-        <p className="text-xs text-slate-500">
-          Filing → Hearing → Interim Order → Judgment → Appeal → Final Outcome
+        <p className="text-xs text-[#544E6D] dark:text-slate-400">
+          Filing → Hearing → Interim Order → Judgment → Appeal → Final Disposition
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2.5 pt-2">
           {(caseData.timelineMilestones || []).map((m: any, idx: number) => (
             <div
               key={idx}
-              className="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/40 text-xs space-y-1"
+              className="p-3 rounded-xl border border-[#E8E3F5] dark:border-slate-800 bg-[#F8F7FC] dark:bg-slate-900/40 text-xs space-y-1 shadow-2xs"
             >
-              <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase">
+              <span className="text-[10px] font-bold text-[#684EC9] dark:text-purple-400 uppercase tracking-wider block">
                 {m.step}
               </span>
-              <p className="font-semibold text-[11px] text-slate-800 dark:text-slate-200 line-clamp-1">
+              <p className="font-bold text-[11px] text-[#1E1B2E] dark:text-slate-200 line-clamp-1">
                 {m.date}
               </p>
-              <p className="text-[10px] text-slate-500 line-clamp-2">{m.desc}</p>
+              <p className="text-[10px] text-[#544E6D] dark:text-slate-400 line-clamp-2">{m.desc}</p>
             </div>
           ))}
         </div>
@@ -156,29 +156,29 @@ export const CaseDetailPage: React.FC = () => {
 
       {/* Judgment Summary & Court Reasoning */}
       <div className="space-y-4">
-        <section className="p-6 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-2 shadow-sm">
-          <h2 className="font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wider">
+        <section className="p-6 sm:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-2 shadow-xs">
+          <h2 className="font-black text-sm text-[#1E1B2E] dark:text-white uppercase tracking-wider">
             Judgment Summary & Crux
           </h2>
-          <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#544E6D] dark:text-slate-300 leading-relaxed font-normal">
             {caseData.summary}
           </p>
         </section>
 
-        <section className="p-6 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-2 shadow-sm">
-          <h2 className="font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wider">
+        <section className="p-6 sm:p-8 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-2 shadow-xs">
+          <h2 className="font-black text-sm text-[#1E1B2E] dark:text-white uppercase tracking-wider">
             Court Reasoning & Ratio Decidendi
           </h2>
-          <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#544E6D] dark:text-slate-300 leading-relaxed font-normal">
             {caseData.courtReasoning}
           </p>
         </section>
 
-        <section className="p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-xl space-y-1">
-          <h3 className="font-bold text-xs text-emerald-800 dark:text-emerald-300 uppercase">
+        <section className="p-5 sm:p-6 bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-2xl space-y-1.5 shadow-xs">
+          <h3 className="font-bold text-xs text-emerald-800 dark:text-emerald-300 uppercase tracking-wider">
             Final Outcome & Disposition
           </h3>
-          <p className="text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed">
+          <p className="text-xs sm:text-sm text-emerald-950 dark:text-emerald-200 leading-relaxed font-medium">
             {caseData.outcome}
           </p>
         </section>
@@ -189,9 +189,9 @@ export const CaseDetailPage: React.FC = () => {
               href={caseData.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-indigo-600 hover:underline font-semibold"
+              className="inline-flex items-center gap-1.5 text-xs text-[#684EC9] hover:underline font-bold"
             >
-              <span>View Full Judgment on Official Indian Kanoon / Supreme Court Portal</span>
+              <span>View Full Judgment on Official Portal</span>
               <ExternalLink size={13} />
             </a>
           </div>

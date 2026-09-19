@@ -18,16 +18,16 @@ interface AIResponseViewProps {
 
 export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
   return (
-    <div className="space-y-6 text-slate-800 dark:text-slate-200">
+    <div className="space-y-6 text-[#1E1B2E] dark:text-slate-200">
       {/* 1. ANSWER */}
       <section className="space-y-2">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-indigo-600" />
-          <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400">
+          <span className="w-2 h-2 rounded-full bg-[#684EC9]" />
+          <h3 className="text-xs font-bold uppercase tracking-wider text-[#573EAE] dark:text-purple-400">
             1. Legal Summary & Answer
           </h3>
         </div>
-        <div className="p-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl leading-relaxed text-sm shadow-sm">
+        <div className="p-4 sm:p-5 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl leading-relaxed text-sm shadow-xs text-[#1E1B2E] dark:text-slate-100 font-medium">
           {response.answer}
         </div>
       </section>
@@ -36,12 +36,12 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
       {response.whyThisMayApply && (
         <section className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-indigo-600" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400">
+            <span className="w-2 h-2 rounded-full bg-[#684EC9]" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#573EAE] dark:text-purple-400">
               2. Why This May Apply
             </h3>
           </div>
-          <div className="p-4 bg-slate-50 dark:bg-[#0B1220] border border-slate-200 dark:border-slate-800 rounded-xl text-sm leading-relaxed">
+          <div className="p-4 sm:p-5 bg-[#F8F7FC] dark:bg-[#0B1220] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl text-sm leading-relaxed text-[#544E6D] dark:text-slate-300">
             {response.whyThisMayApply}
           </div>
         </section>
@@ -51,8 +51,8 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
       {response.relevantLaw && response.relevantLaw.length > 0 && (
         <section className="space-y-2">
           <div className="flex items-center gap-2">
-            <BookOpen size={14} className="text-indigo-600" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400">
+            <BookOpen size={15} className="text-[#684EC9] dark:text-purple-400" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#573EAE] dark:text-purple-400">
               3. Relevant Statutory Law ({response.relevantLaw.length})
             </h3>
           </div>
@@ -60,22 +60,22 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
             {response.relevantLaw.map((sec) => (
               <div
                 key={sec.id}
-                className="p-3.5 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl space-y-2 shadow-sm"
+                className="p-4 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 shadow-xs hover:border-[#DDD6FE] transition-colors"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">
+                  <span className="font-bold text-xs text-[#684EC9] dark:text-purple-400">
                     {sec.actName} ({sec.year})
                   </span>
-                  <span className="text-[11px] bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded font-mono font-semibold">
+                  <span className="text-[11px] bg-[#EDE9FE] dark:bg-slate-800 text-[#46328D] dark:text-purple-300 px-2 py-0.5 rounded-md font-mono font-bold">
                     {sec.sectionNumber}
                   </span>
                 </div>
-                <p className="font-semibold text-xs text-slate-900 dark:text-white">{sec.title}</p>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="font-bold text-xs text-[#1E1B2E] dark:text-white">{sec.title}</p>
+                <p className="text-xs text-[#544E6D] dark:text-slate-300 leading-relaxed">
                   {sec.plainEnglishExplanation}
                 </p>
                 {sec.keyRuleVerbatim && (
-                  <p className="text-[11px] text-slate-500 italic border-l-2 border-indigo-400 pl-2">
+                  <p className="text-[11px] text-[#7E779C] dark:text-slate-400 italic border-l-2 border-[#684EC9] pl-2.5">
                     "{sec.keyRuleVerbatim.slice(0, 160)}..."
                   </p>
                 )}
@@ -89,8 +89,8 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
       {response.relevantCases && response.relevantCases.length > 0 && (
         <section className="space-y-2">
           <div className="flex items-center gap-2">
-            <Scale size={14} className="text-indigo-600" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400">
+            <Scale size={15} className="text-[#684EC9] dark:text-purple-400" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#573EAE] dark:text-purple-400">
               4. Relevant Precedents & Judgments ({response.relevantCases.length})
             </h3>
           </div>
@@ -98,19 +98,19 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
             {response.relevantCases.map((c) => (
               <div
                 key={c.id}
-                className="p-3.5 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl space-y-1.5 shadow-sm"
+                className="p-4 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 shadow-xs hover:border-[#DDD6FE] transition-colors"
               >
                 <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-xs text-slate-900 dark:text-white">{c.caseName}</h4>
-                  <span className="text-[11px] font-mono text-indigo-600 dark:text-indigo-400">
+                  <h4 className="font-bold text-xs text-[#1E1B2E] dark:text-white">{c.caseName}</h4>
+                  <span className="text-[11px] font-mono font-bold text-[#684EC9] dark:text-purple-400">
                     {c.citationStr}
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-500">{c.court}</p>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-[#7E779C] font-medium">{c.court}</p>
+                <p className="text-xs text-[#544E6D] dark:text-slate-300 leading-relaxed">
                   {c.summary}
                 </p>
-                <div className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 px-2 py-1 rounded">
+                <div className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 px-2.5 py-1 rounded-lg border border-emerald-200 dark:border-emerald-800/40">
                   Legal Holding: {c.relevance}
                 </div>
               </div>
@@ -123,8 +123,8 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
       {response.possibleNextSteps && response.possibleNextSteps.length > 0 && (
         <section className="space-y-2">
           <div className="flex items-center gap-2">
-            <CheckCircle2 size={14} className="text-indigo-600" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400">
+            <CheckCircle2 size={15} className="text-[#684EC9] dark:text-purple-400" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#573EAE] dark:text-purple-400">
               5. Possible Informational Next Steps
             </h3>
           </div>
@@ -132,24 +132,24 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
             {response.possibleNextSteps.map((step) => (
               <div
                 key={step.stepNumber}
-                className="p-3.5 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl space-y-1.5 shadow-sm"
+                className="p-4 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 shadow-xs hover:border-[#DDD6FE] transition-colors"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 flex items-center justify-center text-[11px]">
+                  <span className="text-xs font-bold text-[#1E1B2E] dark:text-white flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-[#EDE9FE] dark:bg-purple-900/50 text-[#684EC9] dark:text-purple-300 flex items-center justify-center text-xs font-bold">
                       {step.stepNumber}
                     </span>
                     {step.title}
                   </span>
-                  <span className="text-[11px] bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded text-slate-600 dark:text-slate-300 font-medium">
+                  <span className="text-[11px] bg-[#F8F7FC] dark:bg-slate-800 px-2 py-0.5 rounded-md text-[#544E6D] dark:text-slate-300 font-semibold border border-[#E8E3F5] dark:border-slate-700">
                     {step.recommendedTimeline}
                   </span>
                 </div>
-                <p className="text-xs text-slate-600 dark:text-slate-400 pl-7 leading-relaxed">
+                <p className="text-xs text-[#544E6D] dark:text-slate-300 pl-8 leading-relaxed">
                   {step.description}
                 </p>
                 {step.actionableNotes && step.actionableNotes.length > 0 && (
-                  <ul className="pl-11 list-disc text-[11px] text-slate-500 space-y-0.5">
+                  <ul className="pl-12 list-disc text-[11px] text-[#7E779C] space-y-0.5">
                     {step.actionableNotes.map((note, i) => (
                       <li key={i}>{note}</li>
                     ))}
@@ -165,16 +165,16 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
       {response.importantLimitations && response.importantLimitations.length > 0 && (
         <section className="space-y-2">
           <div className="flex items-center gap-2">
-            <AlertTriangle size={14} className="text-amber-500" />
+            <AlertTriangle size={15} className="text-amber-500" />
             <h3 className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
               6. Important Limitations & Scope
             </h3>
           </div>
-          <div className="p-3.5 bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 rounded-xl text-xs space-y-1.5 text-amber-900 dark:text-amber-200">
+          <div className="p-4 bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 rounded-2xl text-xs space-y-1.5 text-amber-900 dark:text-amber-200">
             {response.importantLimitations.map((lim, i) => (
               <div key={i} className="flex items-start gap-2">
                 <span className="text-amber-500 mt-0.5">•</span>
-                <span>{lim}</span>
+                <span className="leading-relaxed">{lim}</span>
               </div>
             ))}
           </div>
@@ -182,12 +182,12 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
       )}
 
       {/* 7, 8, 9. Summary Badges */}
-      <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs border-t border-slate-200 dark:border-slate-800">
-        <div className="flex items-center gap-2 text-slate-500">
-          <Info size={14} />
+      <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs border-t border-[#E8E3F5] dark:border-slate-800">
+        <div className="flex items-center gap-2 text-[#7E779C]">
+          <Info size={14} className="text-[#684EC9]" />
           <span>Evidence Sources: {response.sources?.length || 0} authoritative items linked</span>
         </div>
-        <div className="text-[11px] text-slate-500">
+        <div className="text-[11px] text-[#7E779C] font-semibold">
           Verified Claims: {response.verification?.filter((v) => v.uiBadge === 'VERIFIED').length} of{' '}
           {response.verification?.length || 0}
         </div>

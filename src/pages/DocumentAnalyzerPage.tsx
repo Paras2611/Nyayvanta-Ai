@@ -110,18 +110,20 @@ export const DocumentAnalyzerPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <FileText className="text-indigo-600" size={24} />
+        <h1 className="text-xl md:text-2xl font-black text-[#1E1B2E] dark:text-white flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
+            <FileText size={20} />
+          </div>
           <span>Analyze a Legal Document</span>
         </h1>
-        <p className="text-xs md:text-sm text-slate-500">
+        <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
           Upload or paste legal agreements, notices, or contracts for statutory clause extraction, enforceability check, and risk scoring.
         </p>
       </div>
 
       {/* Preset Samples */}
-      <div className="flex flex-wrap gap-2">
-        <span className="text-xs text-slate-400 self-center">Quick Load Sample:</span>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-xs font-semibold text-[#7E779C] self-center">Quick Load Sample:</span>
         {sampleAgreements.map((s, idx) => (
           <button
             key={idx}
@@ -130,7 +132,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
               setFilename(s.file);
               handleRunAnalysis(s.text, s.file);
             }}
-            className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-indigo-500 font-medium transition-colors"
+            className="text-xs px-3.5 py-1.5 rounded-xl border border-[#E8E3F5] dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-[#684EC9] text-[#544E6D] dark:text-slate-300 hover:bg-[#EDE9FE] dark:hover:bg-purple-950/30 font-bold transition-all shadow-2xs cursor-pointer"
           >
             {s.title}
           </button>
@@ -140,31 +142,35 @@ export const DocumentAnalyzerPage: React.FC = () => {
       {/* Split Screen Workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left: Input / Viewer */}
-        <div className="p-5 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-4 shadow-sm">
-          <div className="flex items-center justify-between">
-            <h2 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
-              <UploadCloud size={18} className="text-indigo-600" />
-              <span>Document Text / Paste Area</span>
-            </h2>
-            <span className="text-xs text-slate-400">{filename}</span>
+        <div className="p-5 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs flex flex-col justify-between">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h2 className="font-bold text-sm text-[#1E1B2E] dark:text-white flex items-center gap-2">
+                <UploadCloud size={18} className="text-[#684EC9]" />
+                <span>Document Text / Paste Area</span>
+              </h2>
+              <span className="text-xs font-mono text-[#7E779C] bg-[#F8F7FC] dark:bg-slate-800 px-2 py-0.5 rounded-md border border-[#E8E3F5] dark:border-slate-700">
+                {filename}
+              </span>
+            </div>
+
+            <textarea
+              rows={13}
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="Paste complete agreement text, lease deed clauses, or employment notice..."
+              className="w-full p-4 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs font-mono text-[#1E1B2E] dark:text-slate-200 leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-inner"
+            />
           </div>
 
-          <textarea
-            rows={12}
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder="Paste complete agreement text, lease deed clauses, or employment notice..."
-            className="w-full p-3.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs font-mono leading-relaxed focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-
-          <div className="flex items-center justify-between pt-2">
-            <span className="text-xs text-slate-500">
-              Pipeline State: <strong className="text-indigo-600">{pipelineState}</strong>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between pt-2 gap-3">
+            <span className="text-xs text-[#544E6D] dark:text-slate-400">
+              Pipeline State: <strong className="text-[#684EC9] font-bold">{pipelineState}</strong>
             </span>
             <button
               onClick={() => handleRunAnalysis()}
               disabled={pipelineState !== 'Idle' && pipelineState !== 'Complete'}
-              className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer transition-colors"
+              className="px-6 py-2.5 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[42px]"
             >
               Analyze Document
             </button>
@@ -172,37 +178,41 @@ export const DocumentAnalyzerPage: React.FC = () => {
         </div>
 
         {/* Right: Analysis & Findings */}
-        <div className="p-5 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl space-y-4 shadow-sm overflow-y-auto max-h-[600px]">
+        <div className="p-5 sm:p-6 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl space-y-4 shadow-xs overflow-y-auto max-h-[650px]">
           {!analysisResult ? (
-            <div className="h-full flex flex-col items-center justify-center text-center p-8 space-y-2 text-slate-400">
-              <Scale size={32} />
-              <p className="font-semibold text-xs">No analysis generated yet</p>
-              <p className="text-[11px]">Click "Analyze Document" or select a preset sample above.</p>
+            <div className="h-full flex flex-col items-center justify-center text-center p-8 space-y-3 text-[#7E779C] min-h-[350px]">
+              <div className="w-14 h-14 rounded-2xl bg-[#EDE9FE] dark:bg-purple-950/40 text-[#684EC9] flex items-center justify-center">
+                <Scale size={28} />
+              </div>
+              <p className="font-bold text-sm text-[#1E1B2E] dark:text-slate-200">No analysis generated yet</p>
+              <p className="text-xs text-[#544E6D] dark:text-slate-400 max-w-xs">
+                Click "Analyze Document" or select a preset sample above to run clause extraction.
+              </p>
             </div>
           ) : (
             <div className="space-y-4">
               {/* Header Status & Risk */}
-              <div className="flex items-start justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+              <div className="flex items-start justify-between pb-3 border-b border-[#E8E3F5] dark:border-slate-800">
                 <div>
-                  <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                  <h3 className="font-bold text-sm sm:text-base text-[#1E1B2E] dark:text-white">
                     {analysisResult.documentType}
                   </h3>
-                  <p className="text-xs text-slate-500">{analysisResult.filename}</p>
+                  <p className="text-xs text-[#7E779C]">{analysisResult.filename}</p>
                 </div>
                 <RiskBadge risk={analysisResult.riskLevel} />
               </div>
 
               {/* Parties & Dates */}
-              <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 dark:bg-slate-900/40 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs bg-[#F8F7FC] dark:bg-slate-900/40 p-3.5 rounded-2xl border border-[#E8E3F5] dark:border-slate-800">
                 <div>
-                  <span className="text-slate-400">Parties:</span>
-                  <p className="font-semibold text-slate-700 dark:text-slate-300">
+                  <span className="text-[#7E779C] uppercase font-bold text-[10px]">Parties:</span>
+                  <p className="font-bold text-[#1E1B2E] dark:text-slate-300">
                     {analysisResult.parties.join(' & ')}
                   </p>
                 </div>
                 <div>
-                  <span className="text-slate-400">Key Dates:</span>
-                  <p className="font-semibold text-slate-700 dark:text-slate-300">
+                  <span className="text-[#7E779C] uppercase font-bold text-[10px]">Key Dates:</span>
+                  <p className="font-bold text-[#1E1B2E] dark:text-slate-300">
                     {analysisResult.dates.join(', ')}
                   </p>
                 </div>
@@ -210,28 +220,28 @@ export const DocumentAnalyzerPage: React.FC = () => {
 
               {/* Detected Clauses */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+                <h4 className="text-xs font-bold text-[#573EAE] dark:text-purple-400 uppercase tracking-wider">
                   Analyzed Clauses ({analysisResult.importantClauses.length})
                 </h4>
                 {analysisResult.importantClauses.map((clause, i) => (
                   <div
                     key={i}
-                    className="p-3.5 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2 bg-white dark:bg-[#111827] text-xs shadow-xs"
+                    className="p-4 border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 bg-white dark:bg-[#111827] text-xs shadow-xs hover:border-[#DDD6FE] transition-colors"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-slate-900 dark:text-white">
+                      <span className="font-bold text-[#1E1B2E] dark:text-white text-xs sm:text-sm">
                         {clause.clauseTitle}
                       </span>
                       <RiskBadge risk={clause.riskRating} />
                     </div>
-                    <p className="text-[11px] font-mono text-slate-500 bg-slate-50 dark:bg-slate-900 p-2 rounded border border-slate-100 dark:border-slate-800 italic">
+                    <p className="text-[11px] font-mono text-[#544E6D] dark:text-slate-300 bg-[#F8F7FC] dark:bg-slate-900 p-2.5 rounded-xl border border-[#E8E3F5] dark:border-slate-800 italic">
                       "{clause.extractedSnippet}"
                     </p>
-                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <p className="text-xs text-[#544E6D] dark:text-slate-300 leading-relaxed font-medium">
                       {clause.legalImplication}
                     </p>
                     {clause.relevantStatuteSnippet && (
-                      <div className="text-[11px] text-indigo-700 dark:text-indigo-400 font-semibold">
+                      <div className="text-[11px] text-[#684EC9] dark:text-purple-400 font-bold">
                         Statutory Reference: {clause.relevantStatuteSnippet}
                       </div>
                     )}
@@ -240,13 +250,13 @@ export const DocumentAnalyzerPage: React.FC = () => {
               </div>
 
               {/* Actionable Recommendations */}
-              <div className="p-3.5 bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900 rounded-xl space-y-2 text-xs">
-                <h4 className="font-bold text-blue-900 dark:text-blue-200 uppercase tracking-wider text-[11px]">
+              <div className="p-4 bg-[#F6F4FD] dark:bg-purple-950/20 border border-[#DDD6FE] dark:border-purple-900 rounded-2xl space-y-2 text-xs">
+                <h4 className="font-bold text-[#46328D] dark:text-purple-200 uppercase tracking-wider text-[11px]">
                   Actionable Informational Steps
                 </h4>
-                <ul className="space-y-1 text-slate-700 dark:text-slate-300 list-disc pl-4">
+                <ul className="space-y-1.5 text-[#544E6D] dark:text-slate-300 list-disc pl-4">
                   {analysisResult.recommendations.map((rec, idx) => (
-                    <li key={idx}>{rec}</li>
+                    <li key={idx} className="leading-relaxed">{rec}</li>
                   ))}
                 </ul>
               </div>
@@ -260,7 +270,7 @@ export const DocumentAnalyzerPage: React.FC = () => {
                       )}`
                     )
                   }
-                  className="flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:underline"
+                  className="flex items-center gap-1.5 text-xs font-bold text-[#684EC9] dark:text-purple-400 hover:text-[#573EB0] hover:underline cursor-pointer"
                 >
                   <span>Ask Nyayavanta About These Findings</span>
                   <ArrowRight size={14} />

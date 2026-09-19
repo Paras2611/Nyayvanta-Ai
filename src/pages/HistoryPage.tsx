@@ -70,11 +70,13 @@ export const HistoryPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <History className="text-indigo-600" size={24} />
+        <h1 className="text-xl md:text-2xl font-black text-[#1E1B2E] dark:text-white flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-[#EDE9FE] dark:bg-purple-950/60 text-[#684EC9] dark:text-purple-300 flex items-center justify-center shrink-0">
+            <History size={20} />
+          </div>
           <span>Research History</span>
         </h1>
-        <p className="text-xs md:text-sm text-slate-500">
+        <p className="text-xs md:text-sm text-[#544E6D] dark:text-slate-400">
           Chronological audit trail of your past legal inquiries, questions, and retrieved evidence.
         </p>
       </div>
@@ -86,39 +88,41 @@ export const HistoryPage: React.FC = () => {
 
           return (
             <div key={grp} className="space-y-3">
-              <h2 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <h2 className="text-xs font-bold text-[#573EAE] dark:text-purple-400 uppercase tracking-wider">
                 {grp}
               </h2>
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {groupItems.map((item) => (
                   <div
                     key={item.id}
-                    className="p-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-between shadow-xs hover:border-indigo-400 dark:hover:border-indigo-600 transition-colors"
+                    className="p-4 sm:p-5 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs hover:border-[#684EC9] dark:hover:border-purple-600 transition-colors"
                   >
                     <div className="space-y-1 max-w-2xl">
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-semibold uppercase px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
+                        <span className="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-md bg-[#EDE9FE] dark:bg-purple-950 text-[#573EAE] dark:text-purple-300 border border-[#DDD6FE] dark:border-purple-800">
                           {item.domain}
                         </span>
-                        <span className="text-[11px] text-slate-400">{item.timestamp}</span>
+                        <span className="text-[11px] text-[#7E779C]">{item.timestamp}</span>
                       </div>
-                      <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                      <h3 className="font-bold text-sm sm:text-base text-[#1E1B2E] dark:text-white">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-slate-500 line-clamp-1">{item.excerpt}</p>
+                      <p className="text-xs text-[#544E6D] dark:text-slate-300 line-clamp-1 leading-relaxed">
+                        {item.excerpt}
+                      </p>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
                       <button
                         onClick={() => navigate(`/chat?q=${encodeURIComponent(item.title)}&domain=${item.domain}`)}
-                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-xs"
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#684EC9] hover:bg-[#573EB0] text-white text-xs font-bold shadow-xs transition-colors cursor-pointer"
                       >
                         <span>Continue</span>
                         <ArrowRight size={13} />
                       </button>
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="p-1.5 text-slate-400 hover:text-rose-600 rounded"
+                        className="p-2 text-[#7E779C] hover:text-rose-600 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
                         title="Delete record"
                       >
                         <Trash2 size={16} />

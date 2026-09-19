@@ -14,7 +14,9 @@ import {
   ChevronRight,
   BookmarkPlus,
   RefreshCw,
-  Plus
+  Plus,
+  Layers,
+  X
 } from 'lucide-react';
 import { sendChatQuery, EvidenceBackedResponse } from '../services/api';
 import { EvidencePanel } from '../components/chat/EvidencePanel';
@@ -40,6 +42,7 @@ export const AILegalChatPage: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingState, setProcessingState] = useState<string>('');
   const [activeResponse, setActiveResponse] = useState<EvidenceBackedResponse | null>(null);
+  const [showMobileEvidence, setShowMobileEvidence] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +54,6 @@ export const AILegalChatPage: React.FC = () => {
     scrollToBottom();
   }, [messages, isProcessing]);
 
-  // Handle initial query from URL
   useEffect(() => {
     if (initialQuery && messages.length === 0) {
       handleSend(initialQuery);
@@ -86,7 +88,6 @@ export const AILegalChatPage: React.FC = () => {
     const text = queryText || inputQuery;
     if (!text.trim()) return;
 
-    // Add user message if not just submitting clarification answers
     if (!clarificationAnswers) {
       setMessages((prev) => [
         ...prev,
@@ -114,7 +115,6 @@ export const AILegalChatPage: React.FC = () => {
       setActiveResponse(response);
     } catch (err: any) {
       console.error('Chat error:', err);
-      // Fallback message
       setMessages((prev) => [
         ...prev,
         {
@@ -136,57 +136,57 @@ export const AILegalChatPage: React.FC = () => {
   };
 
   return (
-    <div className="flex h-[calc(100vh-5.5rem)] -m-4 md:-m-6 lg:-m-8 bg-[#F7F8FA] dark:bg-[#080D18]">
-      {/* 1. Left History Panel (Desktop) */}
-      <div className="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B1220] hidden lg:flex flex-col justify-between shrink-0">
-        <div className="p-3.5 space-y-3">
+    <div className="flex h-[calc(100vh-6rem)] md:h-[calc(100vh-5rem)] -m-3 sm:-m-5 md:-m-6 lg:-m-8 bg-[#F8F7FC] dark:bg-[#0E0C17] relative overflow-hidden">
+      {/* 1. Left Session History Panel (Desktop only) */}
+      <div className="w-56 xl:w-64 border-r border-[#E8E3F5] dark:border-[#26213D] bg-[#F4F2FA] dark:bg-[#13101F] hidden lg:flex flex-col justify-between shrink-0">
+        <div className="p-3.5 space-y-3 overflow-y-auto">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Research Sessions
+            <span className="text-[11px] font-bold text-[#7E779C] uppercase tracking-wider">
+              Sessions
             </span>
             <button
               onClick={() => {
                 setMessages([]);
                 setActiveResponse(null);
               }}
-              className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-indigo-600"
-              title="New Legal Inquiry"
+              className="p-1.5 rounded-lg bg-white dark:bg-[#221D38] border border-[#E0D9F7] dark:border-[#382F5E] text-[#684EC9] dark:text-[#C4B5FD] hover:bg-[#EBE6F8] shadow-xs"
+              title="New Research Inquiry"
             >
-              <Plus size={16} />
+              <Plus size={14} />
             </button>
           </div>
 
           <div className="space-y-1 text-xs">
-            <p className="text-[10px] font-semibold text-slate-400 uppercase pt-2">Today</p>
+            <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-1">Today</p>
             <div
               onClick={() => {}}
-              className="p-2.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 font-medium cursor-pointer border border-indigo-200 dark:border-indigo-900/60 truncate"
+              className="p-2.5 rounded-xl bg-white dark:bg-[#221D38] text-[#573EAE] dark:text-[#C4B5FD] font-semibold cursor-pointer border border-[#E0D9F7] dark:border-[#382F5E] shadow-xs truncate"
             >
-              Security Deposit Retention in Tenancy
+              Security Deposit Retention
             </div>
             <div
               onClick={() => {}}
-              className="p-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 cursor-pointer truncate"
+              className="p-2.5 rounded-xl hover:bg-[#EBE6F8] dark:hover:bg-[#1D1830] text-[#544E6D] dark:text-[#A59FC2] cursor-pointer truncate transition-colors"
             >
-              Section 27 ICA Non-Compete Restraint
+              Section 27 Non-Compete Restraint
             </div>
 
-            <p className="text-[10px] font-semibold text-slate-400 uppercase pt-3">Previous 7 Days</p>
-            <div className="p-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 cursor-pointer truncate">
-              E-Daakhil Defective Product Refund
+            <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-2">Previous 7 Days</p>
+            <div className="p-2.5 rounded-xl hover:bg-[#EBE6F8] dark:hover:bg-[#1D1830] text-[#544E6D] dark:text-[#A59FC2] cursor-pointer truncate transition-colors">
+              E-Daakhil Defective Laptop Refund
             </div>
-            <div className="p-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 cursor-pointer truncate">
-              MSME Samadhaan 45-Day Overdue Recovery
+            <div className="p-2.5 rounded-xl hover:bg-[#EBE6F8] dark:hover:bg-[#1D1830] text-[#544E6D] dark:text-[#A59FC2] cursor-pointer truncate transition-colors">
+              MSME Samadhaan Overdue Recovery
             </div>
           </div>
         </div>
 
-        <div className="p-3 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 flex items-center justify-between">
-          <span>Active Domain:</span>
+        <div className="p-3 border-t border-[#E8E3F5] dark:border-[#26213D] text-xs text-[#544E6D] flex items-center justify-between">
+          <span className="text-[11px] font-medium">Domain:</span>
           <select
             value={selectedDomain}
             onChange={(e) => setSelectedDomain(e.target.value)}
-            className="text-xs bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded px-2 py-1 font-medium text-slate-800 dark:text-slate-200"
+            className="text-xs bg-white dark:bg-[#1A162B] border border-[#D8D1EE] dark:border-[#382F5E] rounded-lg px-2 py-1 font-semibold text-[#573EAE] dark:text-[#C4B5FD]"
           >
             <option value="consumer">Consumer</option>
             <option value="tenancy">Tenancy</option>
@@ -197,41 +197,53 @@ export const AILegalChatPage: React.FC = () => {
       </div>
 
       {/* 2. Center Chat & Workspace */}
-      <div className="flex-1 flex flex-col min-w-0 bg-[#F7F8FA] dark:bg-[#080D18]">
-        {/* Workspace Header */}
-        <div className="px-5 py-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-2.5">
-            <Scale size={20} className="text-indigo-600" />
-            <div>
-              <h2 className="font-bold text-sm text-slate-900 dark:text-white leading-tight">
-                Nyayavanta AI Research Workspace
+      <div className="flex-1 flex flex-col min-w-0 bg-[#F8F7FC] dark:bg-[#0E0C17]">
+        {/* Workspace Top Header */}
+        <div className="px-3 sm:px-5 py-2.5 sm:py-3 border-b border-[#E8E3F5] dark:border-[#26213D] bg-white dark:bg-[#171424] flex items-center justify-between shrink-0 shadow-xs">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-8 h-8 rounded-xl bg-[#F4F2FA] dark:bg-[#221D38] flex items-center justify-center text-[#684EC9] dark:text-[#C4B5FD] shrink-0">
+              <Scale size={18} />
+            </div>
+            <div className="truncate">
+              <h2 className="font-bold text-xs sm:text-sm text-[#1E1B2E] dark:text-white leading-tight truncate">
+                Legal Research Workspace
               </h2>
-              <p className="text-[11px] text-slate-500">
-                Evidence-First Legal Intelligence • Domain: <span className="font-semibold text-indigo-600 uppercase">{selectedDomain}</span>
+              <p className="text-[11px] text-[#7E779C] truncate">
+                Evidence Grounding • <span className="font-bold text-[#684EC9] uppercase">{selectedDomain}</span>
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-0.5 rounded-full font-semibold border border-emerald-200 dark:border-emerald-800">
-              ● RAG Engine Active
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Mobile/Tablet Toggle for Evidence Panel */}
+            <button
+              onClick={() => setShowMobileEvidence(!showMobileEvidence)}
+              className="xl:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#EDE9FE] dark:bg-[#251F3D] text-[#573EAE] dark:text-[#C4B5FD] border border-[#D8D1EE] dark:border-[#382F5E] text-xs font-semibold"
+            >
+              <Layers size={13} />
+              <span className="hidden sm:inline">Evidence & Sources</span>
+              <span className="sm:hidden">Evidence</span>
+            </button>
+
+            <span className="hidden sm:inline-flex text-[11px] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full font-semibold border border-emerald-200 dark:border-emerald-800">
+              ● RAG Grounded
             </span>
           </div>
         </div>
 
-        {/* Message Scroll Area */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
+        {/* Message Thread Scroll Area */}
+        <div className="flex-1 overflow-y-auto p-3 sm:p-5 md:p-6 space-y-5">
           {messages.length === 0 && (
-            <div className="h-full flex flex-col items-center justify-center text-center max-w-md mx-auto space-y-4 text-slate-500 py-12">
-              <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-950/60 flex items-center justify-center text-indigo-600">
-                <Scale size={24} />
+            <div className="h-full flex flex-col items-center justify-center text-center max-w-md mx-auto space-y-4 text-[#7E779C] py-8 sm:py-12">
+              <div className="w-14 h-14 rounded-2xl bg-[#EDE9FE] dark:bg-[#221D38] flex items-center justify-center text-[#684EC9] dark:text-[#C4B5FD] shadow-xs">
+                <Scale size={28} />
               </div>
-              <div>
-                <h3 className="font-bold text-base text-slate-800 dark:text-slate-200">
-                  Ask a Specific Legal Question
+              <div className="space-y-1">
+                <h3 className="font-bold text-sm sm:text-base text-[#1E1B2E] dark:text-white">
+                  Ask a Specific Indian Legal Question
                 </h3>
-                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                  Provide dispute facts, financial quantum, or contractual terms. Nyayavanta will retrieve authentic Indian statutory authorities and binding precedents.
+                <p className="text-xs text-[#544E6D] dark:text-[#A59FC2] leading-relaxed">
+                  Describe the dispute facts, consideration quantum, or terms. Nyayavanta connects statements to Bare Acts and Supreme Court decisions.
                 </p>
               </div>
 
@@ -243,7 +255,7 @@ export const AILegalChatPage: React.FC = () => {
                       'Landlord is withholding my deposit of Rs 80,000 after I vacated the flat with proper 15-day notice in Bengaluru.'
                     )
                   }
-                  className="w-full text-xs p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-indigo-500 transition-colors text-slate-700 dark:text-slate-300"
+                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs"
                 >
                   "Landlord withholding deposit of Rs 80,000 after vacation in Bengaluru."
                 </button>
@@ -253,7 +265,7 @@ export const AILegalChatPage: React.FC = () => {
                       'Can my employer enforce a 1-year non-compete clause after I resigned from my software job?'
                     )
                   }
-                  className="w-full text-xs p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-indigo-500 transition-colors text-slate-700 dark:text-slate-300"
+                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs"
                 >
                   "Can my employer enforce a post-employment non-compete clause in India?"
                 </button>
@@ -263,7 +275,7 @@ export const AILegalChatPage: React.FC = () => {
                       'Buyer is refusing to pay MSME invoices overdue by 90 days. What statutory remedies exist under the MSMED Act?'
                     )
                   }
-                  className="w-full text-xs p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hover:border-indigo-500 transition-colors text-slate-700 dark:text-slate-300"
+                  className="w-full text-xs p-3 rounded-xl border border-[#E8E3F5] dark:border-[#2D2745] bg-white dark:bg-[#171424] hover:border-[#7C66DC] transition-colors text-[#1E1B2E] dark:text-[#F5F3FF] shadow-xs"
                 >
                   "Buyer refusing to pay overdue MSME invoices beyond 45 days."
                 </button>
@@ -275,12 +287,12 @@ export const AILegalChatPage: React.FC = () => {
             <div key={m.id} className="space-y-3">
               {m.sender === 'user' ? (
                 <div className="flex justify-end">
-                  <div className="max-w-2xl bg-indigo-600 text-white p-3.5 rounded-2xl rounded-tr-xs text-sm shadow-sm leading-relaxed">
+                  <div className="max-w-2xl bg-[#684EC9] text-white p-3 sm:p-4 rounded-2xl rounded-tr-xs text-xs sm:text-sm shadow-xs leading-relaxed">
                     {m.content}
                   </div>
                 </div>
               ) : (
-                <div className="max-w-4xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-5 rounded-2xl rounded-tl-xs shadow-sm space-y-4">
+                <div className="max-w-4xl bg-white dark:bg-[#171424] border border-[#E8E3F5] dark:border-[#2D2745] p-4 sm:p-6 rounded-2xl rounded-tl-xs lavender-shadow-sm space-y-4">
                   {m.response?.isClarification && m.response.clarification ? (
                     <ClarificationCard
                       payload={m.response.clarification}
@@ -289,7 +301,7 @@ export const AILegalChatPage: React.FC = () => {
                   ) : m.response ? (
                     <AIResponseView response={m.response} />
                   ) : (
-                    <p className="text-sm text-slate-800 dark:text-slate-200">{m.content}</p>
+                    <p className="text-xs sm:text-sm text-[#1E1B2E] dark:text-slate-200">{m.content}</p>
                   )}
                 </div>
               )}
@@ -298,13 +310,13 @@ export const AILegalChatPage: React.FC = () => {
 
           {/* Processing State Indicator */}
           {isProcessing && (
-            <div className="flex items-center gap-3 p-4 max-w-md bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs text-xs text-slate-600 dark:text-slate-400">
-              <Loader2 size={18} className="animate-spin text-indigo-600 shrink-0" />
+            <div className="flex items-center gap-3 p-3.5 sm:p-4 max-w-md bg-white dark:bg-[#171424] border border-[#E8E3F5] dark:border-[#2D2745] rounded-2xl shadow-xs text-xs text-[#544E6D] dark:text-[#A59FC2]">
+              <Loader2 size={18} className="animate-spin text-[#684EC9] shrink-0" />
               <div className="space-y-0.5">
-                <span className="font-semibold text-slate-800 dark:text-slate-200">
+                <span className="font-bold text-[#1E1B2E] dark:text-white">
                   {processingState || 'Consulting Indian legal corpus...'}
                 </span>
-                <p className="text-[11px] text-slate-400">Never exposing internal chain-of-thought</p>
+                <p className="text-[11px] text-[#7E779C]">Never exposing internal chain-of-thought</p>
               </div>
             </div>
           )}
@@ -313,7 +325,7 @@ export const AILegalChatPage: React.FC = () => {
         </div>
 
         {/* Input Bar */}
-        <div className="p-3 md:p-4 bg-white dark:bg-[#111827] border-t border-slate-200 dark:border-slate-800 shrink-0">
+        <div className="p-2.5 sm:p-4 bg-white dark:bg-[#171424] border-t border-[#E8E3F5] dark:border-[#26213D] shrink-0 shadow-xs">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -328,22 +340,22 @@ export const AILegalChatPage: React.FC = () => {
                 onChange={(e) => setInputQuery(e.target.value)}
                 placeholder="Describe your legal question or situation in detail..."
                 disabled={isProcessing}
-                className="w-full pl-4 pr-20 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-3.5 sm:pl-4 pr-16 sm:pr-20 py-2.5 sm:py-3 rounded-2xl border border-[#D8D1EE] dark:border-[#382F5E] bg-[#F8F7FC] dark:bg-[#120F1F] text-xs sm:text-sm text-[#1E1B2E] dark:text-white placeholder:text-[#958EB3] focus:outline-none focus:ring-2 focus:ring-[#7C66DC]"
               />
-              <div className="absolute right-2 flex items-center gap-1 text-slate-400">
+              <div className="absolute right-2 flex items-center gap-1 text-[#7E779C]">
                 <button
                   type="button"
-                  title="Attach Agreement / Notice (PDF, TXT)"
-                  className="p-1.5 hover:text-slate-600 rounded"
+                  title="Attach Agreement"
+                  className="p-1.5 hover:text-[#573EAE] rounded-lg"
                 >
-                  <Paperclip size={16} />
+                  <Paperclip size={15} />
                 </button>
                 <button
                   type="button"
                   title="Voice input placeholder"
-                  className="p-1.5 hover:text-slate-600 rounded"
+                  className="p-1.5 hover:text-[#573EAE] rounded-lg"
                 >
-                  <Mic size={16} />
+                  <Mic size={15} />
                 </button>
               </div>
             </div>
@@ -351,20 +363,20 @@ export const AILegalChatPage: React.FC = () => {
             <button
               type="submit"
               disabled={isProcessing || !inputQuery.trim()}
-              className={`p-3 rounded-xl flex items-center justify-center transition-colors shadow-sm ${
+              className={`p-2.5 sm:p-3 rounded-2xl flex items-center justify-center transition-colors shadow-xs ${
                 isProcessing || !inputQuery.trim()
                   ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-                  : 'bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer'
+                  : 'bg-[#684EC9] hover:bg-[#573EAE] text-white cursor-pointer'
               }`}
             >
-              <Send size={18} />
+              <Send size={16} />
             </button>
           </form>
         </div>
       </div>
 
-      {/* 3. Right Evidence & Sources Panel (Desktop) */}
-      <div className="w-80 lg:w-96 border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] hidden xl:flex flex-col shrink-0 overflow-y-auto">
+      {/* 3. Right Evidence & Sources Panel (Desktop Fixed) */}
+      <div className="w-80 lg:w-96 border-l border-[#E8E3F5] dark:border-[#26213D] bg-white dark:bg-[#171424] hidden xl:flex flex-col shrink-0 overflow-y-auto">
         <EvidencePanel
           relevantLaw={activeResponse?.relevantLaw}
           relevantCases={activeResponse?.relevantCases}
@@ -373,6 +385,35 @@ export const AILegalChatPage: React.FC = () => {
           sources={activeResponse?.sources}
         />
       </div>
+
+      {/* 4. Slide-over Evidence Panel for Mobile/Tablet */}
+      {showMobileEvidence && (
+        <div className="fixed inset-0 z-40 flex justify-end xl:hidden bg-black/40 backdrop-blur-xs">
+          <div className="w-full max-w-sm sm:max-w-md bg-white dark:bg-[#171424] h-full flex flex-col shadow-2xl overflow-y-auto">
+            <div className="p-3 border-b border-[#E8E3F5] dark:border-[#26213D] flex items-center justify-between sticky top-0 bg-white dark:bg-[#171424] z-10">
+              <span className="font-bold text-xs text-[#1E1B2E] dark:text-white flex items-center gap-1.5">
+                <Scale size={16} className="text-[#684EC9]" />
+                <span>Evidence & Sources</span>
+              </span>
+              <button
+                onClick={() => setShowMobileEvidence(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="p-2">
+              <EvidencePanel
+                relevantLaw={activeResponse?.relevantLaw}
+                relevantCases={activeResponse?.relevantCases}
+                claimsVerification={activeResponse?.verification}
+                confidence={activeResponse?.confidence}
+                sources={activeResponse?.sources}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

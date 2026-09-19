@@ -64,26 +64,26 @@ export const VerificationBadge: React.FC<{
 
 export const ConfidenceCard: React.FC<{ confidence: ConfidenceInfo }> = ({ confidence }) => {
   return (
-    <div className="bg-slate-50 dark:bg-[#0B1220] border border-slate-200 dark:border-slate-800 rounded-lg p-3">
+    <div className="bg-[#F8F7FC] dark:bg-[#0B1220] border border-[#E8E3F5] dark:border-slate-800 rounded-xl p-3.5 shadow-xs">
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+        <span className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
           Grounding Confidence
         </span>
-        <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+        <span className="text-sm font-bold text-[#684EC9] dark:text-purple-400">
           {confidence.score}% ({confidence.level})
         </span>
       </div>
-      <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden mb-2">
+      <div className="w-full bg-[#E8E3F5] dark:bg-slate-800 h-2 rounded-full overflow-hidden mb-2">
         <div
-          className="bg-indigo-600 h-full rounded-full transition-all"
+          className="bg-[#684EC9] h-full rounded-full transition-all duration-500"
           style={{ width: `${Math.min(confidence.score, 100)}%` }}
         />
       </div>
-      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-1">
+      <p className="text-xs text-[#544E6D] dark:text-slate-300 leading-relaxed mb-2">
         {confidence.rationale}
       </p>
-      <div className="flex items-start gap-1.5 text-[11px] text-amber-700 dark:text-amber-400 bg-amber-50/70 dark:bg-amber-950/30 p-1.5 rounded border border-amber-200 dark:border-amber-900/50">
-        <Info size={13} className="shrink-0 mt-0.5" />
+      <div className="flex items-start gap-1.5 text-[11px] text-[#573EAE] dark:text-amber-300 bg-[#F4F0FD] dark:bg-amber-950/30 p-2 rounded-lg border border-[#DDD6FE] dark:border-amber-900/50">
+        <Info size={14} className="shrink-0 mt-0.5 text-[#684EC9]" />
         <span>{confidence.caveat}</span>
       </div>
     </div>
@@ -92,30 +92,30 @@ export const ConfidenceCard: React.FC<{ confidence: ConfidenceInfo }> = ({ confi
 
 export const ClaimVerificationCard: React.FC<{ claim: ClaimVerificationItem }> = ({ claim }) => {
   return (
-    <div className="border border-slate-200 dark:border-slate-800 rounded-lg p-3 bg-white dark:bg-[#111827] space-y-2">
+    <div className="border border-[#E8E3F5] dark:border-slate-800 rounded-xl p-3 bg-white dark:bg-[#111827] space-y-2 shadow-xs hover:border-[#DDD6FE] transition-colors">
       <div className="flex items-start justify-between gap-2">
-        <p className="text-xs font-medium text-slate-800 dark:text-slate-200 leading-snug">
+        <p className="text-xs font-semibold text-[#1E1B2E] dark:text-slate-200 leading-snug">
           "{claim.claimStatement}"
         </p>
         <VerificationBadge badge={claim.uiBadge} />
       </div>
 
-      <div className="text-[11px] space-y-1 bg-slate-50 dark:bg-slate-900/50 p-2 rounded">
+      <div className="text-[11px] space-y-1 bg-[#F8F7FC] dark:bg-slate-900/50 p-2 rounded-lg border border-[#F0EDF9] dark:border-slate-800/60">
         <div className="flex justify-between">
-          <span className="text-slate-500">Source:</span>
-          <span className="font-semibold text-slate-700 dark:text-slate-300">
+          <span className="text-[#7E779C]">Source:</span>
+          <span className="font-semibold text-[#241C48] dark:text-slate-200">
             {claim.statutoryCitation}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-slate-500">Confidence:</span>
-          <span className="font-semibold text-indigo-600 dark:text-indigo-400">
+          <span className="text-[#7E779C]">Confidence:</span>
+          <span className="font-bold text-[#684EC9] dark:text-purple-400">
             {claim.confidenceRating}%
           </span>
         </div>
       </div>
 
-      <p className="text-[11px] text-slate-500 dark:text-slate-400 italic">
+      <p className="text-[11px] text-[#7E779C] dark:text-slate-400 italic">
         {claim.statusJustification}
       </p>
     </div>
@@ -130,14 +130,14 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
   sources = [],
 }) => {
   return (
-    <div className="p-4 space-y-6">
+    <div className="p-4 space-y-5">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex items-center justify-between pb-3 border-b border-[#E8E3F5] dark:border-slate-800">
         <div className="flex items-center gap-2">
-          <FileCheck className="text-indigo-600 dark:text-indigo-400" size={18} />
-          <h2 className="font-bold text-sm text-slate-900 dark:text-white">Evidence & Sources</h2>
+          <FileCheck className="text-[#684EC9] dark:text-purple-400" size={18} />
+          <h2 className="font-bold text-sm text-[#1E1B2E] dark:text-white">Evidence & Sources</h2>
         </div>
-        <span className="text-[11px] bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-medium px-2 py-0.5 rounded">
+        <span className="text-[11px] bg-[#EDE9FE] dark:bg-purple-950 text-[#573EAE] dark:text-purple-300 font-semibold px-2.5 py-0.5 rounded-md border border-[#DDD6FE] dark:border-purple-800">
           Verifiable
         </span>
       </div>
@@ -148,7 +148,7 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
       {/* Verification Claims */}
       {claimsVerification.length > 0 && (
         <section className="space-y-2">
-          <h3 className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+          <h3 className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
             Claim Grounding ({claimsVerification.length})
           </h3>
           <div className="space-y-2.5">
@@ -163,19 +163,19 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
       {relevantLaw.length > 0 && (
         <section className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+            <h3 className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
               Relevant Provisions ({relevantLaw.length})
             </h3>
-            <BookOpen size={14} className="text-slate-400" />
+            <BookOpen size={14} className="text-[#7E779C]" />
           </div>
           <div className="space-y-2">
             {relevantLaw.map((sec) => (
               <div
                 key={sec.id}
-                className="p-2.5 border border-slate-200 dark:border-slate-800 rounded-md bg-white dark:bg-[#111827] text-xs space-y-1"
+                className="p-3 border border-[#E8E3F5] dark:border-slate-800 rounded-xl bg-white dark:bg-[#111827] text-xs space-y-1.5 shadow-xs hover:border-[#DDD6FE] transition-colors"
               >
                 <div className="flex justify-between items-start">
-                  <span className="font-bold text-indigo-600 dark:text-indigo-400">
+                  <span className="font-bold text-[#684EC9] dark:text-purple-400 bg-[#F4F0FD] dark:bg-purple-950/50 px-1.5 py-0.5 rounded text-[11px]">
                     {sec.sectionNumber}
                   </span>
                   {sec.statutoryReferenceUrl && (
@@ -183,14 +183,14 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
                       href={sec.statutoryReferenceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-400 hover:text-slate-600"
+                      className="text-[#7E779C] hover:text-[#684EC9] transition-colors"
                     >
-                      <ExternalLink size={12} />
+                      <ExternalLink size={13} />
                     </a>
                   )}
                 </div>
-                <p className="font-medium text-slate-800 dark:text-slate-200">{sec.title}</p>
-                <p className="text-slate-500 text-[11px] leading-relaxed">
+                <p className="font-bold text-[#1E1B2E] dark:text-slate-200">{sec.title}</p>
+                <p className="text-[#544E6D] dark:text-slate-400 text-[11px] leading-relaxed">
                   {sec.plainEnglishExplanation}
                 </p>
               </div>
@@ -203,22 +203,24 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
       {relevantCases.length > 0 && (
         <section className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+            <h3 className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
               Binding Precedents ({relevantCases.length})
             </h3>
-            <Scale size={14} className="text-slate-400" />
+            <Scale size={14} className="text-[#7E779C]" />
           </div>
           <div className="space-y-2">
             {relevantCases.map((c) => (
               <div
                 key={c.id}
-                className="p-2.5 border border-slate-200 dark:border-slate-800 rounded-md bg-white dark:bg-[#111827] text-xs space-y-1"
+                className="p-3 border border-[#E8E3F5] dark:border-slate-800 rounded-xl bg-white dark:bg-[#111827] text-xs space-y-1.5 shadow-xs hover:border-[#DDD6FE] transition-colors"
               >
-                <p className="font-bold text-slate-800 dark:text-slate-200">{c.caseName}</p>
-                <p className="text-indigo-600 dark:text-indigo-400 font-mono text-[11px]">
+                <p className="font-bold text-[#1E1B2E] dark:text-slate-200">{c.caseName}</p>
+                <p className="text-[#684EC9] dark:text-purple-400 font-mono text-[11px] font-semibold">
                   {c.citationStr} ({c.court})
                 </p>
-                <p className="text-slate-500 text-[11px] line-clamp-2">{c.summary}</p>
+                <p className="text-[#544E6D] dark:text-slate-400 text-[11px] line-clamp-2 leading-relaxed">
+                  {c.summary}
+                </p>
               </div>
             ))}
           </div>

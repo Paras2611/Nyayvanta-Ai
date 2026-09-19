@@ -25,20 +25,20 @@ export const ClarificationCard: React.FC<ClarificationCardProps> = ({
   };
 
   return (
-    <div className="bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900 rounded-xl p-5 my-4 space-y-4">
-      <div className="flex items-center gap-2 text-blue-900 dark:text-blue-300">
-        <HelpCircle size={18} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+    <div className="bg-[#F6F4FD] dark:bg-purple-950/20 border border-[#DDD6FE] dark:border-purple-900/50 rounded-2xl p-4 sm:p-5 my-4 space-y-4 shadow-xs">
+      <div className="flex items-center gap-2 text-[#46328D] dark:text-purple-300">
+        <HelpCircle size={18} className="text-[#684EC9] dark:text-purple-400 shrink-0" />
         <h3 className="font-bold text-sm">Factual Clarification Needed</h3>
       </div>
-      <p className="text-xs text-slate-600 dark:text-slate-400">
+      <p className="text-xs text-[#544E6D] dark:text-slate-400">
         To ensure accurate statutory grounding and jurisdictional determination, please provide these details rather than making assumptions:
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {payload.questions.map((q, idx) => (
-          <div key={q.id} className="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-lg p-3.5 space-y-2">
+          <div key={q.id} className="bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-xl p-3.5 space-y-2 shadow-xs">
             <div className="flex items-start justify-between gap-2">
-              <label className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+              <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-200">
                 {idx + 1}. {q.text}
               </label>
               {answers[q.id] !== undefined && (
@@ -47,21 +47,21 @@ export const ClarificationCard: React.FC<ClarificationCardProps> = ({
             </div>
 
             {q.helpText && (
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">{q.helpText}</p>
+              <p className="text-[11px] text-[#7E779C] dark:text-slate-400">{q.helpText}</p>
             )}
 
             {/* Render input based on question type */}
             {q.type === 'yes_no' && (
-              <div className="flex gap-3 pt-1">
+              <div className="flex flex-wrap gap-2.5 pt-1">
                 {['yes', 'no'].map((val) => (
                   <button
                     type="button"
                     key={val}
                     onClick={() => handleOptionSelect(q.id, val)}
-                    className={`px-4 py-1.5 text-xs rounded font-medium capitalize border transition-colors ${
+                    className={`px-4 py-2 min-h-[40px] text-xs rounded-xl font-bold capitalize border transition-all ${
                       answers[q.id] === val
-                        ? 'bg-indigo-600 text-white border-indigo-600'
-                        : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:bg-slate-100'
+                        ? 'bg-[#684EC9] text-white border-[#684EC9] shadow-xs'
+                        : 'bg-[#F8F7FC] dark:bg-slate-800 text-[#544E6D] dark:text-slate-300 border-[#E8E3F5] dark:border-slate-700 hover:bg-[#EDE9FE]'
                     }`}
                   >
                     {val}
@@ -75,10 +75,10 @@ export const ClarificationCard: React.FC<ClarificationCardProps> = ({
                 {q.options.map((opt) => (
                   <label
                     key={opt}
-                    className={`flex items-center gap-2 p-2 rounded text-xs cursor-pointer border transition-colors ${
+                    className={`flex items-center gap-2.5 p-2.5 rounded-xl text-xs cursor-pointer border transition-all ${
                       answers[q.id] === opt
-                        ? 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-500 text-indigo-900 dark:text-indigo-200 font-medium'
-                        : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100'
+                        ? 'bg-[#EDE9FE] dark:bg-purple-950/40 border-[#684EC9] text-[#46328D] dark:text-purple-200 font-bold'
+                        : 'bg-[#F8F7FC] dark:bg-slate-800/60 border-[#E8E3F5] dark:border-slate-700 text-[#544E6D] dark:text-slate-300 hover:bg-[#EDE9FE]'
                     }`}
                   >
                     <input
@@ -87,7 +87,7 @@ export const ClarificationCard: React.FC<ClarificationCardProps> = ({
                       value={opt}
                       checked={answers[q.id] === opt}
                       onChange={() => handleOptionSelect(q.id, opt)}
-                      className="text-indigo-600"
+                      className="accent-[#684EC9] w-4 h-4"
                     />
                     <span>{opt}</span>
                   </label>
@@ -99,7 +99,7 @@ export const ClarificationCard: React.FC<ClarificationCardProps> = ({
               <select
                 value={answers[q.id] || ''}
                 onChange={(e) => handleOptionSelect(q.id, e.target.value)}
-                className="w-full text-xs p-2 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+                className="w-full text-xs p-2.5 rounded-xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-800 text-[#1E1B2E] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20"
               >
                 <option value="">-- Select an option --</option>
                 {q.options.map((opt) => (
@@ -116,7 +116,7 @@ export const ClarificationCard: React.FC<ClarificationCardProps> = ({
                 value={answers[q.id] || ''}
                 onChange={(e) => handleOptionSelect(q.id, e.target.value)}
                 placeholder="Enter details..."
-                className="w-full text-xs p-2 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+                className="w-full text-xs p-2.5 rounded-xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-800 text-[#1E1B2E] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20"
               />
             )}
           </div>
@@ -126,10 +126,10 @@ export const ClarificationCard: React.FC<ClarificationCardProps> = ({
           <button
             type="submit"
             disabled={!isComplete}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold shadow-sm transition-all ${
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold shadow-xs transition-all ${
               isComplete
-                ? 'bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer'
-                : 'bg-slate-300 dark:bg-slate-700 text-slate-500 cursor-not-allowed'
+                ? 'bg-[#684EC9] hover:bg-[#573EB0] text-white cursor-pointer'
+                : 'bg-[#E8E3F5] dark:bg-slate-800 text-[#7E779C] dark:text-slate-500 cursor-not-allowed'
             }`}
           >
             <span>Proceed with Grounded Legal Analysis</span>

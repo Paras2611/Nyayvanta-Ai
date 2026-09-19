@@ -28,14 +28,14 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F7F8FA] dark:bg-[#080D18] p-4">
-      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl p-8 space-y-6 shadow-sm">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-4">
+      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center mx-auto shadow-md">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7C66DC] to-[#573EAE] text-white flex items-center justify-center mx-auto shadow-sm">
             <Scale size={24} />
           </div>
-          <h1 className="font-extrabold text-xl text-slate-900 dark:text-white">NYAYAVANTA</h1>
-          <p className="text-xs text-slate-500">Sign in to your legal research workspace</p>
+          <h1 className="font-black text-xl tracking-wide text-[#1E1B2E] dark:text-white">NYAYAVANTA</h1>
+          <p className="text-xs text-[#544E6D] dark:text-slate-400">Sign in to your legal research workspace</p>
         </div>
 
         {error && (
@@ -45,35 +45,35 @@ export const LoginPage: React.FC = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Email</label>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">Email</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 text-slate-400" size={16} />
+              <Mail className="absolute left-3.5 top-3.5 text-[#7E779C]" size={16} />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-white"
+                className="w-full pl-10 pr-3.5 py-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs text-[#1E1B2E] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-2xs"
               />
             </div>
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="flex items-center justify-between text-xs">
-              <label className="font-semibold text-slate-700 dark:text-slate-300">Password</label>
-              <Link to="/forgot-password" className="text-indigo-600 hover:underline">
+              <label className="font-bold text-[#1E1B2E] dark:text-slate-300">Password</label>
+              <Link to="/forgot-password" className="text-[#684EC9] hover:underline font-bold">
                 Forgot password?
               </Link>
             </div>
             <div className="relative">
-              <Lock className="absolute left-3 top-3 text-slate-400" size={16} />
+              <Lock className="absolute left-3.5 top-3.5 text-[#7E779C]" size={16} />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-white"
+                className="w-full pl-10 pr-3.5 py-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs text-[#1E1B2E] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-2xs"
               />
             </div>
           </div>
@@ -81,15 +81,15 @@ export const LoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer transition-colors"
+            className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px]"
           >
             {loading ? 'Authenticating...' : 'Sign In to Workspace'}
           </button>
         </form>
 
-        <div className="text-center text-xs text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800">
+        <div className="text-center text-xs text-[#544E6D] dark:text-slate-400 pt-3 border-t border-[#E8E3F5] dark:border-slate-800">
           Don't have an account?{' '}
-          <Link to="/register" className="font-semibold text-indigo-600 hover:underline">
+          <Link to="/register" className="font-bold text-[#684EC9] hover:underline">
             Register New Advocate / Citizen
           </Link>
         </div>
@@ -127,65 +127,65 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F7F8FA] dark:bg-[#080D18] p-4">
-      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl p-8 space-y-6 shadow-sm">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-4">
+      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center mx-auto shadow-md">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7C66DC] to-[#573EAE] text-white flex items-center justify-center mx-auto shadow-sm">
             <Scale size={24} />
           </div>
-          <h1 className="font-extrabold text-xl text-slate-900 dark:text-white">NYAYAVANTA</h1>
-          <p className="text-xs text-slate-500">Create your evidence-backed research account</p>
+          <h1 className="font-black text-xl tracking-wide text-[#1E1B2E] dark:text-white">NYAYAVANTA</h1>
+          <p className="text-xs text-[#544E6D] dark:text-slate-400">Create your evidence-backed research account</p>
         </div>
 
         <form onSubmit={handleRegister} className="space-y-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Full Name</label>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">Full Name</label>
             <div className="relative">
-              <User className="absolute left-3 top-3 text-slate-400" size={16} />
+              <User className="absolute left-3.5 top-3.5 text-[#7E779C]" size={16} />
               <input
                 type="text"
                 required
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-white"
+                className="w-full pl-10 pr-3.5 py-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs text-[#1E1B2E] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-2xs"
               />
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">Email Address</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 text-slate-400" size={16} />
+              <Mail className="absolute left-3.5 top-3.5 text-[#7E779C]" size={16} />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-white"
+                className="w-full pl-10 pr-3.5 py-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs text-[#1E1B2E] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-2xs"
               />
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Password</label>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">Password</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-3 text-slate-400" size={16} />
+              <Lock className="absolute left-3.5 top-3.5 text-[#7E779C]" size={16} />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-white"
+                className="w-full pl-10 pr-3.5 py-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs text-[#1E1B2E] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20 focus:border-[#684EC9] shadow-2xs"
               />
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Account Type</label>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[#1E1B2E] dark:text-slate-300">Account Type</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs text-slate-900 dark:text-white"
+              className="w-full p-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs font-bold text-[#1E1B2E] dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20"
             >
               <option value="advocate">Enrolled Advocate / Legal Practitioner</option>
               <option value="researcher">Law Student / Legal Researcher</option>
@@ -196,15 +196,15 @@ export const RegisterPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer transition-colors"
+            className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px]"
           >
             {loading ? 'Creating Account...' : 'Register Account'}
           </button>
         </form>
 
-        <div className="text-center text-xs text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800">
+        <div className="text-center text-xs text-[#544E6D] dark:text-slate-400 pt-3 border-t border-[#E8E3F5] dark:border-slate-800">
           Already registered?{' '}
-          <Link to="/login" className="font-semibold text-indigo-600 hover:underline">
+          <Link to="/login" className="font-bold text-[#684EC9] hover:underline">
             Sign In
           </Link>
         </div>
@@ -216,16 +216,18 @@ export const RegisterPage: React.FC = () => {
 export const ForgotPasswordPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F7F8FA] dark:bg-[#080D18] p-4">
-      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-2xl p-8 space-y-6 shadow-sm text-center">
-        <Scale size={28} className="mx-auto text-indigo-600" />
-        <h1 className="font-bold text-lg text-slate-900 dark:text-white">Reset Password</h1>
-        <p className="text-xs text-slate-500">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F7FC] dark:bg-[#0E0C17] p-4">
+      <div className="max-w-md w-full bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs text-center">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7C66DC] to-[#573EAE] text-white flex items-center justify-center mx-auto shadow-sm">
+          <Scale size={24} />
+        </div>
+        <h1 className="font-black text-xl text-[#1E1B2E] dark:text-white">Reset Password</h1>
+        <p className="text-xs text-[#544E6D] dark:text-slate-400">
           Enter your registered email to receive a password reset link.
         </p>
 
         {submitted ? (
-          <div className="p-4 bg-emerald-50 text-emerald-800 text-xs rounded-xl flex items-center gap-2">
+          <div className="p-4 bg-emerald-50 text-emerald-800 text-xs rounded-2xl flex items-center gap-2 border border-emerald-200">
             <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
             <span>If an account exists, a secure reset instruction has been dispatched.</span>
           </div>
@@ -241,11 +243,11 @@ export const ForgotPasswordPage: React.FC = () => {
               type="email"
               required
               placeholder="Enter your email..."
-              className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs"
+              className="w-full p-3 rounded-2xl border border-[#E8E3F5] dark:border-slate-700 bg-[#F8F7FC] dark:bg-slate-900 text-xs text-[#1E1B2E] dark:text-white placeholder-[#7E779C] focus:outline-none focus:ring-2 focus:ring-[#684EC9]/20"
             />
             <button
               type="submit"
-              className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold"
+              className="w-full py-3 bg-[#684EC9] hover:bg-[#573EB0] text-white rounded-2xl text-xs font-bold shadow-xs cursor-pointer transition-colors min-h-[44px]"
             >
               Send Reset Link
             </button>
@@ -253,7 +255,7 @@ export const ForgotPasswordPage: React.FC = () => {
         )}
 
         <div className="pt-2">
-          <Link to="/login" className="text-xs text-indigo-600 hover:underline font-medium">
+          <Link to="/login" className="text-xs text-[#684EC9] hover:underline font-bold">
             Back to Sign In
           </Link>
         </div>

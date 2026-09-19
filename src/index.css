@@ -1,46 +1,67 @@
 @import "tailwindcss";
 
 @theme {
-  --color-page-bg: #F7F8FA;
-  --color-deep-navy: #0B1220;
-  --color-legal-navy: #172554;
-  --color-ai-indigo: #4F46E5;
-  --color-verified: #059669;
-  --color-warning: #D97706;
-  --color-critical: #DC2626;
-  --color-text-primary: #111827;
-  --color-text-secondary: #475569;
-  --color-text-muted: #64748B;
-  --color-border: #E2E8F0;
+  --color-page-bg: #F8F7FC;
   --color-card-bg: #FFFFFF;
+  --color-lavender-50: #FBFBFE;
+  --color-lavender-100: #F4F2FA;
+  --color-lavender-200: #E9E5F5;
+  --color-lavender-300: #D8D1EE;
+  --color-lavender-400: #A89BDE;
+  --color-lavender-500: #7C66DC;
+  --color-lavender-600: #684EC9;
+  --color-lavender-700: #573EAE;
+  --color-lavender-800: #46328D;
+  --color-lavender-900: #35266D;
+  --color-text-primary: #1E1B2E;
+  --color-text-secondary: #544E6D;
+  --color-text-muted: #7E779C;
+  --color-border: #E8E3F5;
 }
 
 :root {
-  --bg-main: #F7F8FA;
-  --bg-card: #FFFFFF;
-  --bg-sidebar: #0B1220;
-  --text-main: #111827;
-  --text-muted: #64748B;
-  --border-color: #E2E8F0;
-  --accent-primary: #172554;
-  --accent-indigo: #4F46E5;
+  /* Light Lavender & White Canonical Palette (Default) */
+  --bg-main: #F8F7FC;
+  --bg-surface: #FFFFFF;
+  --bg-sidebar: #F1EEFA;
+  --bg-sidebar-hover: #E7E2F7;
+  --bg-sidebar-active: #DDD6F3;
+  --text-main: #1E1B2E;
+  --text-secondary: #544E6D;
+  --text-muted: #7E779C;
+  --border-color: #E8E3F5;
+  --border-hover: #D0C7ED;
+  --accent-lavender: #684EC9;
+  --accent-lavender-light: #F1EEFA;
+  --accent-lavender-hover: #573EAE;
   --status-verified: #059669;
   --status-warning: #D97706;
   --status-critical: #DC2626;
 }
 
 .dark {
-  --bg-main: #080D18;
-  --bg-card: #111827;
-  --bg-sidebar: #060A13;
-  --text-main: #F9FAFB;
-  --text-muted: #94A3B8;
-  --border-color: #243047;
-  --accent-primary: #38BDF8;
-  --accent-indigo: #6366F1;
+  /* Elegant Dark Lavender Slate */
+  --bg-main: #0E0C17;
+  --bg-surface: #171424;
+  --bg-sidebar: #13101F;
+  --bg-sidebar-hover: #1D192E;
+  --bg-sidebar-active: #26213D;
+  --text-main: #F5F3FF;
+  --text-secondary: #C4BFDC;
+  --text-muted: #958EB3;
+  --border-color: #2D2745;
+  --border-hover: #403861;
+  --accent-lavender: #8B74E8;
+  --accent-lavender-light: #221D38;
+  --accent-lavender-hover: #A391F0;
   --status-verified: #10B981;
   --status-warning: #F59E0B;
   --status-critical: #EF4444;
+}
+
+html {
+  background-color: var(--bg-main);
+  color: var(--text-main);
 }
 
 body {
@@ -50,17 +71,48 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Legal tech trustworthy styling */
-.legal-shadow {
-  box-shadow: 0 1px 3px 0 rgba(11, 18, 32, 0.05), 0 1px 2px -1px rgba(11, 18, 32, 0.05);
+/* Premium Light Lavender Shadows */
+.lavender-shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(104, 78, 201, 0.04), 0 1px 3px 0 rgba(30, 27, 46, 0.02);
 }
 
-.legal-card-hover {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+.lavender-shadow-md {
+  box-shadow: 0 4px 12px -2px rgba(104, 78, 201, 0.08), 0 2px 4px -2px rgba(30, 27, 46, 0.04);
 }
-.legal-card-hover:hover {
-  box-shadow: 0 4px 6px -1px rgba(11, 18, 32, 0.08), 0 2px 4px -2px rgba(11, 18, 32, 0.08);
+
+.lavender-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lavender-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(104, 78, 201, 0.12), 0 4px 8px -2px rgba(30, 27, 46, 0.04);
+  border-color: var(--border-hover);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8D1EE;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A89BDE;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2D2745;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #403861;
 }

@@ -8,7 +8,9 @@ import {
   BookOpen,
   Scale,
   FileCheck,
-  Info
+  Info,
+  X,
+  Sparkles
 } from 'lucide-react';
 import {
   LegalSectionItem,
@@ -24,6 +26,7 @@ interface EvidencePanelProps {
   claimsVerification?: ClaimVerificationItem[];
   confidence?: ConfidenceInfo;
   sources?: SourceItem[];
+  onClose?: () => void;
 }
 
 export const VerificationBadge: React.FC<{
@@ -128,19 +131,77 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
   claimsVerification = [],
   confidence,
   sources = [],
+  onClose,
 }) => {
+  const hasNoEvidence =
+    relevantLaw.length === 0 &&
+    relevantCases.length === 0 &&
+    claimsVerification.length === 0 &&
+    !confidence;
+
   return (
-    <div className="p-4 space-y-5">
+    <div className="p-3.5 sm:p-4 space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b border-[#E8E3F5] dark:border-slate-800">
         <div className="flex items-center gap-2">
-          <FileCheck className="text-[#684EC9] dark:text-purple-400" size={18} />
-          <h2 className="font-bold text-sm text-[#1E1B2E] dark:text-white">Evidence & Sources</h2>
+          <FileCheck className="text-[#684EC9] dark:text-purple-400" size={17} />
+          <h2 className="font-bold text-xs sm:text-sm text-[#1E1B2E] dark:text-white">Evidence & Grounding</h2>
         </div>
-        <span className="text-[11px] bg-[#EDE9FE] dark:bg-purple-950 text-[#573EAE] dark:text-purple-300 font-semibold px-2.5 py-0.5 rounded-md border border-[#DDD6FE] dark:border-purple-800">
-          Verifiable
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] sm:text-[11px] bg-[#EDE9FE] dark:bg-purple-950 text-[#573EAE] dark:text-purple-300 font-semibold px-2 py-0.5 rounded-md border border-[#DDD6FE] dark:border-purple-800">
+            Verifiable
+          </span>
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="p-1 rounded-lg text-[#7E779C] hover:text-[#1E1B2E] dark:hover:text-white hover:bg-[#EBE6F8] dark:hover:bg-[#26213D] transition-colors"
+              title="Close evidence panel"
+            >
+              <X size={15} />
+            </button>
+          )}
+        </div>
       </div>
+
+      {/* Empty State Guidance Card when no evidence has been fetched yet */}
+      {hasNoEvidence && (
+        <div className="p-4 rounded-2xl bg-[#F8F7FC] dark:bg-[#151221] border border-[#E8E3F5] dark:border-[#2D2644] text-center space-y-3">
+          <div className="w-10 h-10 mx-auto rounded-xl bg-[#EDE9FE] dark:bg-[#2A2244] flex items-center justify-center text-[#684EC9] dark:text-[#C4B5FD] shadow-xs">
+            <Sparkles size={20} />
+          </div>
+          <div>
+            <h3 className="text-xs font-bold text-[#1E1B2E] dark:text-white">
+              Awaiting Legal Inquiry
+            </h3>
+            <p className="text-[11px] text-[#7E779C] dark:text-[#A59FC2] mt-1 leading-relaxed">
+              When you submit a query, Nyayavanta retrieves statutory provisions and case law citations, verifying all claims here in real time.
+            </p>
+          </div>
+          <div className="space-y-2 pt-1 text-left">
+            <div className="p-2.5 rounded-xl bg-white dark:bg-[#1D1830] border border-[#E8E3F5] dark:border-[#382F5E] text-[11px] space-y-0.5 shadow-2xs">
+              <div className="flex items-center gap-1.5 font-bold text-[#684EC9] dark:text-[#C4B5FD]">
+                <BookOpen size={12} />
+                <span>Bare Acts Citations</span>
+              </div>
+              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">Sections mapped from BNS, BSA, CPC, ICA, and CPA.</p>
+            </div>
+            <div className="p-2.5 rounded-xl bg-white dark:bg-[#1D1830] border border-[#E8E3F5] dark:border-[#382F5E] text-[11px] space-y-0.5 shadow-2xs">
+              <div className="flex items-center gap-1.5 font-bold text-[#684EC9] dark:text-[#C4B5FD]">
+                <Scale size={12} />
+                <span>Precedents & Judgments</span>
+              </div>
+              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">Supreme Court and High Court precedent ratios.</p>
+            </div>
+            <div className="p-2.5 rounded-xl bg-white dark:bg-[#1D1830] border border-[#E8E3F5] dark:border-[#2E274D] text-[11px] space-y-0.5 shadow-2xs">
+              <div className="flex items-center gap-1.5 font-bold text-emerald-600 dark:text-emerald-400">
+                <ShieldCheck size={12} />
+                <span>Zero-Hallucination Audit</span>
+              </div>
+              <p className="text-[10px] text-[#7E779C] dark:text-slate-400">Every statement tagged as Verified or Conflicting.</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Confidence Card */}
       {confidence && <ConfidenceCard confidence={confidence} />}

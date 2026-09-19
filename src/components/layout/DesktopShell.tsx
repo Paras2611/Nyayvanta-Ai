@@ -60,7 +60,7 @@ export const DesktopShell: React.FC<DesktopShellProps> = ({
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8F7FC] text-[#1E1B2E]">
+    <div className="h-screen h-dvh flex flex-col bg-[#F8F7FC] text-[#1E1B2E] overflow-hidden">
       {/* 1. Persistent Legal Disclaimer Top Bar - Light Lavender Aesthetic */}
       <header className="bg-[#EDE9FE] text-[#46328D] text-xs px-3 sm:px-4 py-1.5 sm:py-2 flex items-center justify-between border-b border-[#D8D1EE] shrink-0 sticky top-0 z-40 shadow-xs">
         <div className="flex items-center gap-2 max-w-4xl min-w-0">
@@ -336,11 +336,25 @@ export const DesktopShell: React.FC<DesktopShellProps> = ({
         </aside>
 
         {/* 4. Main Workspace (Center) */}
-        <main className="flex-1 overflow-y-auto bg-[#F8F7FC] flex flex-col min-w-0 pb-20 md:pb-0">
-          <div className="flex-1 p-3.5 sm:p-5 md:p-6 lg:p-8 max-w-7xl mx-auto w-full min-w-0">
-            {children || <Outlet />}
-          </div>
-          {!isChatPage && <DisclaimerBanner />}
+        <main
+          className={`flex-1 flex flex-col min-w-0 ${
+            isChatPage
+              ? 'h-full overflow-hidden pb-16 md:pb-0 bg-[#F8F7FC]'
+              : 'overflow-y-auto bg-[#F8F7FC] pb-20 md:pb-0'
+          }`}
+        >
+          {isChatPage ? (
+            <div className="flex-1 h-full w-full min-w-0 flex flex-col overflow-hidden">
+              {children || <Outlet />}
+            </div>
+          ) : (
+            <>
+              <div className="flex-1 p-3.5 sm:p-5 md:p-6 lg:p-8 max-w-7xl mx-auto w-full min-w-0">
+                {children || <Outlet />}
+              </div>
+              <DisclaimerBanner />
+            </>
+          )}
         </main>
 
         {/* 5. Context / Evidence Panel (Right - Desktop) */}

@@ -16,7 +16,9 @@ import {
   RefreshCw,
   Plus,
   Layers,
-  X
+  X,
+  PanelLeftClose,
+  PanelLeft
 } from 'lucide-react';
 import { sendChatQuery, EvidenceBackedResponse } from '../services/api';
 import { EvidencePanel } from '../components/chat/EvidencePanel';
@@ -44,6 +46,12 @@ export const AILegalChatPage: React.FC = () => {
   const [activeResponse, setActiveResponse] = useState<EvidenceBackedResponse | null>(null);
   const [showMobileEvidence, setShowMobileEvidence] = useState(false);
   const [showMobileSessions, setShowMobileSessions] = useState(false);
+  const [showDesktopEvidence, setShowDesktopEvidence] = useState(false);
+  const [showDesktopSessions, setShowDesktopSessions] = useState(true);
+
+  const evidenceCount =
+    (activeResponse?.relevantLaw?.length || 0) +
+    (activeResponse?.relevantCases?.length || 0);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -114,6 +122,15 @@ export const AILegalChatPage: React.FC = () => {
       ]);
 
       setActiveResponse(response);
+      if (
+        (response.relevantLaw && response.relevantLaw.length > 0) ||
+        (response.relevantCases && response.relevantCases.length > 0) ||
+        (response.verification && response.verification.length > 0)
+      ) {
+        if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+          setShowDesktopEvidence(true);
+        }
+      }
     } catch (err: any) {
       console.error('Chat error:', err);
       setMessages((prev) => [
@@ -137,25 +154,35 @@ export const AILegalChatPage: React.FC = () => {
   };
 
   return (
-    <div className="flex h-[calc(100dvh-7.5rem)] md:h-[calc(100dvh-5.5rem)] -m-3.5 sm:-m-5 md:-m-6 lg:-m-8 bg-[#F8F7FC] dark:bg-[#0E0C17] relative overflow-hidden rounded-none md:rounded-2xl border-0 md:border md:border-[#E8E3F5] dark:md:border-[#26213D]">
+    <div className="flex-1 h-full w-full flex flex-row relative overflow-hidden bg-[#F8F7FC] dark:bg-[#0E0C17]">
       {/* 1. Left Session History Panel (Desktop only) */}
-      <div className="w-56 xl:w-64 border-r border-[#E8E3F5] dark:border-[#26213D] bg-[#F4F2FA] dark:bg-[#13101F] hidden lg:flex flex-col justify-between shrink-0">
-        <div className="p-3.5 space-y-3 overflow-y-auto">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-[#7E779C] uppercase tracking-wider">
-              Sessions
-            </span>
-            <button
-              onClick={() => {
-                setMessages([]);
-                setActiveResponse(null);
-              }}
-              className="p-1.5 rounded-lg bg-white dark:bg-[#221D38] border border-[#E0D9F7] dark:border-[#382F5E] text-[#684EC9] dark:text-[#C4B5FD] hover:bg-[#EBE6F8] shadow-xs"
-              title="New Research Inquiry"
-            >
-              <Plus size={14} />
-            </button>
-          </div>
+      {showDesktopSessions && (
+        <div className="w-56 xl:w-64 border-r border-[#E8E3F5] dark:border-[#26213D] bg-[#F4F2FA] dark:bg-[#13101F] hidden lg:flex flex-col justify-between shrink-0 animate-fade-in">
+          <div className="p-3.5 space-y-3 overflow-y-auto">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold text-[#7E779C] uppercase tracking-wider">
+                Sessions
+              </span>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => {
+                    setMessages([]);
+                    setActiveResponse(null);
+                  }}
+                  className="p-1.5 rounded-lg bg-white dark:bg-[#221D38] border border-[#E0D9F7] dark:border-[#382F5E] text-[#684EC9] dark:text-[#C4B5FD] hover:bg-[#EBE6F8] shadow-xs cursor-pointer press-feedback"
+                  title="New Research Inquiry"
+                >
+                  <Plus size={14} />
+                </button>
+                <button
+                  onClick={() => setShowDesktopSessions(false)}
+                  className="p-1.5 rounded-lg text-[#7E779C] hover:text-[#241C48] hover:bg-[#EBE6F8] cursor-pointer"
+                  title="Collapse sessions sidebar"
+                >
+                  <PanelLeftClose size={14} />
+                </button>
+              </div>
+            </div>
 
           <div className="space-y-1 text-xs">
             <p className="text-[10px] font-bold text-[#7E779C] uppercase pt-1">Today</p>
@@ -196,6 +223,7 @@ export const AILegalChatPage: React.FC = () => {
           </select>
         </div>
       </div>
+      )}
 
       {/* Mobile/Tablet Sessions Drawer */}
       {showMobileSessions && (
@@ -287,6 +315,17 @@ export const AILegalChatPage: React.FC = () => {
               <Clock size={16} />
             </button>
 
+            {/* Desktop Sessions Expand Button (when collapsed) */}
+            {!showDesktopSessions && (
+              <button
+                onClick={() => setShowDesktopSessions(true)}
+                className="hidden lg:flex items-center gap-1 p-1.5 rounded-xl bg-[#F4F2FA] dark:bg-[#221D38] border border-[#E0D9F7] dark:border-[#382F5E] text-[#684EC9] dark:text-[#C4B5FD] hover:bg-[#EBE6F8] press-feedback"
+                title="Show research sessions"
+              >
+                <PanelLeft size={16} />
+              </button>
+            )}
+
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#F4F2FA] dark:bg-[#221D38] flex items-center justify-center text-[#684EC9] dark:text-[#C4B5FD] shrink-0">
               <Scale size={16} />
             </div>
@@ -301,14 +340,32 @@ export const AILegalChatPage: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* Mobile/Tablet Toggle for Evidence Panel */}
+            {/* Evidence Panel Toggle Button (Responsive Desktop + Mobile) */}
             <button
-              onClick={() => setShowMobileEvidence(!showMobileEvidence)}
-              className="xl:hidden flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-[#EDE9FE] dark:bg-[#251F3D] text-[#573EAE] dark:text-[#C4B5FD] border border-[#D8D1EE] dark:border-[#382F5E] text-xs font-semibold press-feedback"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+                  setShowDesktopEvidence(!showDesktopEvidence);
+                } else {
+                  setShowMobileEvidence(!showMobileEvidence);
+                }
+              }}
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all press-feedback ${
+                (typeof window !== 'undefined' && window.innerWidth >= 1024 ? showDesktopEvidence : showMobileEvidence)
+                  ? 'bg-[#684EC9] text-white shadow-xs'
+                  : 'bg-[#EDE9FE] dark:bg-[#251F3D] text-[#573EAE] dark:text-[#C4B5FD] border border-[#D8D1EE] dark:border-[#382F5E] hover:bg-[#E0D9F7]'
+              }`}
+              title="Toggle Evidence & Sources grounding panel"
             >
               <Layers size={13} />
-              <span className="hidden sm:inline">Evidence & Sources</span>
+              <span className="hidden sm:inline">
+                {showDesktopEvidence ? 'Hide Evidence' : 'Evidence & Sources'}
+              </span>
               <span className="sm:hidden">Evidence</span>
+              {evidenceCount > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/25 font-mono">
+                  {evidenceCount}
+                </span>
+              )}
             </button>
 
             <span className="hidden md:inline-flex text-[11px] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full font-semibold border border-emerald-200 dark:border-emerald-800">
@@ -417,29 +474,29 @@ export const AILegalChatPage: React.FC = () => {
               e.preventDefault();
               handleSend();
             }}
-            className="flex items-center gap-2 max-w-4xl mx-auto"
+            className="flex items-center gap-2 max-w-4xl mx-auto w-full"
           >
-            <div className="relative flex-1 flex items-center">
+            <div className="relative flex-1 flex items-center min-w-0">
               <input
                 type="text"
                 value={inputQuery}
                 onChange={(e) => setInputQuery(e.target.value)}
-                placeholder="Describe your legal question or situation in detail..."
+                placeholder="Describe your Indian legal question or situation in detail..."
                 disabled={isProcessing}
-                className="w-full pl-3.5 sm:pl-4 pr-16 sm:pr-20 py-2.5 sm:py-3 rounded-2xl border border-[#D8D1EE] dark:border-[#382F5E] bg-[#F8F7FC] dark:bg-[#120F1F] text-xs sm:text-sm text-[#1E1B2E] dark:text-white placeholder:text-[#958EB3] focus:outline-none focus:ring-2 focus:ring-[#7C66DC]"
+                className="w-full pl-3.5 sm:pl-4 pr-16 sm:pr-20 py-2.5 sm:py-3.5 rounded-2xl border border-[#D8D1EE] dark:border-[#382F5E] bg-[#F8F7FC] dark:bg-[#120F1F] text-xs sm:text-sm text-[#1E1B2E] dark:text-white placeholder:text-[#958EB3] placeholder:truncate focus:outline-none focus:ring-2 focus:ring-[#7C66DC]"
               />
               <div className="absolute right-2 flex items-center gap-1 text-[#7E779C]">
                 <button
                   type="button"
                   title="Attach Agreement"
-                  className="p-1.5 hover:text-[#573EAE] rounded-lg"
+                  className="p-1.5 hover:text-[#573EAE] rounded-lg cursor-pointer"
                 >
                   <Paperclip size={15} />
                 </button>
                 <button
                   type="button"
                   title="Voice input placeholder"
-                  className="p-1.5 hover:text-[#573EAE] rounded-lg"
+                  className="p-1.5 hover:text-[#573EAE] rounded-lg cursor-pointer"
                 >
                   <Mic size={15} />
                 </button>
@@ -449,10 +506,10 @@ export const AILegalChatPage: React.FC = () => {
             <button
               type="submit"
               disabled={isProcessing || !inputQuery.trim()}
-              className={`p-2.5 sm:p-3 rounded-2xl flex items-center justify-center transition-colors shadow-xs ${
+              className={`p-2.5 sm:p-3.5 rounded-2xl flex items-center justify-center shrink-0 transition-colors shadow-xs ${
                 isProcessing || !inputQuery.trim()
                   ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-                  : 'bg-[#684EC9] hover:bg-[#573EAE] text-white cursor-pointer'
+                  : 'bg-[#684EC9] hover:bg-[#573EAE] text-white cursor-pointer press-feedback'
               }`}
             >
               <Send size={16} />
@@ -461,20 +518,23 @@ export const AILegalChatPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. Right Evidence & Sources Panel (Desktop Fixed) */}
-      <div className="w-80 lg:w-96 border-l border-[#E8E3F5] dark:border-[#26213D] bg-white dark:bg-[#171424] hidden xl:flex flex-col shrink-0 overflow-y-auto">
-        <EvidencePanel
-          relevantLaw={activeResponse?.relevantLaw}
-          relevantCases={activeResponse?.relevantCases}
-          claimsVerification={activeResponse?.verification}
-          confidence={activeResponse?.confidence}
-          sources={activeResponse?.sources}
-        />
-      </div>
+      {/* 3. Right Evidence & Sources Panel (Desktop Collapsible) */}
+      {showDesktopEvidence && (
+        <aside className="w-72 xl:w-84 border-l border-[#E8E3F5] dark:border-[#26213D] bg-white dark:bg-[#171424] hidden lg:flex flex-col shrink-0 overflow-y-auto animate-fade-in">
+          <EvidencePanel
+            relevantLaw={activeResponse?.relevantLaw}
+            relevantCases={activeResponse?.relevantCases}
+            claimsVerification={activeResponse?.verification}
+            confidence={activeResponse?.confidence}
+            sources={activeResponse?.sources}
+            onClose={() => setShowDesktopEvidence(false)}
+          />
+        </aside>
+      )}
 
       {/* 4. Slide-over Evidence Panel for Mobile/Tablet */}
       {showMobileEvidence && (
-        <div className="fixed inset-0 z-40 flex justify-end xl:hidden bg-black/40 backdrop-blur-xs">
+        <div className="fixed inset-0 z-40 flex justify-end lg:hidden bg-black/40 backdrop-blur-xs">
           <div className="w-full max-w-sm sm:max-w-md bg-white dark:bg-[#171424] h-full flex flex-col shadow-2xl overflow-y-auto">
             <div className="p-3 border-b border-[#E8E3F5] dark:border-[#26213D] flex items-center justify-between sticky top-0 bg-white dark:bg-[#171424] z-10">
               <span className="font-bold text-xs text-[#1E1B2E] dark:text-white flex items-center gap-1.5">

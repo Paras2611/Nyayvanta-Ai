@@ -119,6 +119,8 @@ export interface EvidenceBackedResponse {
   caseSummary?: string;
   suggestedDocuments?: DocumentSuggestionItem[];
   proceedingChecklistTitle?: string;
+  webCorroborationRate?: string;
+  officialAuthoritySource?: string;
   disclaimer: string;
 }
 
@@ -605,6 +607,12 @@ export interface DocumentSuggestionItem {
   purpose: string;
   legal_risk_if_missing: string;
   dataset_citation: string;
+  verified_source_url?: string;
+  verified_authority_name?: string;
+  web_corroboration_score?: number;
+  verification_badge?: string;
+  scraped_timestamp?: string;
+  scraped_snippet?: string;
 }
 
 export interface SuggestDocumentsResponse {
@@ -613,6 +621,9 @@ export interface SuggestDocumentsResponse {
   proceeding_title: string;
   governing_law: string;
   dataset_source: string;
+  verified_primary_url?: string;
+  official_authority?: string;
+  web_corroboration_rate?: string;
   total_documents: number;
   mandatory_count: number;
   supporting_count: number;

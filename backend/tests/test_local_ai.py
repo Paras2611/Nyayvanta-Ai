@@ -374,3 +374,96 @@ def test_api_local_ai_query_includes_document_suggestions():
     assert len(data["suggested_documents"]) > 0
     assert "proceeding_checklist_title" in data
 
+
+# ==========================================
+# Phase 8: Web Scraping & Corroboration Reranker Tests
+# ==========================================
+
+def test_web_document_reranker_corroborates_and_attaches_sources():
+    """Verify web scraper corroborator attaches verified government URLs and ~100% accuracy."""
+    from backend.app.services.web_verifier import web_document_reranker
+
+    sample_docs = [
+        {
+            "name": "Consumer Complaint Petition",
+            "category": "Pleading",
+            "is_mandatory": True,
+            "purpose": "Sets out factual dispute and claims.",
+            "legal_risk_if_missing": "Case cannot proceed.",
+            "dataset_citation": "ConsumerData2.txt Step 4"
+        },
+        {
+            "name": "Verification Affidavit (Notarized)",
+            "category": "Pleading",
+            "is_mandatory": True,
+            "purpose": "Sworn statement of truth.",
+            "legal_risk_if_missing": "Defective filing objection.",
+            "dataset_citation": "ConsumerData2.txt Step 8.1"
+        },
+        {
+            "name": "Purchase Invoices and Payment Proof",
+            "category": "Evidence",
+            "is_mandatory": True,
+            "purpose": "Proves consideration.",
+            "legal_risk_if_missing": "No consumer standing.",
+            "dataset_citation": "ConsumerData2.txt Step 8.2"
+        }
+    ]
+
+    reranked = web_document_reranker.corroborate_and_rerank(
+        documents=sample_docs,
+        proceeding_type="consumer_complaint",
+        domain="consumer"
+    )
+
+    assert reranked["status"] == "success"
+    assert "edaakhil.nic.in" in reranked["verified_primary_url"]
+    assert "e-Daakhil" in reranked["official_authority"]
+    assert len(reranked["documents"]) == 3
+
+    for doc in reranked["documents"]:
+        assert doc.get("verified_source_url") is not None
+        assert doc["verified_source_url"].startswith("http")
+        assert doc.get("verified_authority_name") is not None
+        assert doc.get("web_corroboration_score") >= 97.0
+        assert "Verified" in doc.get("verification_badge", "")
+        assert doc.get("scraped_snippet") is not None
+
+
+def test_document_checklist_returns_web_accuracy_and_urls():
+    """Verify document_checklist_service includes web corroboration rate and official portal URL."""
+    from backend.app.services.document_checklist import document_checklist_service
+
+    res = document_checklist_service.suggest_documents(
+        domain="consumer",
+        proceeding_type="consumer_complaint",
+        enable_web_rerank=True
+    )
+
+    assert "web_corroboration_rate" in res
+    assert "%" in res["web_corroboration_rate"]
+    assert "verified_primary_url" in res
+    assert res["verified_primary_url"].startswith("http")
+    assert any(d.get("verified_source_url") for d in res["documents"])
+
+
+def test_api_suggest_documents_endpoint_web_corroborated():
+    """Verify POST /api/local-ai/documents/suggest returns verified web sources and corroboration."""
+    payload = {
+        "domain": "rental",
+        "proceeding_type": "tenancy_eviction",
+        "case_facts": "Tenant stopped paying rent, 90 day notice served",
+        "enable_web_rerank": True
+    }
+    response = client.post("/api/local-ai/documents/suggest", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert "web_corroboration_rate" in data
+    assert "verified_primary_url" in data
+    assert len(data["documents"]) > 0
+    first_doc = data["documents"][0]
+    assert first_doc.get("verified_source_url") is not None
+    assert first_doc.get("web_corroboration_score") >= 97.0
+
+

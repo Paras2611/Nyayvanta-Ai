@@ -96,6 +96,8 @@ class EvidenceBackedResponse(BaseModel):
     caseSummary: Optional[str] = None
     suggestedDocuments: Optional[List[Dict[str, Any]]] = None
     proceedingChecklistTitle: Optional[str] = None
+    webCorroborationRate: Optional[str] = None
+    officialAuthoritySource: Optional[str] = None
     disclaimer: str = (
         "Nyayavanta provides AI-generated legal information and research assistance based on available sources. "
         "It is not a substitute for advice from a qualified advocate or other legal professional. "

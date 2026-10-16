@@ -42,12 +42,19 @@ class DocumentItemSchema(BaseModel):
     purpose: str
     legal_risk_if_missing: str
     dataset_citation: str
+    verified_source_url: Optional[str] = None
+    verified_authority_name: Optional[str] = None
+    web_corroboration_score: Optional[float] = None
+    verification_badge: Optional[str] = None
+    scraped_timestamp: Optional[str] = None
+    scraped_snippet: Optional[str] = None
 
 
 class SuggestDocumentsRequest(BaseModel):
     domain: Optional[str] = Field("consumer", description="Legal domain: consumer, rental, employment, contract")
     proceeding_type: Optional[str] = Field(None, description="Optional proceeding type")
     case_facts: Optional[str] = Field(None, description="Dispute context or query facts")
+    enable_web_rerank: Optional[bool] = Field(True, description="Scrape web and rerank with official sources")
 
 
 class SuggestDocumentsResponse(BaseModel):
@@ -56,6 +63,9 @@ class SuggestDocumentsResponse(BaseModel):
     proceeding_title: str
     governing_law: str
     dataset_source: str
+    verified_primary_url: Optional[str] = None
+    official_authority: Optional[str] = None
+    web_corroboration_rate: Optional[str] = None
     total_documents: int
     mandatory_count: int
     supporting_count: int

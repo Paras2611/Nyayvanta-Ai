@@ -121,7 +121,8 @@ def suggest_case_documents(req: SuggestDocumentsRequest):
         checklist = document_checklist_service.suggest_documents(
             domain=req.domain,
             proceeding_type=req.proceeding_type,
-            case_facts=req.case_facts
+            case_facts=req.case_facts,
+            enable_web_rerank=req.enable_web_rerank if req.enable_web_rerank is not None else True
         )
         return checklist
     except Exception as ex:

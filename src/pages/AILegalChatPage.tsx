@@ -531,6 +531,8 @@ export const AILegalChatPage: React.FC = () => {
             sources={activeResponse?.sources}
             suggestedDocuments={activeResponse?.suggestedDocuments}
             proceedingChecklistTitle={activeResponse?.proceedingChecklistTitle}
+            webCorroborationRate={activeResponse?.webCorroborationRate}
+            officialAuthoritySource={activeResponse?.officialAuthoritySource}
             onClose={() => setShowDesktopEvidence(false)}
           />
         </aside>
@@ -561,6 +563,8 @@ export const AILegalChatPage: React.FC = () => {
                 sources={activeResponse?.sources}
                 suggestedDocuments={activeResponse?.suggestedDocuments}
                 proceedingChecklistTitle={activeResponse?.proceedingChecklistTitle}
+                webCorroborationRate={activeResponse?.webCorroborationRate}
+                officialAuthoritySource={activeResponse?.officialAuthoritySource}
               />
             </div>
           </div>

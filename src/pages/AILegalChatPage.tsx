@@ -125,7 +125,8 @@ export const AILegalChatPage: React.FC = () => {
       if (
         (response.relevantLaw && response.relevantLaw.length > 0) ||
         (response.relevantCases && response.relevantCases.length > 0) ||
-        (response.verification && response.verification.length > 0)
+        (response.verification && response.verification.length > 0) ||
+        (response.suggestedDocuments && response.suggestedDocuments.length > 0)
       ) {
         if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
           setShowDesktopEvidence(true);
@@ -528,6 +529,8 @@ export const AILegalChatPage: React.FC = () => {
             claimsVerification={activeResponse?.verification}
             confidence={activeResponse?.confidence}
             sources={activeResponse?.sources}
+            suggestedDocuments={activeResponse?.suggestedDocuments}
+            proceedingChecklistTitle={activeResponse?.proceedingChecklistTitle}
             onClose={() => setShowDesktopEvidence(false)}
           />
         </aside>
@@ -556,6 +559,8 @@ export const AILegalChatPage: React.FC = () => {
                 claimsVerification={activeResponse?.verification}
                 confidence={activeResponse?.confidence}
                 sources={activeResponse?.sources}
+                suggestedDocuments={activeResponse?.suggestedDocuments}
+                proceedingChecklistTitle={activeResponse?.proceedingChecklistTitle}
               />
             </div>
           </div>

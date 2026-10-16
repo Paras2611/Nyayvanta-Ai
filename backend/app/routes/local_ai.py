@@ -23,13 +23,16 @@ from backend.app.schemas.legal_ai import (
     LocalAIQueryRequest,
     LocalAIQueryResponse,
     RebuildIndexResponse,
-    DatasetStatsResponse
+    DatasetStatsResponse,
+    SuggestDocumentsRequest,
+    SuggestDocumentsResponse
 )
 from backend.app.services.ollama_client import ollama_service
 from backend.app.services.retrieval import retrieval_engine
 from backend.app.services.answer_verifier import legal_qa_pipeline
 from backend.app.services.dataset_audit import DatasetAuditor
 from backend.app.services.chunker import LegalChunker
+from backend.app.services.document_checklist import document_checklist_service
 
 logger = logging.getLogger("nyayavanta.routes.local_ai")
 router = APIRouter(prefix="/local-ai", tags=["Local Legal AI Pipeline"])
@@ -83,6 +86,12 @@ def query_local_ai(req: LocalAIQueryRequest):
             language=req.language or "en",
             top_k=req.top_k or 4
         )
+        # Fetch dataset-grounded document suggestions for this proceeding
+        doc_checklist = document_checklist_service.suggest_documents(
+            domain=req.domain,
+            case_facts=req.question
+        )
+
         return {
             "answer": res["answer"],
             "status": res["status"],
@@ -90,6 +99,8 @@ def query_local_ai(req: LocalAIQueryRequest):
             "sources": res["sources"],
             "model": res.get("inference_meta", {}).get("model", res.get("model", settings.OLLAMA_MODEL)),
             "verification": res.get("verification"),
+            "suggested_documents": doc_checklist.get("documents", []),
+            "proceeding_checklist_title": doc_checklist.get("proceeding_title"),
             "disclaimer": res.get("disclaimer")
         }
     except Exception as ex:
@@ -97,6 +108,27 @@ def query_local_ai(req: LocalAIQueryRequest):
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Local AI pipeline error: {str(ex)}"
+        )
+
+
+@router.post("/documents/suggest", response_model=SuggestDocumentsResponse)
+def suggest_case_documents(req: SuggestDocumentsRequest):
+    """
+    Suggest required and recommended legal documents for court or commission proceeding,
+    grounded in the authoritative dataset (e-Jagriti manuals, Maharashtra Rent Control Act).
+    """
+    try:
+        checklist = document_checklist_service.suggest_documents(
+            domain=req.domain,
+            proceeding_type=req.proceeding_type,
+            case_facts=req.case_facts
+        )
+        return checklist
+    except Exception as ex:
+        logger.error(f"Document suggestion error: {ex}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Document suggestion failed: {str(ex)}"
         )
 
 

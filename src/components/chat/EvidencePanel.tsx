@@ -11,14 +11,19 @@ import {
   FileCheck,
   Info,
   X,
-  Sparkles
+  Sparkles,
+  CheckSquare,
+  Square,
+  FileText,
+  ListChecks
 } from 'lucide-react';
 import {
   LegalSectionItem,
   CaseCitationItem,
   ClaimVerificationItem,
   ConfidenceInfo,
-  SourceItem
+  SourceItem,
+  DocumentSuggestionItem
 } from '../../services/api';
 
 interface EvidencePanelProps {
@@ -27,6 +32,8 @@ interface EvidencePanelProps {
   claimsVerification?: ClaimVerificationItem[];
   confidence?: ConfidenceInfo;
   sources?: SourceItem[];
+  suggestedDocuments?: DocumentSuggestionItem[];
+  proceedingChecklistTitle?: string;
   onClose?: () => void;
 }
 
@@ -133,14 +140,36 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
   claimsVerification = [],
   confidence,
   sources = [],
+  suggestedDocuments = [],
+  proceedingChecklistTitle,
   onClose,
 }) => {
   const { t } = useTranslation();
+  const [preparedDocs, setPreparedDocs] = React.useState<Record<string, boolean>>({});
+  const [docFilter, setDocFilter] = React.useState<'ALL' | 'MANDATORY' | 'SUPPORTING'>('ALL');
+
+  const toggleDocPrepared = (docName: string) => {
+    setPreparedDocs((prev) => ({
+      ...prev,
+      [docName]: !prev[docName]
+    }));
+  };
+
   const hasNoEvidence =
     relevantLaw.length === 0 &&
     relevantCases.length === 0 &&
     claimsVerification.length === 0 &&
+    suggestedDocuments.length === 0 &&
     !confidence;
+
+  const filteredDocs = React.useMemo(() => {
+    if (docFilter === 'MANDATORY') return suggestedDocuments.filter((d) => d.is_mandatory);
+    if (docFilter === 'SUPPORTING') return suggestedDocuments.filter((d) => !d.is_mandatory);
+    return suggestedDocuments;
+  }, [suggestedDocuments, docFilter]);
+
+  const preparedCount = Object.values(preparedDocs).filter(Boolean).length;
+  const mandatoryCount = suggestedDocuments.filter((d) => d.is_mandatory).length;
 
   return (
     <div className="p-3.5 sm:p-4 space-y-4">
@@ -216,6 +245,142 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
 
       {/* Confidence Card */}
       {confidence && <ConfidenceCard confidence={confidence} />}
+
+      {/* Suggested Proceeding Documents Checklist (Dataset Grounded) */}
+      {suggestedDocuments.length > 0 && (
+        <section className="space-y-2.5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <ListChecks size={15} className="text-[#684EC9] dark:text-purple-400" />
+              <h3 className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
+                {proceedingChecklistTitle || 'Proceeding Documents Checklist'}
+              </h3>
+            </div>
+            <span className="text-[10px] font-bold text-[#684EC9] dark:text-purple-400 bg-[#EDE9FE] dark:bg-purple-950/60 px-2 py-0.5 rounded-full border border-[#DDD6FE] dark:border-purple-800">
+              {preparedCount}/{suggestedDocuments.length} Ready
+            </span>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full bg-[#E8E3F5] dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+            <div
+              className="bg-emerald-500 h-full rounded-full transition-all duration-300"
+              style={{
+                width: `${Math.round((preparedCount / suggestedDocuments.length) * 100)}%`
+              }}
+            />
+          </div>
+
+          {/* Filter tabs */}
+          <div className="flex items-center gap-1 text-[11px] pt-0.5">
+            <button
+              onClick={() => setDocFilter('ALL')}
+              className={`px-2 py-0.5 rounded-md font-semibold transition-colors ${
+                docFilter === 'ALL'
+                  ? 'bg-[#684EC9] text-white'
+                  : 'bg-[#F0EDF9] dark:bg-slate-800 text-[#6A6382] dark:text-slate-300 hover:bg-[#E8E3F5]'
+              }`}
+            >
+              All ({suggestedDocuments.length})
+            </button>
+            <button
+              onClick={() => setDocFilter('MANDATORY')}
+              className={`px-2 py-0.5 rounded-md font-semibold transition-colors ${
+                docFilter === 'MANDATORY'
+                  ? 'bg-rose-600 text-white'
+                  : 'bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 hover:bg-rose-100'
+              }`}
+            >
+              Mandatory ({mandatoryCount})
+            </button>
+            <button
+              onClick={() => setDocFilter('SUPPORTING')}
+              className={`px-2 py-0.5 rounded-md font-semibold transition-colors ${
+                docFilter === 'SUPPORTING'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 hover:bg-blue-100'
+              }`}
+            >
+              Supporting ({suggestedDocuments.length - mandatoryCount})
+            </button>
+          </div>
+
+          {/* Document list */}
+          <div className="space-y-2">
+            {filteredDocs.map((doc, idx) => {
+              const isChecked = !!preparedDocs[doc.name];
+              return (
+                <div
+                  key={`${doc.name}-${idx}`}
+                  className={`p-3 border rounded-xl text-xs space-y-1.5 transition-colors shadow-2xs ${
+                    isChecked
+                      ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800/60'
+                      : 'bg-white dark:bg-[#111827] border-[#E8E3F5] dark:border-slate-800 hover:border-[#DDD6FE]'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <button
+                      onClick={() => toggleDocPrepared(doc.name)}
+                      className="flex items-start gap-2 text-left group cursor-pointer"
+                    >
+                      <span className="mt-0.5 shrink-0">
+                        {isChecked ? (
+                          <CheckSquare size={16} className="text-emerald-600 dark:text-emerald-400" />
+                        ) : (
+                          <Square size={16} className="text-[#9E97B8] group-hover:text-[#684EC9]" />
+                        )}
+                      </span>
+                      <div>
+                        <p
+                          className={`font-bold leading-snug ${
+                            isChecked
+                              ? 'line-through text-slate-500 dark:text-slate-400'
+                              : 'text-[#1E1B2E] dark:text-slate-100'
+                          }`}
+                        >
+                          {doc.name}
+                        </p>
+                        <span className="text-[10px] text-[#7E779C] dark:text-slate-400 font-medium">
+                          {doc.category}
+                        </span>
+                      </div>
+                    </button>
+
+                    <span
+                      className={`text-[9px] uppercase px-1.5 py-0.5 rounded font-bold shrink-0 ${
+                        doc.is_mandatory
+                          ? 'bg-rose-100 text-rose-800 border border-rose-300 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800'
+                          : 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800'
+                      }`}
+                    >
+                      {doc.is_mandatory ? 'Mandatory' : 'Supporting'}
+                    </span>
+                  </div>
+
+                  <p className="text-[11px] text-[#544E6D] dark:text-slate-300 leading-relaxed pl-6">
+                    {doc.purpose}
+                  </p>
+
+                  {doc.legal_risk_if_missing && (
+                    <div className="pl-6 text-[10px] text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/30 p-1.5 rounded border border-amber-200/80 dark:border-amber-900/40 leading-snug">
+                      <span className="font-bold">Risk if missing:</span> {doc.legal_risk_if_missing}
+                    </div>
+                  )}
+
+                  <div className="pl-6 pt-0.5 flex items-center justify-between text-[10px] text-[#7E779C] dark:text-slate-400 font-mono">
+                    <span className="truncate" title={doc.dataset_citation}>
+                      Ref: {doc.dataset_citation}
+                    </span>
+                    <span className="text-[9px] bg-[#EDE9FE] dark:bg-purple-950 text-[#573EAE] dark:text-purple-300 px-1 rounded shrink-0">
+                      Dataset Grounded
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* Verification Claims */}
       {claimsVerification.length > 0 && (

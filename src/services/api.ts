@@ -117,6 +117,8 @@ export interface EvidenceBackedResponse {
   verification: ClaimVerificationItem[];
   sources: SourceItem[];
   caseSummary?: string;
+  suggestedDocuments?: DocumentSuggestionItem[];
+  proceedingChecklistTitle?: string;
   disclaimer: string;
 }
 
@@ -596,6 +598,31 @@ export interface LocalAIVerification {
   note?: string;
 }
 
+export interface DocumentSuggestionItem {
+  name: string;
+  category: string;
+  is_mandatory: boolean;
+  purpose: string;
+  legal_risk_if_missing: string;
+  dataset_citation: string;
+}
+
+export interface SuggestDocumentsResponse {
+  status: string;
+  proceeding_type: string;
+  proceeding_title: string;
+  governing_law: string;
+  dataset_source: string;
+  total_documents: number;
+  mandatory_count: number;
+  supporting_count: number;
+  documents: DocumentSuggestionItem[];
+  mandatory_documents: DocumentSuggestionItem[];
+  supporting_documents: DocumentSuggestionItem[];
+  corroborating_chunks?: any[];
+  disclaimer: string;
+}
+
 export interface LocalAIQueryResponse {
   answer: string;
   status: string;
@@ -603,6 +630,8 @@ export interface LocalAIQueryResponse {
   sources: LocalAISource[];
   model: string;
   verification?: LocalAIVerification;
+  suggested_documents?: DocumentSuggestionItem[];
+  proceeding_checklist_title?: string;
   disclaimer?: string;
 }
 
@@ -650,5 +679,14 @@ export async function rebuildLocalAIIndex(): Promise<any> {
 
 export async function fetchLocalAIDatasetStats(): Promise<any> {
   const res = await apiClient.get('/local-ai/dataset/stats');
+  return res.data;
+}
+
+export async function suggestProceedingDocuments(payload: {
+  domain?: string;
+  proceeding_type?: string;
+  case_facts?: string;
+}): Promise<SuggestDocumentsResponse> {
+  const res = await apiClient.post('/local-ai/documents/suggest', payload);
   return res.data;
 }

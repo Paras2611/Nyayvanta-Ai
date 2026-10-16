@@ -20,6 +20,7 @@ from backend.app.schemas.chat import (
 )
 from backend.app.services.hybrid_search import hybrid_engine
 from backend.app.services.verification_service import claim_verifier
+from backend.app.services.document_checklist import document_checklist_service
 
 logger = logging.getLogger(__name__)
 
@@ -397,6 +398,14 @@ RULES:
         conv_id = conversation_id or str(uuid.uuid4())
         msg_id = str(uuid.uuid4())
 
+        # 11. Suggest Required Proceeding Documents Grounded in Dataset
+        doc_checklist = document_checklist_service.suggest_documents(
+            domain=domain_id,
+            case_facts=f"{query} {case_facts or ''}"
+        )
+        suggested_docs = doc_checklist.get("documents", [])
+        checklist_title = doc_checklist.get("proceeding_title", "Required Documents for Case Proceeding")
+
         return EvidenceBackedResponse(
             conversationId=conv_id,
             messageId=msg_id,
@@ -411,7 +420,9 @@ RULES:
             confidence=confidence_info,
             verification=verified_claims,
             sources=sources,
-            caseSummary=f"Legal research assessment for {domain_id.title()} dispute."
+            caseSummary=f"Legal research assessment for {domain_id.title()} dispute.",
+            suggestedDocuments=suggested_docs,
+            proceedingChecklistTitle=checklist_title
         )
 
 rag_service = RAGService()

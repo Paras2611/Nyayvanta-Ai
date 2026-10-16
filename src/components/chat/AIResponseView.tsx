@@ -7,7 +7,9 @@ import {
   ArrowRight,
   ExternalLink,
   ShieldAlert,
-  Info
+  Info,
+  ListChecks,
+  FileText
 } from 'lucide-react';
 import { EvidenceBackedResponse } from '../../services/api';
 import { VerificationBadge } from './EvidencePanel';
@@ -161,13 +163,78 @@ export const AIResponseView: React.FC<AIResponseViewProps> = ({ response }) => {
         </section>
       )}
 
-      {/* 6. IMPORTANT LIMITATIONS */}
+      {/* 6. REQUIRED / RECOMMENDED DOCUMENTS FOR CASE PROCEEDING (DATASET GROUNDED) */}
+      {response.suggestedDocuments && response.suggestedDocuments.length > 0 && (
+        <section className="space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <ListChecks size={16} className="text-[#684EC9] dark:text-purple-400" />
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#573EAE] dark:text-purple-400">
+                {response.proceedingChecklistTitle || '6. Suggested Documents for Case Proceeding (Dataset Grounded)'}
+              </h3>
+            </div>
+            <span className="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800">
+              {response.suggestedDocuments.filter((d) => d.is_mandatory).length} Mandatory •{' '}
+              {response.suggestedDocuments.filter((d) => !d.is_mandatory).length} Supporting
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {response.suggestedDocuments.map((doc, idx) => (
+              <div
+                key={idx}
+                className="p-4 bg-white dark:bg-[#111827] border border-[#E8E3F5] dark:border-slate-800 rounded-2xl space-y-2 shadow-xs hover:border-[#DDD6FE] transition-colors"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-bold text-xs text-[#1E1B2E] dark:text-white flex items-center gap-1.5">
+                      <FileText size={13} className="text-[#684EC9] dark:text-purple-400 shrink-0" />
+                      <span>{doc.name}</span>
+                    </h4>
+                    <span className="text-[10px] text-[#7E779C] font-semibold">{doc.category}</span>
+                  </div>
+                  <span
+                    className={`text-[9px] uppercase px-2 py-0.5 rounded-md font-bold shrink-0 ${
+                      doc.is_mandatory
+                        ? 'bg-rose-100 text-rose-800 border border-rose-300 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800'
+                        : 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800'
+                    }`}
+                  >
+                    {doc.is_mandatory ? 'Mandatory' : 'Supporting'}
+                  </span>
+                </div>
+
+                <p className="text-xs text-[#544E6D] dark:text-slate-300 leading-relaxed">
+                  {doc.purpose}
+                </p>
+
+                {doc.legal_risk_if_missing && (
+                  <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40 text-[11px] text-amber-900 dark:text-amber-300 leading-snug">
+                    <span className="font-semibold">Legal Risk:</span> {doc.legal_risk_if_missing}
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between pt-1 border-t border-[#F0EDF9] dark:border-slate-800 text-[10px] text-[#7E779C] dark:text-slate-400 font-mono">
+                  <span className="truncate" title={doc.dataset_citation}>
+                    Source: {doc.dataset_citation}
+                  </span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold shrink-0">
+                    Grounded
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 7. IMPORTANT LIMITATIONS */}
       {response.importantLimitations && response.importantLimitations.length > 0 && (
         <section className="space-y-2">
           <div className="flex items-center gap-2">
             <AlertTriangle size={15} className="text-amber-500" />
             <h3 className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
-              6. Important Limitations & Scope
+              7. Important Limitations & Scope
             </h3>
           </div>
           <div className="p-4 bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 rounded-2xl text-xs space-y-1.5 text-amber-900 dark:text-amber-200">

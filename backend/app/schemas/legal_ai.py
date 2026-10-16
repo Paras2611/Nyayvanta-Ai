@@ -35,6 +35,37 @@ class VerificationDetails(BaseModel):
     note: Optional[str] = None
 
 
+class DocumentItemSchema(BaseModel):
+    name: str
+    category: str
+    is_mandatory: bool
+    purpose: str
+    legal_risk_if_missing: str
+    dataset_citation: str
+
+
+class SuggestDocumentsRequest(BaseModel):
+    domain: Optional[str] = Field("consumer", description="Legal domain: consumer, rental, employment, contract")
+    proceeding_type: Optional[str] = Field(None, description="Optional proceeding type")
+    case_facts: Optional[str] = Field(None, description="Dispute context or query facts")
+
+
+class SuggestDocumentsResponse(BaseModel):
+    status: str
+    proceeding_type: str
+    proceeding_title: str
+    governing_law: str
+    dataset_source: str
+    total_documents: int
+    mandatory_count: int
+    supporting_count: int
+    documents: List[DocumentItemSchema]
+    mandatory_documents: List[DocumentItemSchema]
+    supporting_documents: List[DocumentItemSchema]
+    corroborating_chunks: Optional[List[Dict[str, Any]]] = None
+    disclaimer: str
+
+
 class LocalAIQueryResponse(BaseModel):
     answer: str
     status: str
@@ -42,6 +73,8 @@ class LocalAIQueryResponse(BaseModel):
     sources: List[SourceReference]
     model: str
     verification: Optional[VerificationDetails] = None
+    suggested_documents: Optional[List[DocumentItemSchema]] = None
+    proceeding_checklist_title: Optional[str] = None
     disclaimer: Optional[str] = None
 
 

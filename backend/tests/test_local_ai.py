@@ -286,3 +286,91 @@ def test_search_text_dataset_matches():
     assert res["total_files_searched"] == 17
     assert res["files_with_matches"] >= 1
     assert res["total_matches"] >= 1
+
+
+# ==========================================
+# Phase 7: Proceeding Document Checklist Tests
+# ==========================================
+
+def test_document_checklist_service_consumer_complaint():
+    """Verify procedural document checklist derived from ConsumerData2.txt Step 8."""
+    from backend.app.services.document_checklist import document_checklist_service
+
+    res = document_checklist_service.suggest_documents(
+        domain="consumer",
+        case_facts="Defective laptop purchased online, refund rejected by seller"
+    )
+    assert res["status"] == "success"
+    assert res["proceeding_type"] == "consumer_complaint"
+    assert "e-Jagriti" in res["proceeding_title"]
+    assert res["total_documents"] >= 5
+    assert res["mandatory_count"] >= 4
+
+    doc_names = [d["name"] for d in res["documents"]]
+    assert any("Affidavit" in name for name in doc_names)
+    assert any("Index" in name for name in doc_names)
+    assert any("Invoice" in name or "Proof" in name for name in doc_names)
+
+    # Check dataset citation grounding
+    citations = [d["dataset_citation"] for d in res["documents"]]
+    assert any("ConsumerData2.txt" in c for c in citations)
+
+
+def test_document_checklist_service_consumer_appeal():
+    """Verify appeal document checklist derived from ConsumerData1.txt Step 8."""
+    from backend.app.services.document_checklist import document_checklist_service
+
+    res = document_checklist_service.suggest_documents(
+        domain="consumer",
+        case_facts="First Appeal against State Commission dismissal order"
+    )
+    assert res["proceeding_type"] == "consumer_appeal"
+    assert any("Certified" in d["name"] and "Copy" in d["name"] for d in res["documents"])
+    assert any("Statutory Pre-Deposit" in d["name"] for d in res["documents"])
+
+
+def test_document_checklist_service_rental_eviction():
+    """Verify tenancy eviction documents derived from Maharashtra Rent Control Act."""
+    from backend.app.services.document_checklist import document_checklist_service
+
+    res = document_checklist_service.suggest_documents(
+        domain="rental",
+        case_facts="Tenant defaulted on 5 months rent, notice sent"
+    )
+    assert res["proceeding_type"] == "tenancy_eviction"
+    assert any("Section 15(2)" in d["name"] or "Demand Notice" in d["name"] for d in res["documents"])
+    assert any("Agreement" in d["name"] for d in res["documents"])
+
+
+def test_api_suggest_documents_endpoint():
+    """Test POST /api/local-ai/documents/suggest."""
+    payload = {
+        "domain": "consumer",
+        "proceeding_type": "consumer_complaint",
+        "case_facts": "Mobile screen broke within warranty period, service center refused replacement"
+    }
+    response = client.post("/api/local-ai/documents/suggest", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert "documents" in data
+    assert len(data["documents"]) > 0
+    assert data["mandatory_count"] > 0
+    assert "dataset_source" in data
+
+
+def test_api_local_ai_query_includes_document_suggestions():
+    """Verify that POST /api/local-ai/query returns suggested_documents."""
+    payload = {
+        "question": "Consumer forum complaint for unreturned deposit",
+        "domain": "consumer",
+        "language": "en",
+        "top_k": 2
+    }
+    response = client.post("/api/local-ai/query", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert "suggested_documents" in data
+    assert len(data["suggested_documents"]) > 0
+    assert "proceeding_checklist_title" in data
+

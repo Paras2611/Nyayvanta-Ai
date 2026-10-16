@@ -7,6 +7,10 @@ Write-Host "==========================================================" -Foregro
 Write-Host "  Launching Nyayavanta AI Legal Intelligence Platform    " -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
+# Set project root and PYTHONPATH
+$projectRoot = (Get-Item -Path ".").FullName
+$env:PYTHONPATH = "$projectRoot;$env:PYTHONPATH"
+
 # Ensure SQLite FTS index exists
 if (-not (Test-Path "backend\dataset\processed\nyayavanta_fts.db")) {
     Write-Host "Building search index before launch..." -ForegroundColor Yellow
@@ -14,7 +18,7 @@ if (-not (Test-Path "backend\dataset\processed\nyayavanta_fts.db")) {
 }
 
 Write-Host "`nStarting FastAPI Backend on http://localhost:8000..." -ForegroundColor Green
-$backendProcess = Start-Process -FilePath "python" -ArgumentList "backend/run.py" -PassThru -NoNewWindow
+$backendProcess = Start-Process -FilePath "python" -ArgumentList "backend/run.py" -WorkingDirectory $projectRoot -PassThru -NoNewWindow
 
 Write-Host "Starting Vite Client on http://localhost:3000..." -ForegroundColor Green
 Write-Host "`nPress Ctrl+C to shut down.`n" -ForegroundColor Yellow

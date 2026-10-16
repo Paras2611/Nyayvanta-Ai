@@ -7,6 +7,10 @@ Write-Host "  Nyayavanta AI: Local Document Intelligence Setup        " -Foregro
 Write-Host "  CPU-Friendly Mode (<= 8GB RAM Budget)                   " -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
+# Set project root and PYTHONPATH
+$projectRoot = (Get-Item -Path ".").FullName
+$env:PYTHONPATH = "$projectRoot;$env:PYTHONPATH"
+
 # 1. Check Python
 Write-Host "`n[1/5] Checking Python Environment..." -ForegroundColor Yellow
 try {

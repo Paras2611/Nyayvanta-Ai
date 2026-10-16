@@ -27,7 +27,7 @@
       "Coverage Gap: 0 documents found for domain 'employment'.",
       "Coverage Gap: 0 documents found for domain 'contract'."
     ],
-    "audit_timestamp": "2026-10-16T02:39:54.025649+00:00"
+    "audit_timestamp": "2026-10-16T03:15:00.508326+00:00"
   },
   "documents": [
     {
@@ -49,7 +49,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_002_c8baeaa8",
@@ -70,7 +70,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_003_9e7abb1d",
@@ -91,7 +91,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_004_1d59112f",
@@ -112,7 +112,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_005_f17d9ea3",
@@ -133,7 +133,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_006_7a16cdda",
@@ -154,7 +154,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_007_ec17f94e",
@@ -175,7 +175,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "Contains Unicode replacement characters (possible OCR artifact)",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_008_358bb2e2",
@@ -196,7 +196,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_009_658b1333",
@@ -217,7 +217,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_010_735bb8e1",
@@ -238,7 +238,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_011_78205000",
@@ -259,7 +259,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_012_a8588688",
@@ -280,7 +280,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_013_e43fe12f",
@@ -301,7 +301,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_014_e38b5af2",
@@ -322,7 +322,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_015_ba691ca2",
@@ -343,7 +343,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_016_9367b8b1",
@@ -364,7 +364,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     },
     {
       "file_id": "DOC_017_2f61428c",
@@ -385,7 +385,7 @@
       "duplicate_of": null,
       "quality_status": "verified",
       "quality_notes": "clean",
-      "date_last_audited": "2026-10-16T02:39:54.025649+00:00"
+      "date_last_audited": "2026-10-16T03:15:00.508326+00:00"
     }
   ]
 }

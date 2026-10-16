@@ -1,0 +1,221 @@
+
+--- Page 1 ---
+   Help Documentation
+
+
+                   For
+
+ Consumer Complaint (CC)
+            Filing
+
+
+
+
+
+          National Informatics Centre ,
+Ministry of Electronics & Information Technology,
+           Government of India
+              (A-Block, CGO Complex, Lodhi Road,
+              New Delhi – 110003)
+
+                March 2025
+
+--- Page 2 ---
+                                                                    Consumer Complaint (CC)
+
+
+Step 1: Navigate to the dashboard and select "File New Case" from the left menu.
+
+
+
+
+
+Step 2: Choose "Consumer Complaint" from the list of case types in the selection menu.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                      2/12
+
+--- Page 3 ---
+                                                                    Consumer Complaint (CC)
+
+
+Step 3: Upon selecting "Consumer Complaint” from the given case types,
+
+ 3.1 : A list of required documents will be displayed.
+
+ 3.2 : Review the applicable fee structure.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                     3/12
+
+--- Page 4 ---
+                                                                    Consumer Complaint (CC)
+
+Step 4
+4.1: In “Case Details” enter the amount paid for the service, claim amount, date of cause of action,
+state, district, case category, and subcategory.
+4.2: Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                  4/12
+
+--- Page 5 ---
+                                                                    Consumer Complaint (CC)
+
+Step 5
+5.1: Enter the Complainant details. Select if applicable: Senior Citizen, Widow, Differently Abled, or
+Serious Ailments, and choose the address type (Present, Permanent, or Business).
+5.2: Add the advocate from the list
+5.3: Enter the Opposite Party details.
+5.4: Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                    5/12
+
+--- Page 6 ---
+                                                                    Consumer Complaint (CC)
+
+Step 6:
+6.1: Add an additional complainant , if any
+6.2: Add Proforma complainant , if any
+6.3 : Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                      6/12
+
+--- Page 7 ---
+                                                                    Consumer Complaint (CC)
+6.4 : To add an additional complainant , enter the details i.e name , address etc.
+6.5 : Add the advocate from the list
+6.6 : To add proforma complainant , enter the details i.e name , address etc.
+6.7 : Add the advocate pertaining to the proforma complainant.
+6.8 : Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                        7/12
+
+--- Page 8 ---
+                                                                    Consumer Complaint (CC)
+
+Step 7
+7.1: Add an additional opposite party detail , if any
+7.2: Add Proforma opposite party , if any
+7.3: Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                      8/12
+
+--- Page 9 ---
+                                                                    Consumer Complaint (CC)
+
+7.4 : To add the Additional Opposite Party , enter the details  i.e name , address etc.
+7.5 : To add Proforma Opposite Party, enter the details i.e name , address etc.
+7.6 : Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                      9/12
+
+--- Page 10 ---
+                                                                    Consumer Complaint (CC)
+
+Step 8:
+8.1: Upload the required documents i.e Index, Proforma, Synopsis, Memo of Parties, Notarized Affidavit
+and Vakalatnama.
+8.2: Upload Annexures (with appropriate title) or IA Application
+8.3: Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                          10/12
+
+--- Page 11 ---
+                                                                    Consumer Complaint (CC)
+
+
+
+
+Step 9:
+9.1: Select the commission name and tick the declaration checkbox.
+9.2: Click the "Preview" button.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                                   11/12
+
+--- Page 12 ---
+                                                                    Consumer Complaint (CC)
+
+Step 10: Review the details on the Preview page.
+10.1 : Click the "Edit" button to correct the respective section’s information.
+10.2 : Click "Submit" to complete the process.
+
+
+
+
+
+Step 11: Clicking the "Final Submit" button will trigger a pop-up asking, "Are you sure you want to
+submit? You will not be able to edit the form after submission".
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                          12/12
+
+--- Page 13 ---
+                                                                    Consumer Complaint (CC)
+Step 12: Selecting "Yes" will generate a reference number and submit the case to the respective
+commission.
+
+
+
+
+
+Step 13 : Upon clicking on “Print button” will generate a reference number, date of filing,
+commission name etc.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                         13/12

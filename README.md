@@ -71,13 +71,34 @@ npm run dev
 ```
 - Open `http://localhost:3000` in your browser. All `/api` calls are automatically proxied to the FastAPI server on port 8000.
 
-### 3. Run Automated Tests
+### 3. Local AI Pipeline (Windows <= 8GB RAM, Ollama + SQLite FTS5)
 ```bash
-# Run backend pytest suite (10/10 tests)
+# Automated one-click local setup (audit, chunk, build FTS index, test)
+.\scripts\setup_local_ai.ps1
+
+# Launch both Backend & Frontend simultaneously
+.\scripts\run_local_ai.ps1
+
+# Or run keyword search across legal corpus directly
+python search_text_dataset/search_text_dataset.py --keywords "Maharashtra Rent Control Act" --format text
+```
+- Detailed setup instructions: [`NYAYAVANTA_LOCAL_AI_SETUP.md`](file:///d:/Nyayanta/LawLinkSIH/NYAYAVANTA_LOCAL_AI_SETUP.md)
+- Local AI Implementation Plan: [`docs/local-ai-implementation-plan.md`](file:///d:/Nyayanta/LawLinkSIH/docs/local-ai-implementation-plan.md)
+- Dataset Audit & Corpus Metrics: [`docs/dataset-audit.md`](file:///d:/Nyayanta/LawLinkSIH/docs/dataset-audit.md)
+- Local AI Architecture & Memory Budget: [`docs/architecture.md`](file:///d:/Nyayanta/LawLinkSIH/docs/architecture.md)
+- Local AI Test Plan: [`docs/test-plan.md`](file:///d:/Nyayanta/LawLinkSIH/docs/test-plan.md)
+- GPU Fine-Tuning Guide (PEFT/QLoRA): [`docs/fine-tuning-guide.md`](file:///d:/Nyayanta/LawLinkSIH/docs/fine-tuning-guide.md)
+
+### 4. Run Automated Tests
+```bash
+# Run complete backend pytest suite (28/28 tests passing)
 python -m pytest backend/tests/ -v
 
+# Run local AI specific pipeline tests
+python -m pytest backend/tests/test_local_ai.py -v
+
 # Run frontend TypeScript type verification (0 errors)
-npx tsc --noEmit
+npm run test:frontend
 
 # Build production bundle
 npm run build
@@ -93,13 +114,27 @@ d:\Nyayanta\LawLinkSIH\
 │   ├── app/
 │   │   ├── core/                   # Config, Security (bcrypt, JWT), Database
 │   │   ├── models/                 # 13 SQLAlchemy Models
-│   │   ├── schemas/                # Pydantic Schemas (Chat, Auth, Search, Docs)
-│   │   ├── services/               # Hybrid Retrieval (BM25+Dense), RAG, Verification, Docs
+│   │   ├── schemas/                # Pydantic Schemas (Chat, Auth, Search, Docs, Local AI)
+│   │   ├── services/               # Dataset Audit, Cleaner, Chunker, FTS Retrieval, Ollama Client, Verifier
 │   │   ├── ml/                     # Nyayavanta-LM Dataset Generator, QLoRA Config, Benchmark
-│   │   └── routers/                # REST Endpoints (/auth, /chat, /search, /laws, /cases, /docs)
-│   ├── tests/                      # Automated PyTest Test Suites
+│   │   ├── routes/                 # FastAPI Route Handlers (/local-ai)
+│   │   └── routers/                # REST Endpoints (/auth, /chat, /search, /laws, /cases, /docs, /local-ai)
+│   ├── dataset/                    # Local Legal Corpus Storage
+│   │   ├── text/                   # Extracted Authoritative Text Files (17 files, 1.45M chars)
+│   │   ├── chunks/                 # 526 Deduplicated Semantic Chunks (legal_chunks.jsonl)
+│   │   ├── processed/              # Manifest (JSON/CSV) & SQLite FTS5 Database (nyayavanta_fts.db)
+│   │   ├── training/               # 1,128 Instruction Examples (train.jsonl, val.jsonl, test.jsonl)
+│   │   └── evaluation/             # Held-Out Evaluation Reports (eval_report.json)
+│   ├── scripts/                    # CLI Utilities (audit, build index, export/validate training, QLoRA)
+│   ├── tests/                      # Automated PyTest Suites (28/28 passing)
 │   ├── requirements.txt
 │   └── run.py
+├── search_text_dataset/            # Portable Legal Keyword Search Utility & Raw text.zip
+│   ├── search_text_dataset.py
+│   └── text.zip
+├── scripts/                        # Windows PowerShell One-Click Setup & Launch Scripts
+│   ├── setup_local_ai.ps1
+│   └── run_local_ai.ps1
 ├── src/                            # React 19 + Vite Frontend
 │   ├── app/                        # React Router v7 routes
 │   ├── components/
@@ -107,10 +142,15 @@ d:\Nyayanta\LawLinkSIH\
 │   │   └── chat/                   # EvidencePanel, AIResponseView, ClarificationCard
 │   ├── pages/                      # 10 Route Views (Dashboard, Chat, Search, Cases, Docs, etc.)
 │   ├── locales/                    # en.json, hi.json, mr.json Translations
-│   ├── services/                   # Typed API Client
+│   ├── services/                   # Typed API Client (includes Local AI endpoints)
 │   ├── index.css                   # Trustworthy Intelligence Design Tokens
 │   └── main.tsx
-├── docs/                           # 12 Capstone Delivery Artifacts
+├── docs/                           # Capstone Architecture & Implementation Artifacts
+│   ├── local-ai-implementation-plan.md
+│   ├── dataset-audit.md
+│   ├── architecture.md
+│   ├── test-plan.md
+│   ├── fine-tuning-guide.md
 │   ├── ARCHITECTURE.md
 │   ├── DATABASE_ERD.md
 │   ├── API_DOCUMENTATION.md
@@ -122,6 +162,7 @@ d:\Nyayanta\LawLinkSIH\
 │   ├── DEPLOYMENT_GUIDE.md
 │   ├── MCA_PROJECT_DOCUMENTATION.md
 │   └── FINAL_DEMO_SCRIPT.md
+├── NYAYAVANTA_LOCAL_AI_SETUP.md    # Complete Local AI Setup & Operations Guide
 ├── package.json
 ├── vite.config.ts
 └── README.md
@@ -133,13 +174,19 @@ d:\Nyayanta\LawLinkSIH\
 
 | Artifact | Location | Description |
 | :--- | :--- | :--- |
+| **Local AI Setup Guide** | [`NYAYAVANTA_LOCAL_AI_SETUP.md`](file:///d:/Nyayanta/LawLinkSIH/NYAYAVANTA_LOCAL_AI_SETUP.md) | Windows setup, Ollama commands, API test queries, and operations guide. |
+| **Local AI Plan** | [`docs/local-ai-implementation-plan.md`](file:///d:/Nyayanta/LawLinkSIH/docs/local-ai-implementation-plan.md) | Phased implementation plan for CPU-friendly Windows environment. |
+| **Dataset Audit Report** | [`docs/dataset-audit.md`](file:///d:/Nyayanta/LawLinkSIH/docs/dataset-audit.md) | Inventory of 17 legal files, SHA-256 hashes, counts, and domain analysis. |
+| **Local AI Architecture** | [`docs/architecture.md`](file:///d:/Nyayanta/LawLinkSIH/docs/architecture.md) | Memory budget (< 1.2 GB peak RAM), SQLite FTS5 index, and Ollama integration. |
+| **Local AI Test Plan** | [`docs/test-plan.md`](file:///d:/Nyayanta/LawLinkSIH/docs/test-plan.md) | Test matrix covering security traversal, normalization, retrieval, and API. |
+| **GPU Fine-Tuning Guide** | [`docs/fine-tuning-guide.md`](file:///d:/Nyayanta/LawLinkSIH/docs/fine-tuning-guide.md) | QLoRA 4-bit PEFT training instructions, VRAM profiles, and Ollama Modelfile. |
 | **Architecture Diagram** | [`docs/ARCHITECTURE.md`](file:///d:/Nyayanta/LawLinkSIH/docs/ARCHITECTURE.md) | High-level topology and 11-step execution flow diagram. |
 | **Database ERD** | [`docs/DATABASE_ERD.md`](file:///d:/Nyayanta/LawLinkSIH/docs/DATABASE_ERD.md) | Entity-Relationship diagram and schema for 13 core models. |
 | **API Documentation** | [`docs/API_DOCUMENTATION.md`](file:///d:/Nyayanta/LawLinkSIH/docs/API_DOCUMENTATION.md) | REST API endpoints, schemas, authentication, and examples. |
 | **Component Map** | [`docs/FRONTEND_COMPONENT_MAP.md`](file:///d:/Nyayanta/LawLinkSIH/docs/FRONTEND_COMPONENT_MAP.md) | Component hierarchy, routes, and layout design. |
 | **RAG Pipeline** | [`docs/RAG_PIPELINE.md`](file:///d:/Nyayanta/LawLinkSIH/docs/RAG_PIPELINE.md) | BM25 + dense semantic search and RRF reranker specification. |
 | **Verification Pipeline** | [`docs/VERIFICATION_PIPELINE.md`](file:///d:/Nyayanta/LawLinkSIH/docs/VERIFICATION_PIPELINE.md) | Tri-state claim verification and citation mapping engine. |
-| **Test Report** | [`docs/TEST_REPORT.md`](file:///d:/Nyayanta/LawLinkSIH/docs/TEST_REPORT.md) | Automated pytest results (10/10 passing) and tsc report. |
+| **Test Report** | [`docs/TEST_REPORT.md`](file:///d:/Nyayanta/LawLinkSIH/docs/TEST_REPORT.md) | Automated pytest results (28/28 passing) and TypeScript tsc report. |
 | **ML Evaluation Report** | [`docs/ML_EVALUATION_REPORT.md`](file:///d:/Nyayanta/LawLinkSIH/docs/ML_EVALUATION_REPORT.md) | 5-layer experiment matrix, Precision@K, and MRR metrics. |
 | **Deployment Guide** | [`docs/DEPLOYMENT_GUIDE.md`](file:///d:/Nyayanta/LawLinkSIH/docs/DEPLOYMENT_GUIDE.md) | Production setup with Uvicorn, PostgreSQL, and Vite. |
 | **MCA Documentation** | [`docs/MCA_PROJECT_DOCUMENTATION.md`](file:///d:/Nyayanta/LawLinkSIH/docs/MCA_PROJECT_DOCUMENTATION.md) | Full MCA capstone documentation, methodology, and results. |

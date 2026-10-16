@@ -298,6 +298,50 @@ export const EvidencePanel: React.FC<EvidencePanelProps> = ({
           </div>
         </section>
       )}
+
+      {/* Primary Authoritative Sources & Local Corpus Citations */}
+      {sources && sources.length > 0 && (
+        <section className="space-y-2">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xs font-bold text-[#6A6382] dark:text-slate-400 uppercase tracking-wider">
+              Verified Legal Sources ({sources.length})
+            </h3>
+            <FileCheck size={14} className="text-[#684EC9] dark:text-purple-400" />
+          </div>
+          <div className="space-y-2">
+            {sources.map((s, idx) => (
+              <div
+                key={s.id || `src-${idx}`}
+                className="p-3 border border-[#E8E3F5] dark:border-slate-800 rounded-xl bg-white dark:bg-[#111827] text-xs space-y-1.5 shadow-xs hover:border-[#DDD6FE] transition-colors"
+              >
+                <div className="flex items-start justify-between gap-1.5">
+                  <p className="font-bold text-[#1E1B2E] dark:text-slate-200 line-clamp-1">
+                    {s.title}
+                  </p>
+                  <span className="text-[10px] bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-semibold px-1.5 py-0.5 rounded border border-emerald-300 dark:border-emerald-800 shrink-0">
+                    Grounded
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 text-[11px] text-[#7E779C] dark:text-slate-400 font-mono">
+                  {s.sectionOrCourt && <span>{s.sectionOrCourt}</span>}
+                  <span>Doc: {s.id}</span>
+                </div>
+                {s.sourceUrl && (
+                  <a
+                    href={s.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] text-[#684EC9] dark:text-purple-400 hover:underline pt-0.5"
+                  >
+                    <span>View primary source</span>
+                    <ExternalLink size={11} />
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

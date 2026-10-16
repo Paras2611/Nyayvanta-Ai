@@ -569,3 +569,86 @@ export async function fetchAuditEvents() {
   }
   return [];
 }
+
+// ==========================================
+// Nyayavanta Local AI Engine API Integration
+// ==========================================
+
+export interface LocalAISource {
+  document_id: string;
+  chunk_id: string;
+  title: string;
+  source_file?: string;
+  domain?: string;
+  section_number?: string | null;
+  page_number?: number | null;
+  source_url?: string | null;
+  relevance_score?: number;
+}
+
+export interface LocalAIVerification {
+  status: string;
+  is_fully_grounded?: boolean;
+  cited_sections?: string[];
+  verified_sections?: string[];
+  unverified_sections?: string[];
+  has_insufficient_evidence_flag?: boolean;
+  note?: string;
+}
+
+export interface LocalAIQueryResponse {
+  answer: string;
+  status: string;
+  domain?: string;
+  sources: LocalAISource[];
+  model: string;
+  verification?: LocalAIVerification;
+  disclaimer?: string;
+}
+
+export interface LocalAIHealth {
+  status: string;
+  service: string;
+  ollama_running: boolean;
+  configured_model: string;
+  is_model_installed: boolean;
+  available_models: string[];
+  index_status: {
+    total_chunks: number;
+    total_documents: number;
+    domain_chunks: Record<string, number>;
+    language_chunks: Record<string, number>;
+    db_size_mb: number;
+  };
+  message: string;
+}
+
+export async function fetchLocalAIHealth(): Promise<LocalAIHealth> {
+  const res = await apiClient.get('/local-ai/health');
+  return res.data;
+}
+
+export async function fetchLocalAIModel(): Promise<any> {
+  const res = await apiClient.get('/local-ai/model');
+  return res.data;
+}
+
+export async function queryLocalAI(payload: {
+  question: string;
+  domain?: string;
+  language?: string;
+  top_k?: number;
+}): Promise<LocalAIQueryResponse> {
+  const res = await apiClient.post('/local-ai/query', payload);
+  return res.data;
+}
+
+export async function rebuildLocalAIIndex(): Promise<any> {
+  const res = await apiClient.post('/local-ai/index/rebuild');
+  return res.data;
+}
+
+export async function fetchLocalAIDatasetStats(): Promise<any> {
+  const res = await apiClient.get('/local-ai/dataset/stats');
+  return res.data;
+}

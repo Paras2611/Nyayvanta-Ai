@@ -10,7 +10,7 @@ from backend.app.services.seed_data import seed_legal_knowledge
 from backend.app.services.hybrid_search import hybrid_engine
 
 from backend.app.routers import (
-    auth, chat, search, laws, cases, documents, saved, audit
+    auth, chat, search, laws, cases, documents, saved, audit, local_ai
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -56,6 +56,7 @@ app.include_router(cases.router, prefix=settings.API_V1_STR)
 app.include_router(documents.router, prefix=settings.API_V1_STR)
 app.include_router(saved.router, prefix=settings.API_V1_STR)
 app.include_router(audit.router, prefix=settings.API_V1_STR)
+app.include_router(local_ai.router, prefix=settings.API_V1_STR)
 
 @app.get("/api/health")
 def health_check():

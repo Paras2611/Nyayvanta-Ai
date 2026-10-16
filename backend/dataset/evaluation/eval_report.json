@@ -1,0 +1,110 @@
+{
+  "evaluation_timestamp": "2026-10-16T02:57:21Z",
+  "model": "qwen3.5:0.8b",
+  "sample_size": 10,
+  "grounding_rate_pct": 100.0,
+  "average_latency_ms": 5016.2,
+  "correct_refusals": 3,
+  "results": [
+    {
+      "example_id": "EX_00001",
+      "task": "document_classification",
+      "domain": "consumer",
+      "elapsed_ms": 5432.63,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": false,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00002",
+      "task": "document_classification",
+      "domain": "consumer",
+      "elapsed_ms": 5002.04,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": false,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00003",
+      "task": "uncertainty_detection",
+      "domain": "consumer",
+      "elapsed_ms": 5190.18,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": true,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00013",
+      "task": "document_classification",
+      "domain": "consumer",
+      "elapsed_ms": 4964.56,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": false,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00014",
+      "task": "document_classification",
+      "domain": "consumer",
+      "elapsed_ms": 5183.86,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": false,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00015",
+      "task": "uncertainty_detection",
+      "domain": "consumer",
+      "elapsed_ms": 4893.62,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": true,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00016",
+      "task": "document_classification",
+      "domain": "consumer",
+      "elapsed_ms": 4867.41,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": false,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00017",
+      "task": "document_classification",
+      "domain": "consumer",
+      "elapsed_ms": 4885.69,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": false,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00018",
+      "task": "uncertainty_detection",
+      "domain": "consumer",
+      "elapsed_ms": 4860.56,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": true,
+      "cited_sections": []
+    },
+    {
+      "example_id": "EX_00019",
+      "task": "document_classification",
+      "domain": "consumer",
+      "elapsed_ms": 4881.41,
+      "status": "ollama_unavailable",
+      "is_grounded": true,
+      "correct_refusal": false,
+      "cited_sections": []
+    }
+  ]
+}

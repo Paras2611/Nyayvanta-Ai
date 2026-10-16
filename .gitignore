@@ -37,6 +37,7 @@ uploads/
 
 # Model Weights & Large Checkpoints
 nyayavanta-lm-qlora-adapter/
+backend/dataset/models/
 *.pt
 *.bin
 *.safetensors

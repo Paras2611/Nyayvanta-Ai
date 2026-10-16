@@ -1,0 +1,180 @@
+
+--- Page 1 ---
+   Help Documentation
+
+
+                   For
+
+      First Appeal (FA)
+            Filing
+
+
+
+
+
+          National Informatics Centre ,
+Ministry of Electronics & Information Technology,
+           Government of India
+              (A-Block, CGO Complex, Lodhi Road,
+              New Delhi – 110003)
+
+                 March 2025
+
+--- Page 2 ---
+                                                                                                           First Appeal (FA)
+
+
+Step 1: Navigate to the dashboard and select "File New Case" from the left menu.
+
+
+
+
+
+Step 2: Choose "First Appeal" from the list of case types in the selection menu.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                                 2/11
+
+--- Page 3 ---
+                                                                                                         First Appeal (FA)
+Step 3: Upon selecting "First Appeal” from the given case types,
+
+3.1 : The required documents for case filing will be displayed.
+
+3.2 : Click the "Next" button to proceed.
+
+
+
+
+
+                                              e-Jagriti Help Document
+                                                                                                               3/11
+
+--- Page 4 ---
+                                                                                                           First Appeal (FA)
+
+Step 4:
+4.1: Enter the old case details and case number along with the name of the commission (National,
+State, or District Consumer Disputes Redressal Commission
+4.2: Click the "Submit button" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                             4/11
+
+--- Page 5 ---
+                                                                                                           First Appeal (FA)
+
+Step 5 :
+5.1: View the old case details including case number , case type, commission etc.
+5.2: Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                              5/11
+
+--- Page 6 ---
+                                                                                                           First Appeal (FA)
+
+
+Step 6:
+6.1: Enter the date of the impugned order or interim order, along with the date of receipt of the order.
+6.2: Enter the DD details, if available.
+6.3: Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                                 6/11
+
+--- Page 7 ---
+                                                                                                           First Appeal (FA)
+
+Step 7:
+7.1 :To add appellant & respondent in the list ,tick the checkboxes.
+7.2 :Click on “next”.
+7.3 :Tick the checkbox to select an advocate & click "Add Another Advocate" if not listed.
+7.4 :Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                                    7/11
+
+--- Page 8 ---
+                                                                                                           First Appeal (FA)
+Step 8:
+8.1: Upload the required documents: Index, Proforma, Synopsis, Memo of Parties, Notarized Affidavit, FA
+with Notarized Affidavit, Certified State Commission Order, Vakalatnama, Annexures (titled), or IA
+Application.
+8.2: Click "Next" to proceed.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                                 8/11
+
+--- Page 9 ---
+                                                                                                           First Appeal (FA)
+
+Step 9:
+9.1: Select the commission name and tick the declaration checkbox.
+9.2: Click the "Preview" button.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                                 9/11
+
+--- Page 10 ---
+                                                                                                           First Appeal (FA)
+
+Step 10: Review the details on the Preview page.
+10.1 : Click the "Edit" button to correct the respective section’s information.
+10.2 : Click "Final Submit" to complete the process.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                                    10/11
+
+--- Page 11 ---
+                                                                                                           First Appeal (FA)
+
+
+
+Step 11: Clicking "Final Submit" will trigger a pop-up to confirm submission.
+
+
+
+
+
+Step 12: "Final Submit" generates a reference number and forwards the case to the respective
+commission.
+
+
+
+
+
+                                                e-Jagriti Help Document
+                                                                                                                               11/11

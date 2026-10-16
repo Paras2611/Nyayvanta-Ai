@@ -1,0 +1,94 @@
+Grievance Redressal
+Procedure for Filing a Complaint
+Who Can File a Complaint?
+Under Section 35(1) of the Consumer Protection Act, 2019, the following categories of persons can file a complaint:
+
+Consumers to whom goods have been sold or delivered, or who have accepted the sale of goods, or who have received or accepted the provision of a service, or who allege unfair trade practices related to such goods or services.
+Any recognized consumer organization, whether or not a member of such organization, representing one or more consumers where a large number of consumers have the same interest, may file a complaint electronically under this sub-section, with the permission of the District Commission, on behalf of or for the benefit of all interested consumers, or as directed by the Central Government, central authority, or state government.
+What Should the Complaint Contain?
+The consumer’s complaint must include written details of the allegations made:
+
+Any loss or damage suffered by the consumer due to any unfair trade practice followed by the trader related to goods purchased or services availed, including one or more defects or deficiencies arising from the trader’s or service provider’s fault, and the price charged exceeding the price displayed on the goods or packages, or as per any applicable law or mutually agreed price.
+Where to File the Complaint?
+(a) Pecuniary Jurisdiction:
+The complaint should be filed before the Consumer Dispute Redressal Commission having jurisdiction over the value of the goods or services involved:
+
+If the value does not exceed ₹50 lakh, the District Consumer Dispute Redressal Commission.
+If the value exceeds ₹50 lakh but does not exceed ₹2 crore, the State Consumer Dispute Redressal Commission.
+If the value exceeds ₹2 crore, the National Consumer Dispute Redressal Commission.
+(b) Territorial Jurisdiction:
+The complaint should be filed in the local jurisdiction of the District/State Commission where:
+
+The opposite party or each opposite party, if more than one, ordinarily resides, conducts business, or has a branch office, or personally works for their benefit; or where the cause of action arises wholly or partly; or where the complainant resides or personally works for their benefit.
+(c) Limitation Period:
+The complainant must file the complaint within **two years** from the date on which the cause of action arose.
+
+How to File a Complaint?
+The procedure for filing a complaint and obtaining redressal is simple and fast:
+
+The consumer can submit the written complaint with required copies in person or by post to the appropriate forum/commission.
+There is no mandatory requirement to hire a lawyer to file a complaint.
+The consumer can also file a complaint electronically via the E-Daakhila Portal to the District, State, or National Commission.
+Information to be Included in the Complaint
+Complaints can be typed or handwritten clearly. Complaints can be filed in Marathi/English at District Commissions and in English at State Commissions.
+
+Name and address of the complainant.
+Name and address of the opposite party/parties.
+Details of facts or circumstances related to the complaint, including when and where they occurred.
+Supporting documents for the allegations, if any.
+Relief or compensation sought by the complainant.
+The complainant or their authorized representative must sign the complaint.
+Relief Available to Consumers: Sections 39(1) and 49
+If the District/State Commission finds that the goods/services complained about suffer from defects, deficiencies, unfair trade practices, or the allegations are proven under product liability, it may direct the opposite party to:
+
+(a) Rectify the defect as demonstrated by an appropriate laboratory test.
+(b) Replace the goods with new ones of the same description free from defects.
+(c) Refund the price paid with interest or specified charges.
+(d) Compensate for any loss or injury caused by the negligence of the opposite party; in appropriate circumstances, award punitive damages.
+(e) Pay compensation under product liability action as per Chapter VI.
+(f) Rectify any deficiencies in goods or services.
+(g) Stop unfair or restrictive trade practices and prevent their recurrence.
+(h) Ensure hazardous or unsafe goods are not offered for sale.
+(i) Recall hazardous goods from the market.
+(j) Stop production of hazardous goods or services harmful in nature.
+(k) Compensate consumers in cases of widespread harm, with the amount not less than 25% of the value of the defective goods/services.
+(l) Publish corrective advertisements at the expense of the opposite party to counter misleading advertisements.
+(m) Cover expenses for parties and prevent further misleading advertisements.
+Appeal Procedure
+Appeals can be filed against the decisions of the District Commission to the State Commission, against the State Commission to the National Commission, and against the National Commission to the Supreme Court. The appeal must be filed within **30 days**, but a delay may be condoned if sufficient reasons are provided. The procedure for filing an appeal is similar to filing a complaint and must include a copy of the previous order or reasons for appeal.
+
+Time Limit for Decision
+The Act emphasizes speedy, simple, and cost-effective redressal of consumer disputes. Provisions include:
+
+Attendance of the complainant, appellant, or authorized representative before the forum/commission on the day of hearing or by the scheduled date.
+If examination/testing of goods is required, the forum/commission must decide the complaint within 5 months; if not required, within 3 months of notice.
+Decision by District/State/National Commission expected within **90 days** from the first hearing.
+Consumers or their representatives must follow instructions and scrutiny procedures while filing.
+Complaints can be filed by consumers, recognized consumer organizations, multiple consumers, or Central/State government representatives.
+Full details of complainant and opposite party, including name, age, postal address, mobile number, email, must be provided.
+Complaints can be filed in Marathi (state language) or English at District Commission, and in English at State Commission.
+Supporting documents and affidavits must accompany the complaint.
+The cause of action must be clearly stated, and the two-year limitation period adhered to.
+Duplicate/triplicate sets required for State/District Commissions.
+Fees payable through GRAS Portal (https://gras.mahakosh.gov.in/echallan/ ).
+Online Payment of Fees
+For complaints above ₹1 crore but below ₹2 crore: ₹4,000/-
+For complaints above ₹2 crore but below ₹10 crore: ₹5,000/-
+For complaints above ₹10 crore: ₹7,500/-
+Sr. No.	Value of Goods/Services	Fee Payable
+District Commission	
+1	Up to ₹5 lakh	Nil
+2	Above ₹5 lakh but below ₹10 lakh	₹200/-
+3	Above ₹10 lakh but below ₹20 lakh	₹400/-
+4	Above ₹20 lakh but below ₹50 lakh	₹1,000/-
+State Commission	
+5	Above ₹50 lakh but below ₹1 crore	₹2,000/-
+Type the complaint on A4/laser paper with left margin 1/4 and right margin 1/8, double-spaced. Begin the complaint halfway down the first page, leaving space above for official use.
+Address as “Before the State Consumer Dispute Redressal Commission” or “Before the District Consumer Dispute Redressal Commission (Name of District)”.
+Leave space on the right for complaint number.
+Provide full details of parties: names, parent/spouse’s name, surname, age, profession, complete address, and if represented, mention Power of Attorney with supporting documents.
+If the party is a legal entity (company, cooperative, trust, partnership), mention registration and authorized representative details.
+If filing on behalf of a legal entity, include board resolution authorizing signatory.
+Provide total value of complaint, fee paid, and relevant jurisdiction information.
+Include main complaint with numbered paragraphs and prayer for relief.
+Sign the complaint on the right; if prepared by a lawyer, the lawyer signs on the left.
